@@ -1,0 +1,38 @@
+{
+  "name": "ctf-beyond-the-interface",
+  "version": "1.0.0",
+  "private": true,
+  "description": "《表面之下》：鑫启网安俱乐部 CTF 黑客主题动画宣传片",
+  "scripts": {
+    "dev": "remotion studio src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write src scripts docs README.md package.json tsconfig.json",
+    "audio": "node scripts/generate-audio.mjs",
+    "assets": "node scripts/prepare-assets.mjs",
+    "render": "remotion render src/index.ts BeyondTheInterface dist/beyond-the-interface-1080p.mp4 --codec=h264 --crf=18 --audio-codec=aac --pixel-format=yuv420p",
+    "preview": "remotion render src/index.ts BeyondTheInterface dist/preview-720p.mp4 --scale=0.6666667 --codec=h264 --crf=23 --audio-codec=aac --pixel-format=yuv420p",
+    "cover": "remotion still src/index.ts FilmCover public/cover.jpg --image-format=jpeg"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.541",
+    "@remotion/renderer": "4.0.541",
+    "@remotion/bundler": "4.0.541",
+    "@remotion/media": "4.0.541",
+    "@remotion/transitions": "4.0.541",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "remotion": "4.0.541"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "prettier": "^3.6.2",
+    "qrcode": "^1.5.4",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT"
+}

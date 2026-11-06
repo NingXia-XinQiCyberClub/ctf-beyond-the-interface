@@ -1,0 +1,10 @@
+{
+  "durationSeconds": 150,
+  "sampleRate": 48000,
+  "channels": 2,
+  "bitsPerSample": 16,
+  "peakDbFS": -1.5,
+  "rmsDbFS": -19.39687252773535,
+  "bytes": 28800044,
+  "output": "public/soundtrack.wav"
+}
