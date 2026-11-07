@@ -370,5 +370,1379 @@
   "normalizationTarget": {
     "integratedLUFS": -16,
     "truePeakDb": -1.5
-  }
+  },
+  "additionalFoley": {
+    "fps": 30,
+    "events": [
+      {
+        "frame": 16,
+        "time": 0.5333333333333333,
+        "kind": "key",
+        "label": "init --attack",
+        "gain": 0.65,
+        "pan": 0
+      },
+      {
+        "frame": 19,
+        "time": 0.6333333333333333,
+        "kind": "key",
+        "label": "init --attack",
+        "gain": 0.65,
+        "pan": 0
+      },
+      {
+        "frame": 20,
+        "time": 0.6666666666666666,
+        "kind": "scan",
+        "label": "Opening surface scan",
+        "gain": 0.6,
+        "pan": 0
+      },
+      {
+        "frame": 22,
+        "time": 0.7333333333333333,
+        "kind": "key",
+        "label": "init --attack",
+        "gain": 0.65,
+        "pan": 0
+      },
+      {
+        "frame": 26,
+        "time": 0.8666666666666667,
+        "kind": "key",
+        "label": "init --attack",
+        "gain": 0.65,
+        "pan": 0
+      },
+      {
+        "frame": 29,
+        "time": 0.9666666666666667,
+        "kind": "key",
+        "label": "init --attack",
+        "gain": 0.65,
+        "pan": 0
+      },
+      {
+        "frame": 32,
+        "time": 1.0666666666666667,
+        "kind": "key",
+        "label": "init --attack",
+        "gain": 0.65,
+        "pan": 0
+      },
+      {
+        "frame": 36,
+        "time": 1.2,
+        "kind": "key",
+        "label": "init --attack",
+        "gain": 0.65,
+        "pan": 0
+      },
+      {
+        "frame": 39,
+        "time": 1.3,
+        "kind": "key",
+        "label": "init --attack",
+        "gain": 0.65,
+        "pan": 0
+      },
+      {
+        "frame": 42,
+        "time": 1.4,
+        "kind": "key",
+        "label": "init --attack",
+        "gain": 0.65,
+        "pan": 0
+      },
+      {
+        "frame": 46,
+        "time": 1.5333333333333334,
+        "kind": "key",
+        "label": "init --attack",
+        "gain": 0.65,
+        "pan": 0
+      },
+      {
+        "frame": 48,
+        "time": 1.6,
+        "kind": "scan",
+        "label": "Opening surface scan",
+        "gain": 0.6,
+        "pan": 0
+      },
+      {
+        "frame": 49,
+        "time": 1.6333333333333333,
+        "kind": "key",
+        "label": "init --attack",
+        "gain": 0.65,
+        "pan": 0
+      },
+      {
+        "frame": 52,
+        "time": 1.7333333333333334,
+        "kind": "key",
+        "label": "init --attack",
+        "gain": 0.65,
+        "pan": 0
+      },
+      {
+        "frame": 56,
+        "time": 1.8666666666666667,
+        "kind": "key",
+        "label": "init --attack",
+        "gain": 0.65,
+        "pan": 0
+      },
+      {
+        "frame": 75,
+        "time": 2.5,
+        "kind": "scan",
+        "label": "Opening surface scan",
+        "gain": 0.6,
+        "pan": 0
+      },
+      {
+        "frame": 541,
+        "time": 18.033333333333335,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 543,
+        "time": 18.1,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 546,
+        "time": 18.2,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 548,
+        "time": 18.266666666666666,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 1699,
+        "time": 56.63333333333333,
+        "kind": "scan",
+        "label": "Misc pixel scan",
+        "gain": 0.42,
+        "pan": 0
+      },
+      {
+        "frame": 1715,
+        "time": 57.166666666666664,
+        "kind": "scan",
+        "label": "Misc pixel scan",
+        "gain": 0.42,
+        "pan": 0
+      },
+      {
+        "frame": 1731,
+        "time": 57.7,
+        "kind": "scan",
+        "label": "Misc pixel scan",
+        "gain": 0.42,
+        "pan": 0
+      },
+      {
+        "frame": 1747,
+        "time": 58.233333333333334,
+        "kind": "scan",
+        "label": "Misc pixel scan",
+        "gain": 0.42,
+        "pan": 0
+      },
+      {
+        "frame": 1763,
+        "time": 58.766666666666666,
+        "kind": "scan",
+        "label": "Misc pixel scan",
+        "gain": 0.42,
+        "pan": 0
+      },
+      {
+        "frame": 1777,
+        "time": 59.233333333333334,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 1779,
+        "time": 59.3,
+        "kind": "scan",
+        "label": "Misc pixel scan",
+        "gain": 0.42,
+        "pan": 0
+      },
+      {
+        "frame": 1779,
+        "time": 59.3,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 1780,
+        "time": 59.333333333333336,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 1782,
+        "time": 59.4,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 1784,
+        "time": 59.46666666666667,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 1786,
+        "time": 59.53333333333333,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 1788,
+        "time": 59.6,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 1790,
+        "time": 59.666666666666664,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 1792,
+        "time": 59.733333333333334,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 1793,
+        "time": 59.766666666666666,
+        "kind": "scan",
+        "label": "Misc pixel scan",
+        "gain": 0.42,
+        "pan": 0
+      },
+      {
+        "frame": 1794,
+        "time": 59.8,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 1795,
+        "time": 59.833333333333336,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 1797,
+        "time": 59.9,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 1799,
+        "time": 59.96666666666667,
+        "kind": "scanDone",
+        "label": "Pixel scan complete",
+        "gain": 0.65,
+        "pan": 0
+      },
+      {
+        "frame": 1799,
+        "time": 59.96666666666667,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 1801,
+        "time": 60.03333333333333,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 1803,
+        "time": 60.1,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 1813,
+        "time": 60.43333333333333,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 1817,
+        "time": 60.56666666666667,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 1820,
+        "time": 60.666666666666664,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 1824,
+        "time": 60.8,
+        "kind": "data",
+        "label": "Decoded character group",
+        "gain": 0.32,
+        "pan": 0
+      },
+      {
+        "frame": 2910,
+        "time": 97,
+        "kind": "swipe",
+        "label": "Mail to operations slide",
+        "gain": 0.7,
+        "pan": -0.25
+      },
+      {
+        "frame": 3000,
+        "time": 100,
+        "kind": "panel",
+        "label": "Console opens",
+        "gain": 0.4,
+        "pan": 0
+      },
+      {
+        "frame": 3004,
+        "time": 100.13333333333334,
+        "kind": "key",
+        "label": "RED_ACCESS: export PORTAL=http://portal.range.test",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3006,
+        "time": 100.2,
+        "kind": "key",
+        "label": "RED_ACCESS: export PORTAL=http://portal.range.test",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3008,
+        "time": 100.26666666666667,
+        "kind": "key",
+        "label": "RED_ACCESS: export PORTAL=http://portal.range.test",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3010,
+        "time": 100.33333333333333,
+        "kind": "key",
+        "label": "RED_ACCESS: export PORTAL=http://portal.range.test",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3012,
+        "time": 100.4,
+        "kind": "key",
+        "label": "RED_ACCESS: export PORTAL=http://portal.range.test",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3014,
+        "time": 100.46666666666667,
+        "kind": "key",
+        "label": "RED_ACCESS: export PORTAL=http://portal.range.test",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3016,
+        "time": 100.53333333333333,
+        "kind": "key",
+        "label": "RED_ACCESS: export PORTAL=http://portal.range.test",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3034,
+        "time": 101.13333333333334,
+        "kind": "key",
+        "label": "RED_ACCESS: curl -i \"$PORTAL/api/records/202\" \\",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3036,
+        "time": 101.2,
+        "kind": "key",
+        "label": "RED_ACCESS: curl -i \"$PORTAL/api/records/202\" \\",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3038,
+        "time": 101.26666666666667,
+        "kind": "key",
+        "label": "RED_ACCESS: curl -i \"$PORTAL/api/records/202\" \\",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3040,
+        "time": 101.33333333333333,
+        "kind": "key",
+        "label": "RED_ACCESS: curl -i \"$PORTAL/api/records/202\" \\",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3042,
+        "time": 101.4,
+        "kind": "key",
+        "label": "RED_ACCESS: curl -i \"$PORTAL/api/records/202\" \\",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3044,
+        "time": 101.46666666666667,
+        "kind": "key",
+        "label": "RED_ACCESS: curl -i \"$PORTAL/api/records/202\" \\",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3052,
+        "time": 101.73333333333333,
+        "kind": "key",
+        "label": "RED_ACCESS:   -H \"X-Range-User: alice\"",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3054,
+        "time": 101.8,
+        "kind": "key",
+        "label": "RED_ACCESS:   -H \"X-Range-User: alice\"",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3056,
+        "time": 101.86666666666666,
+        "kind": "key",
+        "label": "RED_ACCESS:   -H \"X-Range-User: alice\"",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3058,
+        "time": 101.93333333333334,
+        "kind": "key",
+        "label": "RED_ACCESS:   -H \"X-Range-User: alice\"",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3060,
+        "time": 102,
+        "kind": "key",
+        "label": "RED_ACCESS:   -H \"X-Range-User: alice\"",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3240,
+        "time": 108,
+        "kind": "swipe",
+        "label": "Red / blue horizontal slide",
+        "gain": 0.6,
+        "pan": 0.35
+      },
+      {
+        "frame": 3251,
+        "time": 108.36666666666666,
+        "kind": "panel",
+        "label": "Console opens",
+        "gain": 0.4,
+        "pan": 0
+      },
+      {
+        "frame": 3252,
+        "time": 108.4,
+        "kind": "key",
+        "label": "BLUE_TRACE: jq '.events[]|select(.id==\"REQ-017\")' \\",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3254,
+        "time": 108.46666666666667,
+        "kind": "key",
+        "label": "BLUE_TRACE:   range-evidence.json",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3256,
+        "time": 108.53333333333333,
+        "kind": "key",
+        "label": "BLUE_TRACE:   range-evidence.json",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3258,
+        "time": 108.6,
+        "kind": "key",
+        "label": "BLUE_TRACE:   range-evidence.json",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3258,
+        "time": 108.6,
+        "kind": "scan",
+        "label": "Blue trace scan",
+        "gain": 0.6,
+        "pan": 0
+      },
+      {
+        "frame": 3324,
+        "time": 110.8,
+        "kind": "scanDone",
+        "label": "Source session correlated",
+        "gain": 0.6,
+        "pan": 0
+      },
+      {
+        "frame": 3360,
+        "time": 112,
+        "kind": "swipe",
+        "label": "Red / blue horizontal slide",
+        "gain": 0.6,
+        "pan": -0.35
+      },
+      {
+        "frame": 3368,
+        "time": 112.26666666666667,
+        "kind": "key",
+        "label": "RED_TASK: export OPS=http://ops.range.test",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3370,
+        "time": 112.33333333333333,
+        "kind": "key",
+        "label": "RED_TASK: export OPS=http://ops.range.test",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3371,
+        "time": 112.36666666666666,
+        "kind": "panel",
+        "label": "Console opens",
+        "gain": 0.4,
+        "pan": 0
+      },
+      {
+        "frame": 3372,
+        "time": 112.4,
+        "kind": "key",
+        "label": "RED_TASK: curl -X POST \"$OPS/ops/tasks\" \\",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3374,
+        "time": 112.46666666666667,
+        "kind": "key",
+        "label": "RED_TASK: curl -X POST \"$OPS/ops/tasks\" \\",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3376,
+        "time": 112.53333333333333,
+        "kind": "key",
+        "label": "RED_TASK: curl -X POST \"$OPS/ops/tasks\" \\",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3378,
+        "time": 112.6,
+        "kind": "key",
+        "label": "RED_TASK: curl -X POST \"$OPS/ops/tasks\" \\",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3380,
+        "time": 112.66666666666667,
+        "kind": "key",
+        "label": "RED_TASK: curl -X POST \"$OPS/ops/tasks\" \\",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3382,
+        "time": 112.73333333333333,
+        "kind": "key",
+        "label": "RED_TASK:   -H \"X-Range-User: alice\" \\",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3384,
+        "time": 112.8,
+        "kind": "key",
+        "label": "RED_TASK:   -H \"X-Range-User: alice\" \\",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3386,
+        "time": 112.86666666666666,
+        "kind": "key",
+        "label": "RED_TASK:   -H \"X-Range-User: alice\" \\",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3394,
+        "time": 113.13333333333334,
+        "kind": "key",
+        "label": "RED_TASK:   -d '{\"action\":\"read_range_fixture\",",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3396,
+        "time": 113.2,
+        "kind": "key",
+        "label": "RED_TASK:   -d '{\"action\":\"read_range_fixture\",",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3398,
+        "time": 113.26666666666667,
+        "kind": "key",
+        "label": "RED_TASK:   -d '{\"action\":\"read_range_fixture\",",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3400,
+        "time": 113.33333333333333,
+        "kind": "key",
+        "label": "RED_TASK:   -d '{\"action\":\"read_range_fixture\",",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3402,
+        "time": 113.4,
+        "kind": "key",
+        "label": "RED_TASK:   -d '{\"action\":\"read_range_fixture\",",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3404,
+        "time": 113.46666666666667,
+        "kind": "key",
+        "label": "RED_TASK:   -d '{\"action\":\"read_range_fixture\",",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3406,
+        "time": 113.53333333333333,
+        "kind": "key",
+        "label": "RED_TASK:        \"target\":\"ops-01\"}'",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3408,
+        "time": 113.6,
+        "kind": "key",
+        "label": "RED_TASK:        \"target\":\"ops-01\"}'",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3410,
+        "time": 113.66666666666667,
+        "kind": "key",
+        "label": "RED_TASK:        \"target\":\"ops-01\"}'",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3412,
+        "time": 113.73333333333333,
+        "kind": "key",
+        "label": "RED_TASK:        \"target\":\"ops-01\"}'",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3414,
+        "time": 113.8,
+        "kind": "key",
+        "label": "RED_TASK:        \"target\":\"ops-01\"}'",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3510,
+        "time": 117,
+        "kind": "swipe",
+        "label": "Red / blue horizontal slide",
+        "gain": 0.6,
+        "pan": 0.35
+      },
+      {
+        "frame": 3521,
+        "time": 117.36666666666666,
+        "kind": "panel",
+        "label": "Console opens",
+        "gain": 0.4,
+        "pan": 0
+      },
+      {
+        "frame": 3522,
+        "time": 117.4,
+        "kind": "key",
+        "label": "BLUE_BLOCK: export CTRL=http://control.range.test",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3524,
+        "time": 117.46666666666667,
+        "kind": "key",
+        "label": "BLUE_BLOCK: curl -X POST \"$CTRL/control\" \\",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3526,
+        "time": 117.53333333333333,
+        "kind": "key",
+        "label": "BLUE_BLOCK: curl -X POST \"$CTRL/control\" \\",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3528,
+        "time": 117.6,
+        "kind": "key",
+        "label": "BLUE_BLOCK: curl -X POST \"$CTRL/control\" \\",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3530,
+        "time": 117.66666666666667,
+        "kind": "key",
+        "label": "BLUE_BLOCK:   -H \"X-Range-Role: defender\" \\",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3532,
+        "time": 117.73333333333333,
+        "kind": "key",
+        "label": "BLUE_BLOCK:   -H \"X-Range-Role: defender\" \\",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3534,
+        "time": 117.8,
+        "kind": "key",
+        "label": "BLUE_BLOCK:   -H \"X-Range-Role: defender\" \\",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3541,
+        "time": 118.03333333333333,
+        "kind": "key",
+        "label": "BLUE_BLOCK:   -d '{\"blocked\":true,\"isolated\":true}'",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3543,
+        "time": 118.1,
+        "kind": "key",
+        "label": "BLUE_BLOCK:   -d '{\"blocked\":true,\"isolated\":true}'",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3545,
+        "time": 118.16666666666667,
+        "kind": "key",
+        "label": "BLUE_BLOCK:   -d '{\"blocked\":true,\"isolated\":true}'",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3547,
+        "time": 118.23333333333333,
+        "kind": "key",
+        "label": "BLUE_BLOCK:   -d '{\"blocked\":true,\"isolated\":true}'",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3549,
+        "time": 118.3,
+        "kind": "key",
+        "label": "BLUE_BLOCK:   -d '{\"blocked\":true,\"isolated\":true}'",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3551,
+        "time": 118.36666666666666,
+        "kind": "key",
+        "label": "BLUE_BLOCK:   -d '{\"blocked\":true,\"isolated\":true}'",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3553,
+        "time": 118.43333333333334,
+        "kind": "key",
+        "label": "BLUE_BLOCK:   -d '{\"blocked\":true,\"isolated\":true}'",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3555,
+        "time": 118.5,
+        "kind": "shield",
+        "label": "Policy barrier activates",
+        "gain": 0.6,
+        "pan": 0
+      },
+      {
+        "frame": 3660,
+        "time": 122,
+        "kind": "swipe",
+        "label": "Red / blue horizontal slide",
+        "gain": 0.6,
+        "pan": -0.35
+      },
+      {
+        "frame": 3668,
+        "time": 122.26666666666667,
+        "kind": "key",
+        "label": "RED_RETRY: curl -i \"$PORTAL/api/records/202\" \\",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3670,
+        "time": 122.33333333333333,
+        "kind": "key",
+        "label": "RED_RETRY: curl -i \"$PORTAL/api/records/202\" \\",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3671,
+        "time": 122.36666666666666,
+        "kind": "panel",
+        "label": "Console opens",
+        "gain": 0.4,
+        "pan": 0
+      },
+      {
+        "frame": 3672,
+        "time": 122.4,
+        "kind": "key",
+        "label": "RED_RETRY: curl -i \"$PORTAL/api/records/202\" \\",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3674,
+        "time": 122.46666666666667,
+        "kind": "key",
+        "label": "RED_RETRY: curl -i \"$PORTAL/api/records/202\" \\",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3676,
+        "time": 122.53333333333333,
+        "kind": "key",
+        "label": "RED_RETRY:   -H \"X-Range-User: alice\"",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3678,
+        "time": 122.6,
+        "kind": "key",
+        "label": "RED_RETRY:   -H \"X-Range-User: alice\"",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3680,
+        "time": 122.66666666666667,
+        "kind": "key",
+        "label": "RED_RETRY:   -H \"X-Range-User: alice\"",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3682,
+        "time": 122.73333333333333,
+        "kind": "key",
+        "label": "RED_RETRY:   -H \"X-Range-User: alice\"",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3684,
+        "time": 122.8,
+        "kind": "key",
+        "label": "RED_RETRY:   -H \"X-Range-User: alice\"",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3724,
+        "time": 124.13333333333334,
+        "kind": "key",
+        "label": "RED_RETRY: curl -X POST \"$OPS/ops/tasks\"",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3726,
+        "time": 124.2,
+        "kind": "key",
+        "label": "RED_RETRY: curl -X POST \"$OPS/ops/tasks\"",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3728,
+        "time": 124.26666666666667,
+        "kind": "key",
+        "label": "RED_RETRY: curl -X POST \"$OPS/ops/tasks\"",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3730,
+        "time": 124.33333333333333,
+        "kind": "key",
+        "label": "RED_RETRY: curl -X POST \"$OPS/ops/tasks\"",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3732,
+        "time": 124.4,
+        "kind": "key",
+        "label": "RED_RETRY: curl -X POST \"$OPS/ops/tasks\"",
+        "gain": 0.78,
+        "pan": -0.13
+      },
+      {
+        "frame": 3810,
+        "time": 127,
+        "kind": "swipe",
+        "label": "Red / blue horizontal slide",
+        "gain": 0.6,
+        "pan": 0.35
+      },
+      {
+        "frame": 3821,
+        "time": 127.36666666666666,
+        "kind": "panel",
+        "label": "Console opens",
+        "gain": 0.4,
+        "pan": 0
+      },
+      {
+        "frame": 3822,
+        "time": 127.4,
+        "kind": "key",
+        "label": "BLUE_FIX: curl -X POST \"$CTRL/control\" \\",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3828,
+        "time": 127.6,
+        "kind": "shield",
+        "label": "Authorization hardening lock",
+        "gain": 0.65,
+        "pan": 0
+      },
+      {
+        "frame": 3829,
+        "time": 127.63333333333334,
+        "kind": "key",
+        "label": "BLUE_FIX:   -H \"X-Range-Role: defender\" \\",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3831,
+        "time": 127.7,
+        "kind": "key",
+        "label": "BLUE_FIX:   -H \"X-Range-Role: defender\" \\",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3833,
+        "time": 127.76666666666667,
+        "kind": "key",
+        "label": "BLUE_FIX:   -H \"X-Range-Role: defender\" \\",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3835,
+        "time": 127.83333333333333,
+        "kind": "key",
+        "label": "BLUE_FIX:   -H \"X-Range-Role: defender\" \\",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3837,
+        "time": 127.9,
+        "kind": "key",
+        "label": "BLUE_FIX:   -H \"X-Range-Role: defender\" \\",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3844,
+        "time": 128.13333333333333,
+        "kind": "key",
+        "label": "BLUE_FIX:   -d '{\"fixed\":true,\"blocked\":false,",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3846,
+        "time": 128.2,
+        "kind": "key",
+        "label": "BLUE_FIX:   -d '{\"fixed\":true,\"blocked\":false,",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3848,
+        "time": 128.26666666666668,
+        "kind": "key",
+        "label": "BLUE_FIX:   -d '{\"fixed\":true,\"blocked\":false,",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3849,
+        "time": 128.3,
+        "kind": "shield",
+        "label": "Authorization hardening lock",
+        "gain": 0.65,
+        "pan": 0
+      },
+      {
+        "frame": 3850,
+        "time": 128.33333333333334,
+        "kind": "key",
+        "label": "BLUE_FIX:   -d '{\"fixed\":true,\"blocked\":false,",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3852,
+        "time": 128.4,
+        "kind": "key",
+        "label": "BLUE_FIX:   -d '{\"fixed\":true,\"blocked\":false,",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3854,
+        "time": 128.46666666666667,
+        "kind": "key",
+        "label": "BLUE_FIX:   -d '{\"fixed\":true,\"blocked\":false,",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3856,
+        "time": 128.53333333333333,
+        "kind": "key",
+        "label": "BLUE_FIX:        \"isolated\":false}'",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3858,
+        "time": 128.6,
+        "kind": "key",
+        "label": "BLUE_FIX:        \"isolated\":false}'",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3860,
+        "time": 128.66666666666666,
+        "kind": "key",
+        "label": "BLUE_FIX:        \"isolated\":false}'",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3862,
+        "time": 128.73333333333332,
+        "kind": "key",
+        "label": "BLUE_FIX:        \"isolated\":false}'",
+        "gain": 0.78,
+        "pan": 0.13
+      },
+      {
+        "frame": 3981,
+        "time": 132.7,
+        "kind": "scanDone",
+        "label": "Legal traffic retest passed",
+        "gain": 0.4,
+        "pan": 0
+      },
+      {
+        "frame": 3990,
+        "time": 133,
+        "kind": "swipe",
+        "label": "Red / blue horizontal slide",
+        "gain": 0.6,
+        "pan": -0.35
+      },
+      {
+        "frame": 4014,
+        "time": 133.8,
+        "kind": "key",
+        "label": "Report body input",
+        "gain": 0.48,
+        "pan": -0.1
+      },
+      {
+        "frame": 4016,
+        "time": 133.86666666666667,
+        "kind": "key",
+        "label": "Report body input",
+        "gain": 0.48,
+        "pan": -0.1
+      },
+      {
+        "frame": 4018,
+        "time": 133.93333333333334,
+        "kind": "key",
+        "label": "Report body input",
+        "gain": 0.48,
+        "pan": -0.1
+      },
+      {
+        "frame": 4026,
+        "time": 134.2,
+        "kind": "key",
+        "label": "Report body input",
+        "gain": 0.48,
+        "pan": -0.1
+      },
+      {
+        "frame": 4028,
+        "time": 134.26666666666668,
+        "kind": "key",
+        "label": "Report body input",
+        "gain": 0.48,
+        "pan": -0.1
+      },
+      {
+        "frame": 4030,
+        "time": 134.33333333333334,
+        "kind": "key",
+        "label": "Report body input",
+        "gain": 0.48,
+        "pan": -0.1
+      },
+      {
+        "frame": 4036,
+        "time": 134.53333333333333,
+        "kind": "key",
+        "label": "Report body input",
+        "gain": 0.48,
+        "pan": -0.1
+      },
+      {
+        "frame": 4038,
+        "time": 134.6,
+        "kind": "key",
+        "label": "Report body input",
+        "gain": 0.48,
+        "pan": -0.1
+      },
+      {
+        "frame": 4080,
+        "time": 136,
+        "kind": "swipe",
+        "label": "Red / blue horizontal slide",
+        "gain": 0.6,
+        "pan": 0.35
+      },
+      {
+        "frame": 4104,
+        "time": 136.8,
+        "kind": "key",
+        "label": "Report body input",
+        "gain": 0.48,
+        "pan": 0.1
+      },
+      {
+        "frame": 4106,
+        "time": 136.86666666666667,
+        "kind": "key",
+        "label": "Report body input",
+        "gain": 0.48,
+        "pan": 0.1
+      },
+      {
+        "frame": 4116,
+        "time": 137.2,
+        "kind": "key",
+        "label": "Report body input",
+        "gain": 0.48,
+        "pan": 0.1
+      },
+      {
+        "frame": 4118,
+        "time": 137.26666666666668,
+        "kind": "key",
+        "label": "Report body input",
+        "gain": 0.48,
+        "pan": 0.1
+      },
+      {
+        "frame": 4126,
+        "time": 137.53333333333333,
+        "kind": "key",
+        "label": "Report body input",
+        "gain": 0.48,
+        "pan": 0.1
+      },
+      {
+        "frame": 4128,
+        "time": 137.6,
+        "kind": "key",
+        "label": "Report body input",
+        "gain": 0.48,
+        "pan": 0.1
+      },
+      {
+        "frame": 4130,
+        "time": 137.66666666666666,
+        "kind": "key",
+        "label": "Report body input",
+        "gain": 0.48,
+        "pan": 0.1
+      },
+      {
+        "frame": 4132,
+        "time": 137.73333333333332,
+        "kind": "key",
+        "label": "Report body input",
+        "gain": 0.48,
+        "pan": 0.1
+      },
+      {
+        "frame": 4223,
+        "time": 140.76666666666668,
+        "kind": "data",
+        "label": "QR code reveal",
+        "gain": 0.35,
+        "pan": 0
+      }
+    ]
+  },
+  "bgmArrangementUnchanged": true
 }

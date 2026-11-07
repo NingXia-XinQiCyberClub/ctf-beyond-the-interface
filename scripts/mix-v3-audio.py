@@ -6,6 +6,7 @@ synthesize replacement background music. Python 3 + numpy are required.
 from pathlib import Path
 import json, os, shutil, subprocess, wave
 import numpy as np
+from foley import add_foley
 
 ROOT=Path(__file__).resolve().parents[1]
 SR=48000; N=150*SR
@@ -71,7 +72,8 @@ def tone(kind):
             age=np.maximum(0,t-i*.055); sound+=np.sin(2*np.pi*freq*age)*(t>=i*.055)*np.exp(-age*(4 if kind=='coda' else 8))*.10
     elif kind=='email':
         for at,freq in [(0,880),(.14,1174.66)]:
-            age=np.maximum(0,t-at); sound+=np.sin(2*np.pi*freq*age)*(t>=at)*np.exp(-age*10)*.24
+            age=np.maximum(0,t-at)
+            sound+=(np.sin(2*np.pi*freq*age)+.18*np.sin(2*np.pi*freq*2*age))*(t>=at)*np.exp(-age*9)*.34
     elif kind=='alert':
         for at in [0,.18]:
             age=np.maximum(0,t-at); sound+=np.sin(2*np.pi*740*age)*(t>=at)*np.exp(-age*24)*.24
@@ -88,6 +90,13 @@ for cue in cues['events']:
         size=min(round(.28*SR),N-at); env=1-.28*np.sin(np.linspace(0,np.pi,size))
         music[at:at+size]*=env[:,None]
 
+extra_foley,foley_schedule=add_foley(ROOT,SR,sfx)
+write(QA/'sfx-upgrade/additional-foley.wav',extra_foley)
+# The existing score edits and its existing gain envelope above stay identical.
+baseline=QA/'sfx-upgrade/original-music.wav'
+if baseline.exists():
+    assert np.array_equal(np.round(np.clip(music,-.9999,.9999)*32767).astype('<i2'),
+                          np.round(read(baseline)*32768).astype('<i2')), 'BGM changed'
 premix=music+sfx
 if np.max(np.abs(premix))>.94: premix*=.94/np.max(np.abs(premix))
 temp=QA/'v3-audio-premix.wav'; write(temp,premix)
@@ -97,5 +106,7 @@ run=subprocess.run(cmd,capture_output=True,text=True,encoding='utf8',errors='rep
 (QA/'v3-audio-normalization.txt').write_text(run.stderr,encoding='utf8')
 write(QA/'v3-music-only.wav',music); write(QA/'v3-sfx-only.wav',sfx)
 manifest=dict(selectedSample='C / 红蓝交锋',model='ACE-Step 1.5 turbo',requestedBpm=150,requestedKey='D minor',duration=150,sampleRate=SR,edits=edits,events=cues['events'],music='ACE-Step generated; source-derived repaint and cover',sfx='Original deterministic procedural foley, separate from music',normalizationTarget=dict(integratedLUFS=-16,truePeakDb=-1.5))
-(OUT/'music/production-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+manifest['additionalFoley']=foley_schedule
+manifest['bgmArrangementUnchanged']=True
+(OUT/'music/production-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf8',newline='\n')
 print('C-derived score mixed:',target)
