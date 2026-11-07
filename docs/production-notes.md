@@ -1,5 +1,7 @@
 # 制作说明
 
+当前为第二版，详细变化见 [v2-direction.md](v2-direction.md)。开场组件已换为 `AttackIntro`，片尾口号为“见微知隙，破阵无声。”，使用经用户审查确认的 SVG Logo，二维码目标为 https://ningxia-xinqicyberclub.github.io/ 。
+
 ## 动画结构
 
 主合成为BeyondTheInterface，1920×1080、30fps、4500帧。
@@ -8,7 +10,7 @@
 
 | 起始秒 | 时长 | 场景         |
 | ------ | ---- | ------------ |
-| 0      | 10   | IntroScene   |
+| 0      | 10   | AttackIntro  |
 | 10     | 22   | WebScene     |
 | 32     | 20   | CryptoScene  |
 | 52     | 22   | ReverseScene |
@@ -18,6 +20,8 @@
 | 140    | 10   | OutroScene   |
 
 画面采用React、SVG与CSS透视构建，所有运动由帧号决定。
+
+第二版章节之间增加14帧羽化扫描遮罩与轻微镜头位移，使用前一场景末帧保持衔接，不缩短时间线。主节奏150 BPM对应每拍12帧；突破事件和音效由同一JSON驱动。最后提交时间保持原版。
 
 无需额外三维软件、付费模型接口或在线素材服务参与渲染。
 

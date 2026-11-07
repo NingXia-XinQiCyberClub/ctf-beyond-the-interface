@@ -5,5 +5,5 @@ const path = process.argv[2];
 const png = PNG.sync.read(fs.readFileSync(path));
 const result = jsQR(new Uint8ClampedArray(png.data), png.width, png.height, {inversionAttempts: 'dontInvert'});
 if (!result) throw new Error('QR code could not be decoded from frame');
-if (result.data !== 'https://github.com/NingXia-XinQiCyberClub') throw new Error('Unexpected QR destination');
+if (result.data !== 'https://ningxia-xinqicyberclub.github.io/') throw new Error('Unexpected QR destination');
 console.log('QR decoded correctly: ' + result.data);

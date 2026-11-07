@@ -5,6 +5,10 @@
 - 所有正式文案、队伍名、界面与片尾统一使用完整名称“鑫启网安俱乐部”，保持同一行。
 - 主体为CTF与黑客视角，社团元素少量融入。五方向为Web、Crypto、Reverse、Pwn、Misc。
 - 当前成片150秒、1920×1080、30fps、4500帧。Pwn悬念在最后26秒收束。
+- 当前制作第二版；进攻视觉、蓝紫红状态、150 BPM配乐与14帧扫描转场见`docs/v2-direction.md`。
+- 用户已审查确认`public/logo.svg`，保留原始PNG对照；Logo本身不改色。
+- 片尾口号已由用户选定为“见微知隙，破阵无声。”，二维码必须指向`https://ningxia-xinqicyberclub.github.io/`。
+- 保留第一版最后Flag提交、排名上涨和落版结构。关键音画事件共用`src/data/attack-cues.json`。
 - 源码直接位于项目根目录，使用React、Remotion、SVG与CSS逐帧动画。
 - 重要文件：`docs/storyboard.md`、`docs/production-notes.md`、`prompts/creative-brief.md`、`PROJECT_STATUS.md`。
 - 常用命令：`npm run assets`、`npm run audio`、`npm run typecheck`、`npm run dev`、`npm run render`。

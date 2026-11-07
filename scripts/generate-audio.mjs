@@ -238,171 +238,269 @@ function fail(start) {
   );
 }
 
-// Harmonic palette: D minor / B-flat / F / C; final release opens to D minor add9.
+// The exact same event table drives the palette, effects and musical accents.
+const cues = JSON.parse(
+  fs.readFileSync(path.join(root, "src/data/attack-cues.json"), "utf8"),
+);
+const BEAT = 60 / cues.bpm; // 0.4 seconds / 12 frames, sample-exact at 48 kHz.
+const STEP = BEAT / 4;
 const chords = [
   { bass: 38, notes: [50, 57, 62, 65, 69] },
   { bass: 34, notes: [46, 53, 58, 62, 65] },
   { bass: 41, notes: [53, 60, 65, 69, 72] },
   { bass: 36, notes: [48, 55, 60, 64, 67] },
 ];
-function intensity(t) {
-  if (t < 3) return 0.05;
-  if (t < 10) return 0.2 + ((t - 3) / 7) * 0.23;
-  if (t < 32) return 0.55;
-  if (t < 52) return 0.64;
-  if (t < 74) return 0.72;
-  if (t < 81) return 0.8;
-  if (t < 84) return 0.35;
-  if (t < 96) return 0.74;
-  if (t < 114) return 0.62;
-  if (t < 126) return 0.86;
-  if (t < 136) return 1;
-  if (t < 138.3) return 0;
-  return t < 140 ? 1 : 0.62;
-}
 
-// Sustained bed; pads overlap, avoiding hard harmonic boundaries.
-for (let bar = 0; bar < 70; bar += 2) {
-  const t = bar * 2;
-  const chord = chords[Math.floor(bar / 4) % 4];
-  pad(t, 6.7, chord.notes, 0.014 + (t > 110 ? 0.006 : 0));
-}
-pad(138.3, 11.7, [50, 57, 62, 65, 69, 76], 0.024);
-
-// Beat-synchronous score. Lower activity at the start, fuller arrangement near the finish.
-for (let step = 0; step < 1120; step++) {
-  const t = step * 0.125;
-  if (t >= 136) break;
-  const energy = intensity(t);
-  const chord = chords[Math.floor(t / 8) % 4];
-  const beat = step % 4 === 0;
-  if (t >= 6 && beat) {
-    const beatInBar = Math.floor(step / 4) % 4;
-    if (beatInBar === 0 || beatInBar === 2 || t > 114) kick(t, 0.13 * energy);
-    if (t >= 10 && (beatInBar === 1 || beatInBar === 3))
-      snare(t, 0.07 * energy);
-  }
-  if (t >= 10 && step % 2 === 0)
-    hat(
-      t,
-      0.013 * energy * (step % 4 === 0 ? 0.7 : 1),
-      step % 16 === 14,
-      step % 4 === 0 ? -0.25 : 0.25,
-    );
-  if (t >= 114 && step % 2 === 1)
-    hat(t, 0.006 * energy, false, (rand() - 0.5) * 0.7);
-  if (t >= 8 && step % 4 === 0) {
-    const pattern = [0, 0, 7, 0, 0, 12, 7, 0];
-    bass(
-      t,
-      chord.bass + pattern[Math.floor(step / 4) % 8],
-      0.12 * energy,
-      0.32,
-    );
-  }
-  if (t >= 10 && step % 2 === 0) {
-    const pattern = [0, 2, 1, 3, 2, 4, 1, 3];
-    const index = pattern[Math.floor(step / 2) % pattern.length];
-    const note = chord.notes[index] + 12;
-    const accent = step % 8 === 0 ? 1.1 : 0.62;
-    pluck(t, note, 0.033 * energy * accent, Math.sin(step * 0.8) * 0.48, 0.95);
-  }
-  if (t >= 32 && step % 16 === 8)
-    pluck(t, chord.notes[3] + 24, 0.012 * energy, -0.5, 1.2);
-}
-
-// A simple evolving lead ties the sequences together without competing with readable UI.
-const motif = [74, 77, 81, 79, 77, 74, 72, 69];
-for (const section of [20, 40, 60, 88, 104, 118, 126]) {
-  motif.forEach((note, i) =>
-    pluck(
-      section + i * 0.5,
-      note,
-      0.022 + (section > 114 ? 0.008 : 0),
-      Math.sin(i) * 0.35,
-      1.3,
-    ),
+function reese(start, note, len = 0.18, volume = 0.15) {
+  const f = hz(note);
+  let low = 0;
+  voice(
+    start,
+    len,
+    (t, i, l) => {
+      const env = (1 - Math.exp(-t * 450)) * Math.min(1, (l - t) / 0.025);
+      const saw = (freq) => 2 * ((t * freq) % 1) - 1;
+      const raw =
+        saw(f * 0.997) * 0.55 +
+        saw(f * 1.003) * 0.55 +
+        Math.sin(TAU * f * t) * 0.7;
+      const cutoff = 0.025 + 0.24 * Math.exp(-t * 18);
+      low += cutoff * (raw - low);
+      const pump = 0.35 + 0.65 * Math.min(1, t / 0.045);
+      return Math.tanh(low * 2.7) * env * volume * pump;
+    },
+    0,
+    0.025,
   );
 }
+function stab(start, note, volume = 0.035, len = 0.18, pan = 0) {
+  const f = hz(note);
+  voice(
+    start,
+    len,
+    (t, i, l) => {
+      const env =
+        (1 - Math.exp(-t * 550)) *
+        Math.exp(-t * 13) *
+        Math.min(1, (l - t) / 0.02);
+      const tone = Math.sin(
+        TAU * f * t + Math.sin(TAU * f * 2 * t) * Math.exp(-t * 10) * 1.8,
+      );
+      return Math.tanh(tone * 1.6) * env * volume;
+    },
+    pan,
+    0.13,
+  );
+}
+function metal(start, volume = 0.045) {
+  voice(
+    start,
+    0.35,
+    (t) => {
+      const body = Math.sin(TAU * 421 * t) * Math.sin(TAU * 629.4 * t);
+      return (
+        (body + (rand() * 2 - 1) * 0.23) *
+        Math.exp(-t * 21) *
+        volume *
+        (1 - Math.exp(-t * 1200))
+      );
+    },
+    -0.1,
+    0.1,
+  );
+}
+function riser(start, len = 1.2, v = 0.035) {
+  let low = 0;
+  voice(
+    start,
+    len,
+    (t, i, l) => {
+      const q = t / l;
+      low = low * 0.8 + (rand() * 2 - 1) * 0.2;
+      const frequencyPhase = 100 * t + (900 * t * t) / l;
+      return (
+        (low * 1.2 + Math.sin(TAU * frequencyPhase) * 0.15) *
+        q ** 1.7 *
+        v *
+        Math.min(1, (l - t) / 0.015)
+      );
+    },
+    0,
+    0.1,
+  );
+}
+function energyAt(t) {
+  if (t < 2.8) return 0.05;
+  if (t < 6) return 0.42;
+  if (t < 10) return 0.74;
+  if (t < 20.8) return 0.72;
+  if (t < 32) return 1.0;
+  if (t < 40) return 0.74;
+  if (t < 52) return 0.95;
+  if (t < 64.4) return 0.8;
+  if (t < 74) return 1.0;
+  if (t < 80.8) return 0.92;
+  if (t < 83.2) return 0.22;
+  if (t < 96) return 1;
+  if (t < 100.8) return 0.43;
+  if (t < 110.4) return 0.8;
+  if (t < 114) return 0.65;
+  return t < 126 ? 0.92 : 1.1;
+}
 
-// Original UI foley; matched to the approved shot timings.
-keyboard(0.85, 13, 0.105);
-tick(2.55, 0.045);
-impact(3.1, 0.1);
-sweep(4.7, 1.3, 0.035);
-impact(6, 0.12);
-[6.2, 6.7, 7.2, 7.7, 8.2].forEach((t) => pluck(t, 81, 0.018, 0, 0.5));
-[10, 32, 52, 74, 96, 114].forEach((t) => {
-  sweep(t - 0.65, 0.65, 0.019);
-  impact(t, 0.07);
-});
-tick(11.4);
-keyboard(15.3, 5);
-pluck(18.7, 86, 0.025, 0.25, 0.6);
-success(28.8);
-keyboard(33.5, 8);
-pluck(40.1, 81, 0.028, -0.2, 0.6);
-success(50.2);
-fail(52.5);
-tick(59.7, 0.03);
-keyboard(64, 6);
-success(71.5);
-keyboard(75.6, 16, 0.074);
-fail(81.1);
-keyboard(86.4, 12, 0.069);
-tick(93.4, 0.035);
-tick(97.1);
-sweep(101.2, 2, 0.018);
-success(110.7);
-keyboard(115.4, 10, 0.08);
-keyboard(121.1, 15, 0.072);
-keyboard(126.5, 14, 0.06);
-impact(128.2, 0.09);
-pluck(130.7, 86, 0.028, 0.2, 0.8);
-tick(133.2, 0.03);
-tick(134.1, 0.03);
+// Low dark pad beneath the attacks; leave room for the heavy drums and bass.
+for (let bar = 0; bar < 85; bar += 4) {
+  const time = bar * BEAT * 4;
+  if (time >= 136) break;
+  pad(time, 7, chords[Math.floor(bar / 4) % 4].notes, 0.009);
+}
 
-// Audible countdown and restrained heart-like low pulse.
-for (let t = 114; t < 138.3; t += 1) {
-  pluck(t, 86, t < 132 ? 0.009 : 0.016, 0, 0.12);
-  if (t >= 136) {
+// 150 BPM industrial breakbeat. Each section deliberately restarts its drum phrase.
+for (let n = 0; n < Math.ceil(136 / STEP); n++) {
+  const time = Number((n * STEP).toFixed(4));
+  if (time >= 136) break;
+  const sectionStart = [...cues.chapters].reverse().find((s) => time >= s) || 0;
+  const local = time - sectionStart;
+  const step = Math.round(local / STEP) % 16;
+  const energy = energyAt(time);
+  const chord = chords[Math.floor((time - 6) / 6.4 + 40) % 4];
+  if (time >= 2.8) {
+    if ([0, 6, 8, 11].includes(step) || (time > 114 && step === 14))
+      kick(time, 0.24 * energy);
+    if ([4, 12].includes(step)) {
+      snare(time, 0.125 * energy);
+      metal(time, 0.028 * energy);
+    }
+    if (time > 10 && [3, 10, 15].includes(step)) snare(time, 0.025 * energy);
+    if (step % 2 === 0)
+      hat(time, 0.027 * energy, step === 14, step % 4 ? 0.4 : -0.3);
+    if (time > 20.8 && (step === 7 || step === 15))
+      hat(time, 0.012 * energy, false, -0.55);
+  }
+  if (time >= 6) {
+    if ([0, 3, 6, 8, 10, 14].includes(step)) {
+      const riff = [0, 0, 7, 0, 12, 0, 0, 7, 0, 0, 12, 7, 0, 0, 3, 0];
+      reese(
+        time,
+        chord.bass + riff[step],
+        step === 0 || step === 8 ? 0.24 : 0.14,
+        0.17 * energy,
+      );
+    }
+    if (step % 2 === 0 && time > 10) {
+      const index = [0, 2, 1, 3, 2, 4, 1, 3][Math.floor(step / 2)];
+      stab(
+        time,
+        chord.notes[index] + 12,
+        0.039 * energy,
+        0.17,
+        Math.sin(n * 0.8) * 0.48,
+      );
+    }
+    if (step === 14 && energy > 0.9)
+      stab(time, chord.notes[3] + 24, 0.028, 0.25, 0.45);
+  }
+  // Short rolls lead into section changes without a continuous wash of noise.
+  const next = cues.chapters.find((s) => s > time);
+  if (next && next - time < 0.4 && time > 8)
+    snare(time, (0.035 + (0.4 - (next - time)) * 0.1) * energy);
+}
+
+// Action-specific stop edits create a perceptible inhale before each breach.
+const attackCues = cues.events.filter((e) =>
+  ["breach", "drop", "failure"].includes(e.kind),
+);
+for (const cue of attackCues) {
+  for (
+    let i = Math.round((cue.time - 0.16) * SR);
+    i < Math.round(cue.time * SR);
+    i++
+  ) {
+    if (i < 0 || i >= N) continue;
+    const progress = (i / SR - cue.time + 0.16) / 0.16;
+    const gain = progress < 0.63 ? 1 - progress * 0.9 : 0.12;
+    left[i] *= gain;
+    right[i] *= gain;
+  }
+}
+
+keyboard(0.7, 13, 0.095);
+tick(2.8, 0.065);
+riser(4.8, 1.2, 0.048);
+for (const time of cues.chapters.filter((t) => t >= 10 && t <= 114)) {
+  riser(time - 0.6, 0.6, 0.03);
+  impact(time, 0.15);
+  metal(time, 0.055);
+}
+for (const cue of cues.events.filter((e) => e.time < 136)) {
+  if (cue.kind === "success") {
+    success(cue.time);
+    impact(cue.time, 0.13);
+  } else if (cue.kind === "failure") {
+    fail(cue.time);
+    impact(cue.time, 0.2);
+    metal(cue.time, 0.075);
+  } else if (cue.kind === "breach" || cue.kind === "drop") {
+    impact(cue.time, 0.2 * cue.power);
+    metal(cue.time, 0.065 * cue.power);
+    reese(cue.time, 26, 0.32, 0.14 * cue.power);
+  } else {
+    tick(cue.time, 0.045 * cue.power);
+    stab(cue.time, 86, 0.04, 0.15);
+  }
+}
+for (const [start, count] of [
+  [15.2, 7],
+  [33.6, 8],
+  [59.6, 6],
+  [75.6, 12],
+  [86.4, 12],
+  [115.6, 10],
+  [121.2, 14],
+  [126.4, 16],
+])
+  keyboard(start, count, 0.055);
+for (let time = 114; time < 138.3; time += 1) {
+  pluck(time, 86, time < 132 ? 0.012 : 0.02, 0, 0.12);
+  if (time >= 136) {
     voice(
-      t,
+      time,
       0.25,
-      (tt) => Math.sin(TAU * 43 * tt) * Math.exp(-tt * 20) * 0.048,
+      (t) => Math.sin(TAU * 43 * t) * Math.exp(-t * 20) * 0.048,
     );
     voice(
-      t + 0.23,
+      time + 0.23,
       0.18,
-      (tt) => Math.sin(TAU * 46 * tt) * Math.exp(-tt * 25) * 0.027,
+      (t) => Math.sin(TAU * 46 * t) * Math.exp(-t * 25) * 0.027,
     );
   }
 }
 
-// Apply the pre-submit hush to existing music and delay tails before adding click and success.
+// Preserve the successful V1 ending: the click, one-second wait, release and coda.
 for (let i = Math.floor(135.7 * SR); i < Math.floor(138.3 * SR); i++) {
   const t = i / SR;
-  const g = t < 136 ? 1 - ((t - 135.7) / 0.3) * 0.93 : t < 137.6 ? 0.07 : 0.013;
-  left[i] *= g;
-  right[i] *= g;
+  const gain =
+    t < 136 ? 1 - ((t - 135.7) / 0.3) * 0.93 : t < 137.6 ? 0.07 : 0.013;
+  left[i] *= gain;
+  right[i] *= gain;
 }
 tick(137.3, 0.06);
+pad(138.3, 11.7, [50, 57, 62, 65, 69, 76], 0.027);
 success(138.3, true);
-pluck(138.8, 93, 0.04, 0.3, 1.4);
+pluck(138.8, 93, 0.045, 0.3, 1.4);
+metal(139, 0.028);
 sweep(139.2, 1.7, 0.025, false);
-
-// Spacious branded coda.
 for (let i = 0; i < 8; i++)
   pluck(
     140 + i * 0.5,
     [74, 77, 81, 86, 81, 77, 76, 74][i],
-    0.035,
+    0.039,
     Math.sin(i) * 0.5,
     2,
   );
-impact(143, 0.08);
-pad(143, 7, [50, 57, 62, 65, 69, 76], 0.016);
-pluck(145, 86, 0.025, 0.15, 3);
+impact(143, 0.09);
+pad(143, 7, [50, 57, 62, 65, 69, 76], 0.018);
+pluck(145, 86, 0.028, 0.15, 3);
 
 // Diffuse stereo room: multiple all-pass-ish taps with low-passed returns.
 for (const [delay, gain, swap] of [
@@ -430,8 +528,8 @@ let dcL = 0,
 for (let i = 0; i < N; i++) {
   dcL = dcL * 0.9995 + left[i] * 0.0005;
   dcR = dcR * 0.9995 + right[i] * 0.0005;
-  let l = Math.tanh((left[i] - dcL) * 1.15),
-    r = Math.tanh((right[i] - dcR) * 1.15);
+  let l = Math.tanh((left[i] - dcL) * 2.6),
+    r = Math.tanh((right[i] - dcR) * 2.6);
   const t = i / SR;
   const fade =
     t < 0.08 ? t / 0.08 : t > 148.6 ? Math.max(0, (150 - t) / 1.4) : 1;
@@ -478,6 +576,10 @@ fs.mkdirSync(path.dirname(output), { recursive: true });
 fs.writeFileSync(output, out);
 const rms = Math.sqrt(sum / N);
 const report = {
+  version: "2.0.0",
+  bpm: cues.bpm,
+  framesPerBeat: BEAT * cues.fps,
+  cueEvents: cues.events,
   durationSeconds: duration,
   sampleRate: SR,
   channels: 2,

@@ -1,19 +1,10 @@
 import React from "react";
+import { useAttackColors, ExploitArtifacts } from "./AttackDirection";
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion";
 
 // All animation is a pure function of the local frame. No live browser clocks,
 // random generators, network requests or external assets are used.
-const C = {
-  bg: "#030711",
-  ink: "#edf7ff",
-  muted: "#8aa0b7",
-  blue: "#2782ff",
-  cyan: "#32d8ff",
-  line: "#18344d",
-  red: "#ff506e",
-  green: "#61edbf",
-  gold: "#ffce77",
-};
+
 const SANS = '"Noto Sans SC", "Microsoft YaHei", sans-serif';
 const MONO = '"Cascadia Code", Consolas, monospace';
 const clamp = (v: number) => Math.min(1, Math.max(0, v));
@@ -34,99 +25,107 @@ const Glow: React.FC<{
   color?: string;
   children: React.ReactNode;
   style?: React.CSSProperties;
-}> = ({ color = C.cyan, children, style }) => (
-  <span style={{ color, textShadow: `0 0 20px ${color}66`, ...style }}>
-    {children}
-  </span>
-);
+}> = ({ color: requestedColor, children, style }) => {
+  const C = useAttackColors();
+  const color = requestedColor ?? C.cyan;
+  return (
+    <span style={{ color, textShadow: `0 0 20px ${color}66`, ...style }}>
+      {children}
+    </span>
+  );
+};
 
 const Backdrop: React.FC<{ t: number; accent?: string }> = ({
   t,
-  accent = C.blue,
-}) => (
-  <AbsoluteFill
-    style={{
-      background: C.bg,
-      overflow: "hidden",
-      fontFamily: SANS,
-      color: C.ink,
-    }}
-  >
+  accent: requestedColor,
+}) => {
+  const C = useAttackColors();
+  const accent = requestedColor ?? C.blue;
+  return (
     <AbsoluteFill
       style={{
-        background: `radial-gradient(ellipse at ${38 + Math.sin(t * 0.12) * 5}% 44%, ${accent}26, transparent 56%), radial-gradient(ellipse at 82% 12%, #07487955, transparent 47%)`,
+        background: C.bg,
+        overflow: "hidden",
+        fontFamily: SANS,
+        color: C.ink,
       }}
-    />
-    <AbsoluteFill
-      style={{
-        opacity: 0.19,
-        backgroundImage:
-          "linear-gradient(#234664 1px,transparent 1px),linear-gradient(90deg,#234664 1px,transparent 1px)",
-        backgroundSize: "80px 80px",
-        transform: `perspective(950px) rotateX(61deg) scale(1.5) translateY(${120 + t * 2}px)`,
-        transformOrigin: "center bottom",
-      }}
-    />
-    <svg
-      width="1920"
-      height="1080"
-      style={{ position: "absolute", inset: 0, opacity: 0.26 }}
     >
-      {Array.from({ length: 34 }, (_, i) => {
-        const x = (i * 419 + 137) % 1920;
-        const y = (i * 233 + 47) % 1080;
-        return (
-          <g key={i} opacity={0.25 + 0.45 * pulse(t * 0.5 + i)}>
-            <circle cx={x} cy={y} r={i % 5 === 0 ? 2.1 : 1} fill={C.cyan} />
-            <path
-              d={`M${x - 7},${y}h14M${x},${y - 7}v14`}
-              stroke={C.blue}
-              strokeWidth={0.5}
-            />
-          </g>
-        );
-      })}
-      <path d="M64 196H1856 M64 970H1856" stroke={C.line} />
-      <path
-        d="M64 196v22M1856 196v22M64 948v22M1856 948v22"
-        stroke={C.cyan}
-        strokeWidth="2"
+      <AbsoluteFill
+        style={{
+          background: `radial-gradient(ellipse at ${38 + Math.sin(t * 0.12) * 5}% 44%, ${accent}26, transparent 56%), radial-gradient(ellipse at 82% 12%, #07487955, transparent 47%)`,
+        }}
       />
-    </svg>
-    <AbsoluteFill
-      style={{
-        background:
-          "linear-gradient(180deg,#01040c44 0%,transparent 28%,transparent 65%,#01040c99 100%)",
-      }}
-    />
-    <div
-      style={{
-        position: "absolute",
-        left: 64,
-        bottom: 38,
-        color: "#486276",
-        fontSize: 14,
-        fontFamily: MONO,
-        letterSpacing: 3,
-      }}
-    >
-      CTF / CHALLENGE ENVIRONMENT
-    </div>
-    <div
-      style={{
-        position: "absolute",
-        right: 64,
-        bottom: 38,
-        color: "#486276",
-        fontSize: 14,
-        fontFamily: MONO,
-        letterSpacing: 3,
-      }}
-    >
-      TRACE · UNDERSTAND · VERIFY
-    </div>
-  </AbsoluteFill>
-);
+      <AbsoluteFill
+        style={{
+          opacity: 0.19,
+          backgroundImage:
+            "linear-gradient(#234664 1px,transparent 1px),linear-gradient(90deg,#234664 1px,transparent 1px)",
+          backgroundSize: "80px 80px",
+          transform: `perspective(950px) rotateX(61deg) scale(1.5) translateY(${120 + t * 2}px)`,
+          transformOrigin: "center bottom",
+        }}
+      />
+      <svg
+        width="1920"
+        height="1080"
+        style={{ position: "absolute", inset: 0, opacity: 0.26 }}
+      >
+        {Array.from({ length: 34 }, (_, i) => {
+          const x = (i * 419 + 137) % 1920;
+          const y = (i * 233 + 47) % 1080;
+          return (
+            <g key={i} opacity={0.25 + 0.45 * pulse(t * 0.5 + i)}>
+              <circle cx={x} cy={y} r={i % 5 === 0 ? 2.1 : 1} fill={C.cyan} />
+              <path
+                d={`M${x - 7},${y}h14M${x},${y - 7}v14`}
+                stroke={C.blue}
+                strokeWidth={0.5}
+              />
+            </g>
+          );
+        })}
+        <path d="M64 196H1856 M64 970H1856" stroke={C.line} />
+        <path
+          d="M64 196v22M1856 196v22M64 948v22M1856 948v22"
+          stroke={C.cyan}
+          strokeWidth="2"
+        />
+      </svg>
+      <AbsoluteFill
+        style={{
+          background:
+            "linear-gradient(180deg,#01040c44 0%,transparent 28%,transparent 65%,#01040c99 100%)",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          left: 64,
+          bottom: 38,
+          color: "#486276",
+          fontSize: 14,
+          fontFamily: MONO,
+          letterSpacing: 3,
+        }}
+      >
+        CTF / CHALLENGE ENVIRONMENT
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          right: 64,
+          bottom: 38,
+          color: "#486276",
+          fontSize: 14,
+          fontFamily: MONO,
+          letterSpacing: 3,
+        }}
+      >
+        RECON · EXPLOIT · CAPTURE
+      </div>
+    </AbsoluteFill>
+  );
+};
 
 const Header: React.FC<{
   n: string;
@@ -134,114 +133,120 @@ const Header: React.FC<{
   sub: string;
   t: number;
   status?: string;
-}> = ({ n, title, sub, t, status = "ANALYSIS IN PROGRESS" }) => (
-  <div
-    style={{
-      position: "absolute",
-      left: 78,
-      top: 59,
-      right: 78,
-      display: "flex",
-      alignItems: "center",
-      opacity: appear(t, 0, 0.6),
-      transform: `translateY(${(1 - appear(t, 0, 0.6)) * 12}px)`,
-    }}
-  >
+}> = ({ n, title, sub, t, status = "ATTACK VECTOR ACTIVE" }) => {
+  const C = useAttackColors();
+  return (
     <div
       style={{
-        fontFamily: MONO,
-        color: C.cyan,
-        fontSize: 22,
-        letterSpacing: 4,
-        marginRight: 28,
-      }}
-    >
-      {n}
-    </div>
-    <div>
-      <div
-        style={{
-          fontSize: 43,
-          fontWeight: 650,
-          letterSpacing: 2,
-          lineHeight: 1.2,
-        }}
-      >
-        {title}
-      </div>
-      <div
-        style={{
-          fontSize: 15,
-          fontFamily: MONO,
-          color: C.muted,
-          letterSpacing: 4,
-          marginTop: 10,
-        }}
-      >
-        {sub}
-      </div>
-    </div>
-    <div
-      style={{
-        marginLeft: "auto",
+        position: "absolute",
+        left: 78,
+        top: 59,
+        right: 78,
         display: "flex",
         alignItems: "center",
-        gap: 12,
-        fontFamily: MONO,
-        color: C.muted,
-        fontSize: 14,
-        letterSpacing: 2,
+        opacity: appear(t, 0, 0.6),
+        transform: `translateY(${(1 - appear(t, 0, 0.6)) * 12}px)`,
       }}
     >
-      <span
+      <div
         style={{
-          width: 7,
-          height: 7,
-          borderRadius: "50%",
-          background: C.cyan,
-          boxShadow: `0 0 14px ${C.cyan}`,
-          opacity: 0.4 + 0.6 * pulse(t * 3),
+          fontFamily: MONO,
+          color: C.cyan,
+          fontSize: 22,
+          letterSpacing: 4,
+          marginRight: 28,
         }}
-      />
-      {status}
+      >
+        {n}
+      </div>
+      <div>
+        <div
+          style={{
+            fontSize: 43,
+            fontWeight: 650,
+            letterSpacing: 2,
+            lineHeight: 1.2,
+          }}
+        >
+          {title}
+        </div>
+        <div
+          style={{
+            fontSize: 15,
+            fontFamily: MONO,
+            color: C.muted,
+            letterSpacing: 4,
+            marginTop: 10,
+          }}
+        >
+          {sub}
+        </div>
+      </div>
+      <div
+        style={{
+          marginLeft: "auto",
+          display: "flex",
+          alignItems: "center",
+          gap: 12,
+          fontFamily: MONO,
+          color: C.muted,
+          fontSize: 14,
+          letterSpacing: 2,
+        }}
+      >
+        <span
+          style={{
+            width: 7,
+            height: 7,
+            borderRadius: "50%",
+            background: C.cyan,
+            boxShadow: `0 0 14px ${C.cyan}`,
+            opacity: 0.4 + 0.6 * pulse(t * 3),
+          }}
+        />
+        {status}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Caption: React.FC<{
   text: string;
   t: number;
   start?: number;
   end?: number;
-}> = ({ text, t, start = 4, end = 100 }) => (
-  <div
-    style={{
-      position: "absolute",
-      bottom: 118,
-      left: 80,
-      right: 80,
-      textAlign: "center",
-      fontFamily: SANS,
-      opacity: windowAlpha(t, start, end),
-      transform: `translateY(${(1 - appear(t, start)) * 12}px)`,
-    }}
-  >
-    <div style={{ display: "inline-flex", gap: 22, alignItems: "center" }}>
-      <span style={{ width: 40, height: 1, background: C.blue }} />
-      <span
-        style={{
-          fontSize: 28,
-          letterSpacing: 4,
-          fontWeight: 500,
-          textShadow: "0 2px 20px #000",
-        }}
-      >
-        {text}
-      </span>
-      <span style={{ width: 40, height: 1, background: C.blue }} />
+}> = ({ text, t, start = 4, end = 100 }) => {
+  const C = useAttackColors();
+  return (
+    <div
+      style={{
+        position: "absolute",
+        bottom: 118,
+        left: 80,
+        right: 80,
+        textAlign: "center",
+        fontFamily: SANS,
+        opacity: windowAlpha(t, start, end),
+        transform: `translateY(${(1 - appear(t, start)) * 12}px)`,
+      }}
+    >
+      <div style={{ display: "inline-flex", gap: 22, alignItems: "center" }}>
+        <span style={{ width: 40, height: 1, background: C.blue }} />
+        <span
+          style={{
+            fontSize: 28,
+            letterSpacing: 4,
+            fontWeight: 500,
+            textShadow: "0 2px 20px #000",
+          }}
+        >
+          {text}
+        </span>
+        <span style={{ width: 40, height: 1, background: C.blue }} />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Panel: React.FC<{
   x: number;
@@ -262,60 +267,64 @@ const Panel: React.FC<{
   tag = "LIVE",
   children,
   style,
-  accent = C.cyan,
-}) => (
-  <div
-    style={{
-      position: "absolute",
-      left: x,
-      top: y,
-      width: w,
-      height: h,
-      background: "linear-gradient(135deg,#10243aed,#071321ef)",
-      border: "1px solid #2c5979",
-      boxShadow: "0 18px 75px #0008,inset 0 1px 0 #70baff0c",
-      borderRadius: 8,
-      overflow: "hidden",
-      ...style,
-    }}
-  >
+  accent: requestedColor,
+}) => {
+  const C = useAttackColors();
+  const accent = requestedColor ?? C.cyan;
+  return (
     <div
       style={{
-        height: 42,
-        borderBottom: "1px solid #1b3044",
-        display: "flex",
-        alignItems: "center",
-        padding: "0 16px",
-        fontFamily: MONO,
-        fontSize: 13,
-        letterSpacing: 1.4,
-        color: "#99aebf",
-        background: "#0a1420",
+        position: "absolute",
+        left: x,
+        top: y,
+        width: w,
+        height: h,
+        background: `linear-gradient(135deg,${C.blue}18,${C.bg}f5)`,
+        border: `1px solid ${C.line}`,
+        boxShadow: "0 18px 75px #0008,inset 0 1px 0 #70baff0c",
+        borderRadius: 8,
+        overflow: "hidden",
+        ...style,
       }}
     >
-      <span style={{ display: "flex", gap: 5, marginRight: 13 }}>
-        {["#fc6477", "#ffd17a", "#43dbb0"].map((c) => (
-          <i
-            key={c}
-            style={{
-              display: "block",
-              width: 5,
-              height: 5,
-              borderRadius: 10,
-              background: c,
-              opacity: 0.8,
-            }}
-          />
-        ))}
-      </span>
-      {title}
-      <span style={{ marginLeft: "auto", color: accent, fontSize: 11 }}>
-        {tag}
-      </span>
+      <div
+        style={{
+          height: 42,
+          borderBottom: `1px solid ${C.line}`,
+          display: "flex",
+          alignItems: "center",
+          padding: "0 16px",
+          fontFamily: MONO,
+          fontSize: 13,
+          letterSpacing: 1.4,
+          color: "#99aebf",
+          background: C.bg,
+        }}
+      >
+        <span style={{ display: "flex", gap: 5, marginRight: 13 }}>
+          {["#fc6477", "#ffd17a", "#43dbb0"].map((c) => (
+            <i
+              key={c}
+              style={{
+                display: "block",
+                width: 5,
+                height: 5,
+                borderRadius: 10,
+                background: c,
+                opacity: 0.8,
+              }}
+            />
+          ))}
+        </span>
+        {title}
+        <span style={{ marginLeft: "auto", color: accent, fontSize: 11 }}>
+          {tag}
+        </span>
+      </div>
+      {children}
     </div>
-    {children}
-  </div>
-);
+  );
+};
 
 const Code: React.FC<{
   lines: string[];
@@ -323,80 +332,90 @@ const Code: React.FC<{
   t: number;
   title?: string;
   accent?: string;
-}> = ({ lines, active, t, title = "SOURCE / TRACE", accent = C.cyan }) => (
-  <Panel
-    x={1410}
-    y={242}
-    w={435}
-    h={598}
-    title={title}
-    tag="READ ONLY"
-    accent={accent}
-    style={{
-      opacity: appear(t, 1.3),
-      transform: `translateX(${(1 - appear(t, 1.3)) * 25}px)`,
-    }}
-  >
-    <div
+}> = ({
+  lines,
+  active,
+  t,
+  title = "SOURCE / TRACE",
+  accent: requestedColor,
+}) => {
+  const C = useAttackColors();
+  const accent = requestedColor ?? C.cyan;
+  return (
+    <Panel
+      x={1410}
+      y={242}
+      w={435}
+      h={598}
+      title={title}
+      tag="OPERATOR"
+      accent={accent}
       style={{
-        padding: "27px 17px",
-        fontFamily: MONO,
-        fontSize: 17,
-        lineHeight: 2.0,
+        opacity: appear(t, 1.3),
+        transform: `translateX(${(1 - appear(t, 1.3)) * 25}px)`,
       }}
     >
-      {lines.map((line, i) => (
-        <div
-          key={i}
-          style={{
-            display: "flex",
-            whiteSpace: "pre",
-            background: i === active ? `${accent}14` : "transparent",
-            borderLeft: `2px solid ${i === active ? accent : "transparent"}`,
-            paddingLeft: 9,
-            color:
-              i === active
-                ? C.ink
-                : line.trim().startsWith("//")
-                  ? "#52798d"
-                  : "#92a9c2",
-          }}
-        >
-          <span
+      <div
+        style={{
+          padding: "27px 17px",
+          fontFamily: MONO,
+          fontSize: 17,
+          lineHeight: 2.0,
+        }}
+      >
+        {lines.map((line, i) => (
+          <div
+            key={i}
             style={{
-              color: "#344e66",
-              width: 34,
-              flexShrink: 0,
-              fontSize: 12,
-              paddingTop: 4,
+              display: "flex",
+              whiteSpace: "pre",
+              background: i === active ? `${accent}14` : "transparent",
+              borderLeft: `2px solid ${i === active ? accent : "transparent"}`,
+              paddingLeft: 9,
+              color:
+                i === active
+                  ? C.ink
+                  : line.trim().startsWith("//")
+                    ? "#52798d"
+                    : "#92a9c2",
             }}
           >
-            {String(i + 1).padStart(2, "0")}
-          </span>
-          <span>{line}</span>
-        </div>
-      ))}
-    </div>
-    <div
-      style={{
-        position: "absolute",
-        bottom: 24,
-        left: 27,
-        right: 27,
-        borderTop: "1px solid #183146",
-        paddingTop: 16,
-        fontFamily: MONO,
-        fontSize: 12,
-        color: "#5c8198",
-        display: "flex",
-        justifyContent: "space-between",
-      }}
-    >
-      <span>LOCAL CHALLENGE</span>
-      <span>UTF-8 / LF</span>
-    </div>
-  </Panel>
-);
+            <span
+              style={{
+                color: "#344e66",
+                width: 34,
+                flexShrink: 0,
+                fontSize: 12,
+                paddingTop: 4,
+              }}
+            >
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <span>{line}</span>
+          </div>
+        ))}
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          bottom: 24,
+          left: 27,
+          right: 27,
+          borderTop: "1px solid #183146",
+          paddingTop: 16,
+          fontFamily: MONO,
+          fontSize: 12,
+          color: "#5c8198",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <span>LOCAL CHALLENGE</span>
+        <span>UTF-8 / LF</span>
+      </div>
+    </Panel>
+  );
+};
 
 const Success: React.FC<{
   t: number;
@@ -407,6 +426,7 @@ const Success: React.FC<{
   y?: number;
   w?: number;
 }> = ({ t, start, label = "CORRECT", flag, x = 240, y = 380, w = 1040 }) => {
+  const C = useAttackColors();
   const a = appear(t, start, 0.65);
   return (
     <div
@@ -489,13 +509,14 @@ const routePoint = (pts: [number, number][], q: number): [number, number] => {
 };
 
 export const WebScene: React.FC = () => {
+  const C = useAttackColors();
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = frame / fps;
   const overview = 1 - appear(t, 5, 0.7),
     compare = windowAlpha(t, 4.5, 10.8),
     flow = windowAlpha(t, 10, 17.4),
-    result = appear(t, 17.2);
+    result = appear(t, 17.6);
   const packet = routePoint(
     [
       [200, 555],
@@ -505,12 +526,17 @@ export const WebScene: React.FC = () => {
       [760, 555],
       [1220, 555],
     ],
-    p(t, 10.8, 15.8),
+    p(t, 10.8, 15.6),
   );
   return (
     <AbsoluteFill style={{ fontFamily: SANS, color: C.ink }}>
       <Backdrop t={t} />
-      <Header n="01" title="Web" sub="BEYOND THE INTERFACE / 对象访问" t={t} />
+      <Header
+        n="01"
+        title="Web"
+        sub="BROKEN ACCESS CONTROL / 越过授权边界"
+        t={t}
+      />
       <div
         style={{
           position: "absolute",
@@ -551,15 +577,15 @@ export const WebScene: React.FC = () => {
                     marginBottom: 14,
                   }}
                 >
-                  CTF / RESEARCH ARCHIVE
+                  CTF / TARGET APPLICATION
                 </div>
                 <div
                   style={{ fontSize: 40, fontWeight: 600, marginBottom: 16 }}
                 >
-                  每一条记录，都有来处。
+                  页面背后，目标已锁定。
                 </div>
                 <div style={{ fontSize: 18, color: C.muted, marginBottom: 28 }}>
-                  查阅公开笔记，探索页面背后的数据关系。
+                  截获请求。改变对象。直达边界之后。
                 </div>
                 {[104, 103, 102].map((id, i) => (
                   <div
@@ -642,7 +668,7 @@ export const WebScene: React.FC = () => {
             color: C.cyan,
           }}
         >
-          ONE FIELD CHANGES. THE RESPONSE SHOULDN’T.
+          MUTATE THE REQUEST. CROSS THE BOUNDARY.
         </div>
         {[104, 105].map((id, i) => (
           <Panel
@@ -726,7 +752,7 @@ export const WebScene: React.FC = () => {
           <path
             d="M200 555H460V470H760V555H1220"
             fill="none"
-            stroke="#183a56"
+            stroke={C.line}
             strokeWidth="3"
           />
           <path
@@ -736,7 +762,7 @@ export const WebScene: React.FC = () => {
             strokeWidth="3"
             pathLength="1"
             strokeDasharray="1"
-            strokeDashoffset={1 - p(t, 10.8, 15.8)}
+            strokeDashoffset={1 - p(t, 10.8, 15.6)}
           />
           <circle
             cx={packet[0]}
@@ -821,10 +847,11 @@ export const WebScene: React.FC = () => {
               color: C.green,
             }}
           >
-            {textSlice("flag{test}", t, 15.1, 22)}
+            {textSlice("flag{test}", t, 15.6, 22)}
           </div>
         </Panel>
       </div>
+      <ExploitArtifacts kind="web" t={t} />
       <Code
         t={t}
         active={t < 5 ? 0 : t < 10 ? 2 : t < 16 ? 4 : 5}
@@ -843,14 +870,15 @@ export const WebScene: React.FC = () => {
         ]}
       />
       <div style={{ opacity: result }}>
-        <Success t={t} start={17.3} flag="flag{test}" />
+        <Success t={t} start={17.6} flag="flag{test}" />
       </div>
-      <Caption t={t} start={5.2} end={16.9} text="入口，藏在习以为常之处。" />
+      <Caption t={t} start={5.2} end={16.9} text="改写请求，越过边界。" />
     </AbsoluteFill>
   );
 };
 
 export const CryptoScene: React.FC = () => {
+  const C = useAttackColors();
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = frame / fps;
@@ -859,13 +887,8 @@ export const CryptoScene: React.FC = () => {
     decrypt = windowAlpha(t, 12, 17.6);
   return (
     <AbsoluteFill style={{ fontFamily: SANS, color: C.ink }}>
-      <Backdrop t={t} accent="#315dff" />
-      <Header
-        n="02"
-        title="Crypto"
-        sub="PATTERNS BECOME KEYS / 弱参数分析"
-        t={t}
-      />
+      <Backdrop t={t} accent={C.blue} />
+      <Header n="02" title="Crypto" sub="BREAK THE CIPHER / 击穿弱参数" t={t} />
       <svg
         width="1380"
         height="850"
@@ -1181,6 +1204,7 @@ export const CryptoScene: React.FC = () => {
           SINGLE-BLOCK DEMONSTRATION / 数据块逐一还原
         </div>
       </div>
+      <ExploitArtifacts kind="crypto" t={t} />
       <Code
         t={t}
         title="RSA / PARAMETER TRACE"
@@ -1196,9 +1220,9 @@ export const CryptoScene: React.FC = () => {
           "# m = 65",
           "chr(m)  # A",
         ]}
-        accent="#7f9eff"
+        accent={C.cyan}
       />
-      <Caption t={t} start={5.5} end={16.8} text="秘密，也有它的规律。" />
+      <Caption t={t} start={5.5} end={16.8} text="拆开模数，夺回密钥。" />
       <div style={{ opacity: appear(t, 17) }}>
         <div
           style={{
@@ -1291,12 +1315,13 @@ const GRAPH: GraphNode[] = [
 ];
 
 export const ReverseScene: React.FC = () => {
+  const C = useAttackColors();
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = frame / fps;
   const graphAlpha = appear(t, 3.5),
     program = 1 - appear(t, 4.1),
-    verified = appear(t, 17.4);
+    verified = appear(t, 17.6);
   const failPath: [number, number][] = [
     [215, 405],
     [500, 405],
@@ -1311,10 +1336,10 @@ export const ReverseScene: React.FC = () => {
     [830, 310],
     [1190, 310],
   ];
-  const successPath = t > 12.5;
+  const successPath = t >= 12.4;
   const trace = routePoint(
     successPath ? passPath : failPath,
-    p(t, successPath ? 12.5 : 5, successPath ? 17 : 10.3),
+    p(t, successPath ? 12.4 : 5, successPath ? 17 : 10.3),
   );
   return (
     <AbsoluteFill style={{ fontFamily: SANS, color: C.ink }}>
@@ -1322,7 +1347,7 @@ export const ReverseScene: React.FC = () => {
       <Header
         n="03"
         title="Reverse"
-        sub="FOLLOW THE EXECUTION / 还原校验逻辑"
+        sub="UNLOCK THE BRANCH / 突破校验分支"
         t={t}
       />
       <div
@@ -1358,7 +1383,7 @@ export const ReverseScene: React.FC = () => {
             pathLength="1"
             strokeDasharray="1"
             strokeDashoffset={
-              1 - p(t, successPath ? 12.5 : 5, successPath ? 17 : 10.3)
+              1 - p(t, successPath ? 12.4 : 5, successPath ? 17 : 10.3)
             }
           />
           <circle
@@ -1403,7 +1428,7 @@ export const ReverseScene: React.FC = () => {
                 height: 100,
                 padding: "19px 21px",
                 boxSizing: "border-box",
-                background: on ? "#0c2137" : "#081321",
+                background: on ? `${C.blue}20` : C.bg,
                 border: `1px solid ${on ? (v.id === "fail" ? C.red : C.cyan) : "#24445d"}`,
                 borderRadius: 5,
                 boxShadow: on
@@ -1519,11 +1544,11 @@ export const ReverseScene: React.FC = () => {
           "  ...",
           "  jmp success",
           "",
-          t < 12.5 ? "eax: 0x00 → 0x2a" : "eax: 0x41 → 0x6b",
-          t < 12.5 ? "ZF:  0 / mismatch" : "ZF:  1 / match",
+          t < 12.4 ? "eax: 0x00 → 0x2a" : "eax: 0x41 → 0x6b",
+          t < 12.4 ? "ZF:  0 / mismatch" : "ZF:  1 / match",
         ]}
       />
-      <Caption t={t} start={5.2} end={17.5} text="沿着执行的轨迹，寻找真相。" />
+      <Caption t={t} start={5.2} end={17.5} text="看穿分支，打开通路。" />
       <div style={{ opacity: verified }}>
         <Success t={t} start={17.6} label="PATH VERIFIED" />
         <div
@@ -1547,11 +1572,12 @@ export const ReverseScene: React.FC = () => {
 };
 
 export const PwnScene: React.FC = () => {
+  const C = useAttackColors();
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = frame / fps;
-  const failed = t >= 6.6 && t < 13;
-  const repair = appear(t, 13);
+  const failed = t >= 6.8 && t < 13;
+  const repair = appear(t, 14);
   const breakpoint = appear(t, 19.2);
   return (
     <AbsoluteFill style={{ fontFamily: SANS, color: C.ink }}>
@@ -1559,7 +1585,7 @@ export const PwnScene: React.FC = () => {
       <Header
         n="04"
         title="Pwn"
-        sub="INSIDE THE PROCESS / 运行时分析"
+        sub="TAKE THE CONTROL FLOW / 夺取执行流"
         t={t}
         status={
           t > 19
@@ -1759,6 +1785,7 @@ export const PwnScene: React.FC = () => {
           </div>
         </Panel>
       </div>
+      <ExploitArtifacts kind="pwn" t={t} />
       <Code
         t={t}
         title="GDB / PROCESS TRACE"
@@ -1769,7 +1796,7 @@ export const PwnScene: React.FC = () => {
           "(gdb) run",
           "input: [buffer data]",
           "",
-          t >= 6.6 ? "Program received SIGSEGV" : "",
+          t >= 6.8 ? "Program received SIGSEGV" : "",
           t >= 8 ? "(gdb) info registers" : "",
           t >= 12 ? "(gdb) examine stack" : "",
           t >= 14 ? "offset = 0x48" : "",
@@ -1799,7 +1826,7 @@ export const PwnScene: React.FC = () => {
               ? "OFFSET VERIFIED / RUN AGAIN"
               : "INPUT RECEIVED"}
       </div>
-      <Caption t={t} start={6.5} end={18.8} text="每一次失败，都留下线索。" />
+      <Caption t={t} start={6.5} end={18.8} text="崩溃之后，重写执行方向。" />
       <div
         style={{
           position: "absolute",
@@ -1834,18 +1861,19 @@ const pixelColor = (x: number, y: number, bit: number) => {
 };
 
 export const MiscScene: React.FC = () => {
+  const C = useAttackColors();
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = frame / fps;
-  const bitplane = ease(p(t, 5, 9));
-  const done = appear(t, 14.5);
+  const bitplane = ease(p(t, 4.8, 8.8));
+  const done = appear(t, 14.4);
   return (
     <AbsoluteFill style={{ fontFamily: SANS, color: C.ink }}>
       <Backdrop t={t} />
       <Header
         n="05"
         title="Misc"
-        sub="HIDDEN IN PLAIN SIGHT / 隐藏信息"
+        sub="STRIP THE SURFACE / 提取隐藏通道"
         t={t}
       />
       <div style={{ position: "absolute", inset: 0, opacity: 1 - done }}>
@@ -2002,9 +2030,9 @@ export const MiscScene: React.FC = () => {
           "# hidden data restored",
         ]}
       />
-      <Caption t={t} start={5.1} end={14.2} text="被忽略的细节，正在回答。" />
+      <Caption t={t} start={5.1} end={14.2} text="剥开像素，让隐藏通道开口。" />
       <div style={{ opacity: done }}>
-        <Success t={t} start={14.5} flag={HIDDEN} />
+        <Success t={t} start={14.4} flag={HIDDEN} />
       </div>
     </AbsoluteFill>
   );

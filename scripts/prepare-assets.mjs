@@ -184,7 +184,7 @@ if (!(await nonemptyFile(licensePath))) {
 
 await QRCode.toFile(
   path.join(publicDir, "club-qr.png"),
-  "https://github.com/NingXia-XinQiCyberClub",
+  "https://ningxia-xinqicyberclub.github.io/",
   {
     type: "png",
     width: 630,

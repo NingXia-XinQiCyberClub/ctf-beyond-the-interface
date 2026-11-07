@@ -1,6 +1,6 @@
 {
   "name": "ctf-beyond-the-interface",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "description": "《表面之下》：鑫启网安俱乐部 CTF 黑客主题动画宣传片",
   "scripts": {
@@ -9,8 +9,8 @@
     "format": "prettier --write src scripts docs README.md package.json tsconfig.json",
     "audio": "node scripts/generate-audio.mjs",
     "assets": "node scripts/prepare-assets.mjs",
-    "render": "remotion render src/index.ts BeyondTheInterface dist/beyond-the-interface-1080p.mp4 --codec=h264 --crf=18 --audio-codec=aac --pixel-format=yuv420p",
-    "preview": "remotion render src/index.ts BeyondTheInterface dist/preview-720p.mp4 --scale=0.6666667 --codec=h264 --crf=23 --audio-codec=aac --pixel-format=yuv420p",
+    "render": "remotion render src/index.ts BeyondTheInterface dist/beyond-the-interface-v2-1080p.mp4 --codec=h264 --crf=18 --audio-codec=aac --pixel-format=yuv420p",
+    "preview": "remotion render src/index.ts BeyondTheInterface dist/preview-v2-720p.mp4 --scale=0.6666667 --codec=h264 --crf=23 --audio-codec=aac --pixel-format=yuv420p",
     "cover": "remotion still src/index.ts FilmCover public/cover.jpg --image-format=jpeg"
   },
   "dependencies": {

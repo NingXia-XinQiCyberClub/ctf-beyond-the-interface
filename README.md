@@ -8,6 +8,8 @@
 
 源码与制作说明由本项目管理，MP4 和完整资产包通过 GitHub Releases 分发。
 
+当前工作版本为 **第二版 v2.0.0**：进攻叙事、蓝红状态过渡、150 BPM 工业电子配乐、逐帧卡点、矢量 Logo 与连续扫描转场。片尾口号为 **“见微知隙，破阵无声。”**，二维码指向[俱乐部主页](https://ningxia-xinqicyberclub.github.io/)。第二版制作说明见 [docs/v2-direction.md](docs/v2-direction.md)。下方 Release 链接仍指已发布版本。
+
 ![《表面之下》封面](public/cover.jpg)
 
 [下载 MP4](https://github.com/NingXia-XinQiCyberClub/ctf-beyond-the-interface/releases/latest/download/beyond-the-interface-1080p.mp4) · [查看 Releases](https://github.com/NingXia-XinQiCyberClub/ctf-beyond-the-interface/releases)
@@ -45,7 +47,7 @@ npm run render
 完整视频输出到：
 
 ```text
-dist/beyond-the-interface-1080p.mp4
+dist/beyond-the-interface-v2-1080p.mp4
 ```
 
 渲染使用 H.264、AAC 音频与 `yuv420p` 像素格式。耗时取决于处理器、内存、并发设置和 Chromium 性能。
@@ -57,7 +59,7 @@ npm run preview
 npm run cover
 ```
 
-`npm run preview` 输出 `dist/preview-720p.mp4`。依赖目录、渲染缓存和构建输出不进入源码历史，MP4 保存在 Releases。
+`npm run preview` 输出 `dist/preview-v2-720p.mp4`。依赖目录、渲染缓存和构建输出不进入源码历史，MP4 保存在 Releases。
 
 ## 影片结构
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { useAttackColors } from "./AttackDirection";
 import {
   AbsoluteFill,
   Img,
@@ -7,16 +8,7 @@ import {
   useVideoConfig,
 } from "remotion";
 
-const C = {
-  bg: "#030914",
-  blue: "#1266ff",
-  cyan: "#24d9ff",
-  white: "#e7f5ff",
-  muted: "#7190ac",
-  line: "#173c61",
-  green: "#55f0b4",
-  red: "#ff4e72",
-};
+
 const sans = '"Noto Sans SC", "Microsoft YaHei", Arial, sans-serif';
 const mono = 'Consolas, "Courier New", monospace';
 const sat = (v: number) => Math.max(0, Math.min(1, v));
@@ -29,453 +21,161 @@ const between = (t: number, a: number, b: number) => sat((t - a) / (b - a));
 const Atmosphere: React.FC<{ t: number; intensity?: number }> = ({
   t,
   intensity = 1,
-}) => (
-  <AbsoluteFill style={{ background: C.bg, overflow: "hidden" }}>
-    <AbsoluteFill
-      style={{
-        background:
-          "radial-gradient(ellipse at 50% 68%,#082449 0%,#030914 58%,#01040a 100%)",
-      }}
-    />
-    <svg
-      width="1920"
-      height="1080"
-      style={{ position: "absolute", opacity: 0.36 * intensity }}
-    >
-      <defs>
-        <linearGradient id="story-grid" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor={C.blue} stopOpacity="0" />
-          <stop offset="1" stopColor={C.cyan} stopOpacity=".5" />
-        </linearGradient>
-      </defs>
-      {Array.from({ length: 23 }, (_, i) => (
-        <line
-          key={`v${i}`}
-          x1={960 + (i - 11) * 34}
-          y1="500"
-          x2={960 + (i - 11) * 230}
-          y2="1080"
-          stroke="url(#story-grid)"
-          strokeWidth="1"
-        />
-      ))}
-      {Array.from({ length: 13 }, (_, i) => {
-        const y = 530 + Math.pow((i + ((t * 0.18) % 1)) / 12, 1.8) * 600;
-        return (
+}) => {
+  const C = useAttackColors();
+  return (
+    <AbsoluteFill style={{ background: C.bg, overflow: "hidden" }}>
+      <AbsoluteFill
+        style={{
+          background: `radial-gradient(ellipse at 50% 68%,${C.blue}24 0%,${C.bg} 58%,#01040a 100%)`,
+        }}
+      />
+      <svg
+        width="1920"
+        height="1080"
+        style={{ position: "absolute", opacity: 0.36 * intensity }}
+      >
+        <defs>
+          <linearGradient id="story-grid" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor={C.blue} stopOpacity="0" />
+            <stop offset="1" stopColor={C.cyan} stopOpacity=".5" />
+          </linearGradient>
+        </defs>
+        {Array.from({ length: 23 }, (_, i) => (
           <line
-            key={`h${i}`}
-            x1="0"
-            y1={y}
-            x2="1920"
-            y2={y}
-            stroke={C.line}
+            key={`v${i}`}
+            x1={960 + (i - 11) * 34}
+            y1="500"
+            x2={960 + (i - 11) * 230}
+            y2="1080"
+            stroke="url(#story-grid)"
             strokeWidth="1"
           />
-        );
-      })}
-      {Array.from({ length: 72 }, (_, i) => {
-        const x = (i * 283.19) % 1920;
-        const y = (i * 173.81) % 1000;
-        const glow = 0.14 + 0.3 * (0.5 + 0.5 * Math.sin(t * 0.48 + i));
-        return (
-          <circle
-            key={`p${i}`}
-            cx={x + Math.sin(t * 0.2 + i) * 12}
-            cy={y - ((t * 1.2) % 90)}
-            r={i % 9 === 0 ? 2 : 1}
-            fill={C.cyan}
-            opacity={glow}
-          />
-        );
-      })}
-    </svg>
-    <div
-      style={{
-        position: "absolute",
-        left: 0,
-        top: 0,
-        right: 0,
-        height: 2,
-        background: C.cyan,
-        opacity: 0.06,
-        transform: `translateY(${(t * 65) % 1080}px)`,
-      }}
-    />
-    <AbsoluteFill
-      style={{
-        boxShadow: "inset 0 0 220px 60px #01040bd9",
-        pointerEvents: "none",
-      }}
-    />
-  </AbsoluteFill>
-);
-
-const Corner: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div
-    style={{
-      display: "flex",
-      alignItems: "center",
-      gap: 14,
-      fontFamily: mono,
-      fontSize: 18,
-      letterSpacing: 3,
-      color: C.muted,
-    }}
-  >
-    <span
-      style={{
-        width: 7,
-        height: 7,
-        background: C.cyan,
-        boxShadow: `0 0 15px ${C.cyan}`,
-      }}
-    />
-    {children}
-  </div>
-);
-const Panel: React.FC<{
-  style?: React.CSSProperties;
-  children: React.ReactNode;
-  title: string;
-  accent?: string;
-}> = ({ style, children, title, accent = C.cyan }) => (
-  <div
-    style={{
-      position: "absolute",
-      background: "linear-gradient(135deg,#08172aeF,#040d1bed)",
-      border: `1px solid ${accent}44`,
-      boxShadow: "0 24px 80px #0007",
-      overflow: "hidden",
-      ...style,
-    }}
-  >
-    <div
-      style={{
-        height: 48,
-        borderBottom: `1px solid ${accent}33`,
-        display: "flex",
-        alignItems: "center",
-        padding: "0 24px",
-        gap: 9,
-        fontSize: 16,
-        fontFamily: mono,
-        letterSpacing: 2,
-        color: C.muted,
-      }}
-    >
-      <span style={{ height: 6, width: 6, background: accent }} />
-      {title}
-      <span style={{ marginLeft: "auto", fontSize: 12, color: accent }}>
-        ● LIVE
-      </span>
-    </div>
-    {children}
-  </div>
-);
-
-export const IntroScene: React.FC = () => {
-  const f = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const t = f / fps;
-  const typed = "connect challenge".slice(
-    0,
-    Math.floor(Math.max(0, t - 0.65) * 11),
-  );
-  const terminalOpacity = smooth(t / 0.6) * (1 - smooth((t - 2.6) / 0.4));
-  const portalOpacity =
-    smooth((t - 2.75) / 0.35) * (1 - smooth((t - 5.75) / 0.3));
-  const forward = smooth((t - 4.15) / 1.8);
-  const cardsOpacity = smooth((t - 5.8) / 0.4);
-  return (
-    <AbsoluteFill
-      style={{ fontFamily: sans, color: C.white, overflow: "hidden" }}
-    >
-      <Atmosphere t={t} intensity={0.5} />
-      <div
-        style={{ position: "absolute", left: 95, top: 74, opacity: smooth(t) }}
-      >
-        <Corner>CTF SESSION / READY</Corner>
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          left: 250,
-          top: 375,
-          width: 1420,
-          opacity: terminalOpacity,
-          transform: `translateY(${12 * (1 - smooth(t))}px)`,
-        }}
-      >
-        <div
-          style={{
-            fontFamily: mono,
-            fontSize: 24,
-            letterSpacing: 5,
-            color: C.muted,
-            marginBottom: 30,
-          }}
-        >
-          ESTABLISHING A DIFFERENT PERSPECTIVE
-        </div>
-        <div
-          style={{
-            fontFamily: mono,
-            fontSize: 66,
-            letterSpacing: 0,
-            display: "flex",
-            alignItems: "center",
-            gap: 27,
-          }}
-        >
-          <span style={{ color: C.cyan, textShadow: `0 0 30px ${C.blue}` }}>
-            ›
-          </span>
-          <span>{typed}</span>
-          <span
-            style={{
-              display: "inline-block",
-              width: 25,
-              height: 64,
-              background: C.white,
-              opacity: f % 30 < 19 ? 1 : 0,
-            }}
-          />
-        </div>
-        <div
-          style={{
-            height: 1,
-            width: 1160,
-            background: "linear-gradient(90deg,#24d9ff55,transparent)",
-            marginTop: 38,
-          }}
-        />
-        <div
-          style={{
-            fontFamily: mono,
-            fontSize: 19,
-            letterSpacing: 3,
-            color: C.cyan,
-            marginTop: 24,
-            opacity: smooth((t - 2.35) / 0.2),
-          }}
-        >
-          SESSION CONNECTED · CHALLENGES ONLINE
-        </div>
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          opacity: portalOpacity,
-          perspective: 1000,
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: `radial-gradient(ellipse at center,#1271ff${Math.round(18 + forward * 48).toString(16)},transparent 62%)`,
-          }}
-        />
-        {Array.from({ length: 9 }, (_, i) => {
-          const s = 0.3 + i * 0.18 + forward * 2.4;
+        ))}
+        {Array.from({ length: 13 }, (_, i) => {
+          const y = 530 + Math.pow((i + ((t * 0.18) % 1)) / 12, 1.8) * 600;
           return (
-            <div
-              key={i}
-              style={{
-                position: "absolute",
-                left: 960 - 230,
-                top: 540 - 230,
-                width: 460,
-                height: 460,
-                border: `${i % 3 === 0 ? 2 : 1}px solid ${i % 2 === 0 ? C.cyan : C.blue}`,
-                transform: `rotate(45deg) scale(${s})`,
-                opacity: (1 - i / 11) * 0.6,
-                boxShadow: `0 0 ${18 + i * 4}px #1266ff30,inset 0 0 20px #1266ff20`,
-              }}
+            <line
+              key={`h${i}`}
+              x1="0"
+              y1={y}
+              x2="1920"
+              y2={y}
+              stroke={C.line}
+              strokeWidth="1"
             />
           );
         })}
-        <Img
-          src={staticFile("logo.png")}
-          style={{
-            position: "absolute",
-            left: 795,
-            top: 375,
-            width: 330,
-            height: 330,
-            objectFit: "contain",
-            filter: "drop-shadow(0 0 30px #1277ff99)",
-            opacity: (1 - smooth((t - 4.1) / 0.45)) * 0.92,
-            transform: `scale(${1 + forward * 1.8})`,
-          }}
-        />
-        <svg width="1920" height="1080" style={{ position: "absolute" }}>
-          {Array.from({ length: 26 }, (_, i) => {
-            const a = (i / 26) * Math.PI * 2;
-            const r = 160 + forward * 250;
-            return (
-              <line
-                key={i}
-                x1={960 + Math.cos(a) * r}
-                y1={540 + Math.sin(a) * r}
-                x2={960 + Math.cos(a) * (r + 70 + forward * 450)}
-                y2={540 + Math.sin(a) * (r + 70 + forward * 450)}
-                stroke={i % 3 === 0 ? C.white : C.cyan}
-                strokeOpacity={forward * 0.38}
-                strokeWidth={i % 3 === 0 ? 2 : 1}
-              />
-            );
-          })}
-        </svg>
-      </div>
-      <div style={{ position: "absolute", inset: 0, opacity: cardsOpacity }}>
-        <div
-          style={{
-            position: "absolute",
-            top: 184,
-            width: "100%",
-            textAlign: "center",
-            fontFamily: mono,
-            fontSize: 18,
-            letterSpacing: 8,
-            color: C.cyan,
-          }}
-        >
-          FIVE DOMAINS. ONE CURIOSITY.
-        </div>
-        <div
-          style={{
-            position: "absolute",
-            top: 258,
-            width: "100%",
-            textAlign: "center",
-            fontSize: 76,
-            fontWeight: 700,
-            letterSpacing: 12,
-            textShadow: "0 0 35px #2293ff55",
-            opacity: smooth((t - 6.05) / 0.8),
-          }}
-        >
-          表面之下，另有入口。
-        </div>
-        {["WEB", "CRYPTO", "REVERSE", "PWN", "MISC"].map((name, i) => {
-          const p = smooth((t - 6.25 - i * 0.2) / 0.55);
-          const enterWeb = smooth((t - 9.1) / 0.9);
+        {Array.from({ length: 72 }, (_, i) => {
+          const x = (i * 283.19) % 1920;
+          const y = (i * 173.81) % 1000;
+          const glow = 0.14 + 0.3 * (0.5 + 0.5 * Math.sin(t * 0.48 + i));
           return (
-            <div
-              key={name}
-              style={{
-                position: "absolute",
-                left: 150 + i * 330,
-                top: 500 + Math.sin(t * 0.7 + i) * 7,
-                width: 300,
-                height: 270,
-                background: "linear-gradient(145deg,#0d2445e8,#040e20f2)",
-                border: `1px solid ${i === 0 ? C.cyan : C.line}`,
-                opacity: p,
-                transform: `perspective(1400px) translateY(${60 * (1 - p)}px) rotateY(${-12 + i * 5}deg) scale(${i === 0 ? 1 + enterWeb * 0.06 : 1 - enterWeb * 0.04})`,
-                boxShadow: i === 0 ? "0 0 45px #087aff2b" : "0 20px 45px #0006",
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  left: 22,
-                  top: 20,
-                  color: C.muted,
-                  fontFamily: mono,
-                  fontSize: 15,
-                  letterSpacing: 3,
-                }}
-              >
-                0{i + 1} / CHALLENGE
-              </div>
-              <svg
-                width="250"
-                height="115"
-                style={{ position: "absolute", left: 25, top: 55 }}
-              >
-                {Array.from({ length: 7 }, (_, j) => (
-                  <g key={j}>
-                    <line
-                      x1={20 + j * 34}
-                      y1={30 + (j % 3) * 15}
-                      x2={40 + j * 25}
-                      y2={95 - (j % 4) * 13}
-                      stroke={C.blue}
-                      strokeWidth="1"
-                    />
-                    <circle
-                      cx={20 + j * 34}
-                      cy={30 + (j % 3) * 15}
-                      r={j === i + 1 ? 7 : 4}
-                      fill={j === i + 1 ? C.white : C.cyan}
-                      opacity={0.4 + j * 0.07}
-                    />
-                  </g>
-                ))}
-              </svg>
-              <div
-                style={{
-                  position: "absolute",
-                  left: 24,
-                  bottom: 53,
-                  fontFamily: mono,
-                  fontSize: 37,
-                  fontWeight: 700,
-                  letterSpacing: 3,
-                }}
-              >
-                {name}
-              </div>
-              <div
-                style={{
-                  position: "absolute",
-                  left: 24,
-                  bottom: 23,
-                  fontFamily: mono,
-                  fontSize: 13,
-                  color: C.cyan,
-                  letterSpacing: 3,
-                }}
-              >
-                AWAITING DISCOVERY
-              </div>
-            </div>
+            <circle
+              key={`p${i}`}
+              cx={x + Math.sin(t * 0.2 + i) * 12}
+              cy={y - ((t * 1.2) % 90)}
+              r={i % 9 === 0 ? 2 : 1}
+              fill={C.cyan}
+              opacity={glow}
+            />
           );
         })}
-        <div
-          style={{
-            position: "absolute",
-            top: 887,
-            left: 150,
-            right: 150,
-            display: "flex",
-            justifyContent: "space-between",
-            fontFamily: mono,
-            fontSize: 17,
-            color: C.muted,
-            letterSpacing: 3,
-          }}
-        >
-          <span>CAPTURE THE FLAG</span>
-          <span>THE CHALLENGE BEGINS</span>
-        </div>
-      </div>
+      </svg>
       <div
         style={{
           position: "absolute",
-          inset: 0,
-          background: "#ddf5ff",
-          opacity: Math.max(0, 1 - Math.abs(t - 5.85) / 0.12) * 0.28,
+          left: 0,
+          top: 0,
+          right: 0,
+          height: 2,
+          background: C.cyan,
+          opacity: 0.06,
+          transform: `translateY(${(t * 65) % 1080}px)`,
+        }}
+      />
+      <AbsoluteFill
+        style={{
+          boxShadow: "inset 0 0 220px 60px #01040bd9",
+          pointerEvents: "none",
         }}
       />
     </AbsoluteFill>
   );
 };
 
+const Corner: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const C = useAttackColors();
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 14,
+        fontFamily: mono,
+        fontSize: 18,
+        letterSpacing: 3,
+        color: C.muted,
+      }}
+    >
+      <span
+        style={{
+          width: 7,
+          height: 7,
+          background: C.cyan,
+          boxShadow: `0 0 15px ${C.cyan}`,
+        }}
+      />
+      {children}
+    </div>
+  );
+};
+const Panel: React.FC<{
+  style?: React.CSSProperties;
+  children: React.ReactNode;
+  title: string;
+  accent?: string;
+}> = ({ style, children, title, accent: requestedColor }) => {
+  const C = useAttackColors();
+  const accent = requestedColor ?? C.cyan;
+  return (
+    <div
+      style={{
+        position: "absolute",
+        background: `linear-gradient(135deg,${C.blue}15,${C.bg}ed)`,
+        border: `1px solid ${accent}44`,
+        boxShadow: "0 24px 80px #0007",
+        overflow: "hidden",
+        ...style,
+      }}
+    >
+      <div
+        style={{
+          height: 48,
+          borderBottom: `1px solid ${accent}33`,
+          display: "flex",
+          alignItems: "center",
+          padding: "0 24px",
+          gap: 9,
+          fontSize: 16,
+          fontFamily: mono,
+          letterSpacing: 2,
+          color: C.muted,
+        }}
+      >
+        <span style={{ height: 6, width: 6, background: accent }} />
+        {title}
+        <span style={{ marginLeft: "auto", fontSize: 12, color: accent }}>
+          ● LIVE
+        </span>
+      </div>
+      {children}
+    </div>
+  );
+};
+
 const ExecutionGraph: React.FC<{ t: number }> = ({ t }) => {
+  const C = useAttackColors();
   // The path is 1110 SVG units long. Each node sits exactly on its route point;
   // a normalized pathLength keeps the traced line synchronized with node states.
   const progress = 485 / 1110 + (1 - 485 / 1110) * smooth((t - 12) / 3.3);
@@ -575,6 +275,7 @@ const ExecutionGraph: React.FC<{ t: number }> = ({ t }) => {
 };
 
 export const FinaleScene: React.FC = () => {
+  const C = useAttackColors();
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = f / fps;
@@ -1051,6 +752,7 @@ export const FinaleScene: React.FC = () => {
 };
 
 export const OutroScene: React.FC = () => {
+  const C = useAttackColors();
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = f / fps;
@@ -1130,7 +832,7 @@ export const OutroScene: React.FC = () => {
         }}
       />
       <Img
-        src={staticFile("logo.png")}
+        src={staticFile("logo.svg")}
         style={{
           position: "absolute",
           left: 830,
@@ -1192,7 +894,7 @@ export const OutroScene: React.FC = () => {
             color: C.white,
           }}
         >
-          下一道题，一起解。
+          见微知隙，破阵无声。
         </div>
       </div>
       <div

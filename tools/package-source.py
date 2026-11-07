@@ -3,7 +3,7 @@ from zipfile import ZipFile, ZIP_DEFLATED
 
 workspace = Path(__file__).resolve().parent.parent
 source = workspace
-destination = workspace / 'outputs' / '表面之下-完整源工程.zip'
+destination = workspace / 'outputs' / '表面之下-第二版-完整源工程.zip'
 excluded = {'node_modules', 'dist', 'build', 'qa', '.git', '.cache', '.remotion', 'outputs', 'release-assets', 'references'}
 files = []
 for path in source.rglob('*'):

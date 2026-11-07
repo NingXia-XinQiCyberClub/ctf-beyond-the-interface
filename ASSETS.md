@@ -4,7 +4,7 @@
 
 | 项目 | 来源 | 用途与授权范围 |
 | --- | --- | --- |
-| 俱乐部 Logo | 用户为本项目提供的“鑫启网安俱乐部”Logo；公开组织资料亦展示此标志 | 本片品牌署名使用。Logo 与相关品牌名称保留原有权利，不纳入本仓库 MIT 授权；复用工程时应替换，或另行取得品牌使用许可 |
+| 俱乐部 Logo | 用户提供的原始 `public/logo.png`；第二版依据原图几何重绘为 `public/logo.svg`，经用户审查确认 | SVG 使用独立路径与渐变，无内嵌位图，透明背景，保留原造型和配色；清理原图杂边。本片品牌署名使用。Logo 与相关品牌名称保留原有权利，不纳入本仓库 MIT 授权；复用工程时应替换，或另行取得品牌使用许可 |
 | Noto Sans SC | [Google Fonts 字体服务](https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700)与 [Google Fonts 字体源](https://github.com/google/fonts/tree/main/ofl/notosanssc) | SIL Open Font License 1.1。使用官方生成的静态 400／700 字重子集；覆盖 `src` 字符与完整常用 ASCII，具体集合和下载地址记录于 `public/fonts/font-source.json`。分发时保留 OFL 文本和版权声明 |
 | 二维界面、路径、图表、粒子与程序图形 | 本项目动画源代码生成 | 自有实现按项目 MIT 许可证发布；演示赛题与界面数据为本片编写 |
 | 配乐与界面音效 | `scripts/generate-audio.mjs` 程序合成 | 没有第三方录音、音乐采样包或外部音频服务；生成脚本及其生成结果按项目发布许可使用 |

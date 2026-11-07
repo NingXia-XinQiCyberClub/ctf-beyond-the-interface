@@ -32,10 +32,13 @@ try {
     puppeteerInstance: browser,
     timeoutInMilliseconds: 120000,
   });
-  for (const second of [
-    1.5, 4, 8, 14, 23, 29, 39, 46, 50, 57, 64, 71, 79, 87, 94, 101, 107, 112,
-    119, 129, 135, 137.8, 138.7, 139.3, 143, 146, 149,
-  ]) {
+  const seconds = process.env.QA_SECONDS
+    ? process.env.QA_SECONDS.split(",").map(Number)
+    : [
+        1.5, 4, 8, 14, 23, 29, 39, 46, 50, 57, 64, 71, 79, 87, 94, 101, 107,
+        112, 119, 129, 135, 137.8, 138.7, 139.3, 143, 146, 149,
+      ];
+  for (const second of seconds) {
     const output = path.join(
       destination,
       `frame-${String(second).padStart(5, "0")}.png`,

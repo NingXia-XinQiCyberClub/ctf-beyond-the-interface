@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">鑫启网安俱乐部 Logo</title>
+  <desc id="desc">根据用户提供的原始标志重绘的透明矢量版本，保留青蓝色交叉翼、深蓝色双折线和中央菱形。</desc>
+  <defs>
+    <linearGradient id="wing-left" x1="0" y1="70" x2="129" y2="442" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0085d8"/><stop offset=".52" stop-color="#0084d2"/><stop offset="1" stop-color="#0085d8"/>
+    </linearGradient>
+    <linearGradient id="wing-right" x1="512" y1="70" x2="383" y2="442" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0085d8"/><stop offset=".52" stop-color="#0084d2"/><stop offset="1" stop-color="#0085d8"/>
+    </linearGradient>
+    <linearGradient id="fold-left" x1="100" y1="256" x2="244" y2="256" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#182083"/><stop offset="1" stop-color="#1a2285"/>
+    </linearGradient>
+    <linearGradient id="fold-right" x1="412" y1="256" x2="268" y2="256" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#182083"/><stop offset="1" stop-color="#1a2285"/>
+    </linearGradient>
+    <linearGradient id="diamond" x1="256" y1="169" x2="256" y2="345" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#182284"/><stop offset="1" stop-color="#192181"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#wing-left)" d="M0 70H104L134 123 75 256ZM75 256 134 389 104 442H0Z"/>
+  <path fill="url(#wing-right)" d="M512 70H408L378 123 437 256ZM437 256 378 389 408 442H512Z"/>
+  <path fill="url(#fold-left)" d="M185 0H244V109L185 256 244 403V512H185L74 256Z"/>
+  <path fill="url(#fold-right)" d="M327 0H268V109L327 256 268 403V512H327L438 256Z"/>
+  <path fill="url(#diamond)" d="M256 169 297 256 256 345 215 256Z"/>
+</svg>

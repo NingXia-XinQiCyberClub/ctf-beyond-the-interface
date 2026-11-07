@@ -3,6 +3,7 @@ import {
   AbsoluteFill,
   Audio,
   Composition,
+  Freeze,
   Img,
   Sequence,
   staticFile,
@@ -15,31 +16,54 @@ import {
   PwnScene,
   MiscScene,
 } from "./scenes/ChallengeScenes";
-import { IntroScene, FinaleScene, OutroScene } from "./scenes/StoryScenes";
+import { FinaleScene, OutroScene } from "./scenes/StoryScenes";
 import "./global.css";
+import { AttackIntro, AttackStage } from "./scenes/AttackDirection";
 
 export const CHAPTERS = [
-  { title: "入口", from: 0, seconds: 10, component: IntroScene },
+  { title: "入口", from: 0, seconds: 10, component: AttackIntro },
   { title: "Web", from: 10, seconds: 22, component: WebScene },
   { title: "Crypto", from: 32, seconds: 20, component: CryptoScene },
   { title: "Reverse", from: 52, seconds: 22, component: ReverseScene },
   { title: "Pwn", from: 74, seconds: 22, component: PwnScene },
   { title: "Misc", from: 96, seconds: 18, component: MiscScene },
   { title: "最后一次提交", from: 114, seconds: 26, component: FinaleScene },
-  { title: "下一道题，一起解", from: 140, seconds: 10, component: OutroScene },
+  {
+    title: "见微知隙，破阵无声",
+    from: 140,
+    seconds: 10,
+    component: OutroScene,
+  },
 ];
 
-const ChapterTransition: React.FC<{ duration: number }> = ({ duration }) => {
+const ChapterTransition: React.FC<{
+  duration: number;
+  first: boolean;
+  children: React.ReactNode;
+}> = ({ duration, first, children }) => {
   const frame = useCurrentFrame();
-  const fade = Math.max(0, 1 - frame / 7, (frame - duration + 7) / 7);
+  const p = Math.min(1, frame / 14);
+  const ease = p * p * p * (p * (p * 6 - 15) + 10);
+  const edge = -20 + ease * 140;
   return (
     <AbsoluteFill
       style={{
-        background: "#020711",
-        opacity: Math.min(0.72, fade * 0.72),
-        pointerEvents: "none",
+        // Incoming scene wipes over a held outgoing frame; no time is removed
+        // from either scene, so the finale's existing submission timing survives.
+        maskImage:
+          first || p === 1
+            ? undefined
+            : `linear-gradient(105deg,#000 ${edge - 8}%,transparent ${edge + 8}%)`,
+        transform: first
+          ? undefined
+          : `translateX(${(1 - ease) * 22}px) scale(${1 + (1 - ease) * 0.012})`,
+        opacity: first ? Math.min(1, frame / 10) : 1,
       }}
-    />
+    >
+      <Freeze frame={duration - 1} active={frame >= duration}>
+        {children}
+      </Freeze>
+    </AbsoluteFill>
   );
 };
 
@@ -52,10 +76,13 @@ const Film: React.FC = () => (
         key={title}
         name={title}
         from={from * 30}
-        durationInFrames={seconds * 30}
+        durationInFrames={seconds * 30 + (from < 140 ? 14 : 0)}
       >
-        <Scene />
-        <ChapterTransition duration={seconds * 30} />
+        <ChapterTransition duration={seconds * 30} first={from === 0}>
+          <AttackStage from={from}>
+            <Scene />
+          </AttackStage>
+        </ChapterTransition>
       </Sequence>
     ))}
     <Audio src={staticFile("soundtrack.wav")} />
@@ -65,7 +92,8 @@ const Film: React.FC = () => (
 const FilmCover: React.FC = () => (
   <AbsoluteFill
     style={{
-      background: "radial-gradient(ellipse at 55% 42%, #0b294d, #020711 70%)",
+      background:
+        "radial-gradient(ellipse at 80% 30%, #66162c55, transparent 60%), radial-gradient(ellipse at 25% 70%, #0b294d, #020711 70%)",
       color: "#e9f7ff",
       fontFamily: '"Noto Sans SC", sans-serif',
       justifyContent: "center",
@@ -93,7 +121,7 @@ const FilmCover: React.FC = () => (
         fontFamily: "Consolas, monospace",
       }}
     >
-      CAPTURE THE FLAG / AN ORIGINAL CODE FILM
+      CAPTURE THE FLAG / OFFENSIVE CUT 02
     </div>
     <div
       style={{
@@ -113,7 +141,7 @@ const FilmCover: React.FC = () => (
         marginTop: 36,
       }}
     >
-      另有入口。
+      锁定边界，打开突破口。
     </div>
     <div
       style={{
@@ -126,7 +154,7 @@ const FilmCover: React.FC = () => (
       宁夏大学 · 鑫启网安俱乐部
     </div>
     <Img
-      src={staticFile("logo.png")}
+      src={staticFile("logo.svg")}
       style={{
         position: "absolute",
         right: 235,
@@ -171,5 +199,63 @@ export const RemotionRoot: React.FC = () => (
       width={1920}
       height={1080}
     />
+    <Composition
+      id="LogoProof"
+      component={LogoProof}
+      durationInFrames={1}
+      fps={30}
+      width={1680}
+      height={980}
+    />
   </>
+);
+
+const LogoProof: React.FC = () => (
+  <AbsoluteFill
+    style={{
+      background: "#f0f3f8",
+      fontFamily: '"Noto Sans SC", sans-serif',
+      color: "#182440",
+      padding: 60,
+    }}
+  >
+    <div style={{ fontSize: 38, fontWeight: 700 }}>
+      鑫启网安俱乐部 · Logo 矢量化审查
+    </div>
+    <div style={{ marginTop: 12, fontSize: 20, color: "#57677d" }}>
+      保留原有造型与配色 · SVG 使用几何路径与渐变 · 原始 PNG 保留
+    </div>
+    <div style={{ display: "flex", gap: 40, marginTop: 38 }}>
+      {[
+        ["用户原图 / PNG · 512 × 512", "logo.png"],
+        ["矢量重绘 / SVG · 无限缩放", "logo.svg"],
+      ].map(([label, file]) => (
+        <div key={file} style={{ flex: 1 }}>
+          <div style={{ padding: "22px 0", fontSize: 23 }}>{label}</div>
+          <div
+            style={{
+              height: 570,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#fff",
+              backgroundImage:
+                "linear-gradient(45deg,#e8ecf3 25%,transparent 25%),linear-gradient(-45deg,#e8ecf3 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#e8ecf3 75%),linear-gradient(-45deg,transparent 75%,#e8ecf3 75%)",
+              backgroundSize: "32px 32px",
+              backgroundPosition: "0 0,0 16px,16px -16px,-16px 0",
+            }}
+          >
+            <Img
+              src={staticFile(file)}
+              style={{ width: 512, height: 512, objectFit: "contain" }}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+    <div style={{ marginTop: 35, fontSize: 21, color: "#57677d" }}>
+      审查重点：双折线比例 / 中央菱形 / 青蓝交叉翼 /
+      透明留白。矢量版清理了原图边缘的浅色杂边。
+    </div>
+  </AbsoluteFill>
 );
