@@ -751,114 +751,43 @@ export const FinaleScene: React.FC = () => {
 };
 
 export const OutroScene: React.FC = () => {
-  const C = useAttackColors();
-  const f = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const t = f / fps;
-  const converge = smooth(t / 2.8);
-  const settled = smooth((t - 2.3) / 0.8);
-  const typeIn = smooth((t - 3) / 0.65);
-  const origins = [
-    { x: 0, y: 170 },
-    { x: 1920, y: 150 },
-    { x: 0, y: 940 },
-    { x: 1920, y: 900 },
-    { x: 960, y: 1080 },
-  ];
+  const t = useCurrentFrame() / 30;
   return (
     <AbsoluteFill
-      style={{ fontFamily: sans, color: C.white, overflow: "hidden" }}
+      style={{
+        background: "#000",
+        fontFamily: sans,
+        color: "#edf5ff",
+        overflow: "hidden",
+      }}
     >
-      <Atmosphere t={t + 140} intensity={0.5} />
-      <svg
-        width="1920"
-        height="1080"
-        style={{ position: "absolute", opacity: 1 - settled }}
-      >
-        <defs>
-          <filter id="outro-line-glow">
-            <feGaussianBlur stdDeviation="5" />
-          </filter>
-        </defs>
-        {origins.map((p, i) => {
-          const x = p.x + (960 - p.x) * converge;
-          const y = p.y + (290 - p.y) * converge;
-          const route = `M${p.x} ${p.y} Q${(p.x + 960) / 2} ${p.y - 100} ${x} ${y}`;
-          return (
-            <g key={i}>
-              <path
-                d={route}
-                stroke={C.cyan}
-                fill="none"
-                strokeWidth="12"
-                opacity=".14"
-                filter="url(#outro-line-glow)"
-              />
-              <path
-                d={route}
-                stroke={i % 2 ? "#42c9ff" : "#ff4762"}
-                fill="none"
-                strokeWidth="2"
-              />
-              <circle cx={x} cy={y} r="6" fill={C.white} />
-              {Array.from({ length: 7 }, (_, j) => {
-                const q = sat(converge - j * 0.045);
-                return (
-                  <rect
-                    key={j}
-                    x={p.x + (960 - p.x) * q - 3}
-                    y={p.y + (290 - p.y) * q - 3}
-                    width="6"
-                    height="6"
-                    fill={C.cyan}
-                    opacity={1 - j * 0.12}
-                  />
-                );
-              })}
-            </g>
-          );
-        })}
-      </svg>
-      <div
-        style={{
-          position: "absolute",
-          left: 680,
-          top: 8,
-          width: 560,
-          height: 560,
-          background: "radial-gradient(circle,#1463ff27,transparent 65%)",
-          opacity: settled,
-        }}
-      />
       <Img
         src={staticFile("logo.svg")}
         style={{
           position: "absolute",
           left: 830,
-          top: 160,
+          top: 142,
           width: 260,
           height: 260,
           objectFit: "contain",
-          opacity: smooth((t - 1.8) / 1),
-          transform: `scale(${0.78 + 0.22 * settled})`,
-          filter: "drop-shadow(0 0 35px #138aff55)",
+          opacity: smooth(t / 0.4),
         }}
       />
       <div
         style={{
           position: "absolute",
-          top: 454,
-          width: "100%",
+          left: 400,
+          top: 442,
+          width: 1120,
           textAlign: "center",
-          opacity: typeIn,
-          transform: `translateY(${18 * (1 - typeIn)}px)`,
+          opacity: smooth((t - 0.2) / 0.4),
         }}
       >
         <div
           style={{
             fontSize: 27,
             letterSpacing: 14,
-            color: C.muted,
+            color: "#8398ac",
             marginBottom: 23,
           }}
         >
@@ -871,26 +800,16 @@ export const OutroScene: React.FC = () => {
             letterSpacing: 6,
             whiteSpace: "nowrap",
             lineHeight: 1.3,
-            textShadow: "0 0 35px #2180e32b",
           }}
         >
           鑫启网安俱乐部
         </div>
         <div
           style={{
-            margin: "36px auto 0",
-            width: 84,
-            height: 2,
-            background: C.cyan,
-            boxShadow: `0 0 18px ${C.cyan}`,
-          }}
-        />
-        <div
-          style={{
             fontSize: 39,
             letterSpacing: 7,
-            marginTop: 31,
-            color: C.white,
+            marginTop: 46,
+            opacity: smooth((t - 0.4) / 0.4),
           }}
         >
           见微知隙，破阵无声。
@@ -901,16 +820,10 @@ export const OutroScene: React.FC = () => {
           position: "absolute",
           right: 132,
           top: 650,
-          opacity: smooth((t - 4.7) / 0.3),
+          opacity: smooth((t - 0.4) / 0.35),
         }}
       >
-        <div
-          style={{
-            background: "#fff",
-            padding: 14,
-            boxShadow: "0 0 45px #116bff20",
-          }}
-        >
+        <div style={{ background: "#fff", padding: 14 }}>
           <Img
             src={staticFile("club-qr.png")}
             style={{
@@ -926,48 +839,13 @@ export const OutroScene: React.FC = () => {
             textAlign: "center",
             fontSize: 18,
             letterSpacing: 3,
-            color: C.muted,
+            color: "#8398ac",
             marginTop: 18,
           }}
         >
           了解我们 · 加入方式
         </div>
       </div>
-      <div
-        style={{
-          position: "absolute",
-          left: 110,
-          bottom: 83,
-          opacity: smooth((t - 4.5) / 0.5),
-        }}
-      >
-        <Corner>CTF / RED TEAM / BLUE TEAM</Corner>
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          left: 110,
-          bottom: 55,
-          fontFamily: mono,
-          fontSize: 13,
-          letterSpacing: 3,
-          color: "#385873",
-          opacity: smooth((t - 4.5) / 0.5),
-        }}
-      >
-        CURIOSITY / COLLABORATION / DISCOVERY
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          top: 935,
-          width: 1000,
-          left: 460,
-          height: 1,
-          background: "linear-gradient(90deg,transparent,#1d4868,transparent)",
-          opacity: typeIn,
-        }}
-      />
     </AbsoluteFill>
   );
 };

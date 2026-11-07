@@ -335,14 +335,32 @@
       "power": 0.7
     },
     {
+      "time": 133,
+      "label": "RED REPORT OPEN",
+      "kind": "click",
+      "power": 0.35
+    },
+    {
+      "time": 135.45,
+      "label": "RED REPORT SAVED",
+      "kind": "success",
+      "power": 0.6
+    },
+    {
       "time": 136,
-      "label": "SESSION CLOSED",
-      "kind": "close",
-      "power": 0.75
+      "label": "BLUE REPORT OPEN",
+      "kind": "click",
+      "power": 0.35
+    },
+    {
+      "time": 138.45,
+      "label": "BLUE REPORT SAVED",
+      "kind": "success",
+      "power": 0.6
     },
     {
       "time": 140,
-      "label": "RED BLUE CONVERGE",
+      "label": "BRAND REVEAL",
       "kind": "coda",
       "power": 0.8
     }

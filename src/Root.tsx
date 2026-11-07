@@ -144,9 +144,16 @@ const Retimed: React.FC<{ map?: number[][]; children: React.ReactNode }> = ({
 const ChapterTransition: React.FC<{
   duration: number;
   first: boolean;
+  plain?: boolean;
   children: React.ReactNode;
-}> = ({ duration, first, children }) => {
+}> = ({ duration, first, plain, children }) => {
   const frame = useCurrentFrame();
+  if (plain)
+    return (
+      <Freeze frame={duration - 1} active={frame >= duration}>
+        {children}
+      </Freeze>
+    );
   const p = Math.min(1, frame / 14);
   const ease = p * p * p * (p * (p * 6 - 15) + 10);
   const edge = -20 + ease * 140;
@@ -184,7 +191,11 @@ const Film: React.FC = () => (
           from={from * 30}
           durationInFrames={seconds * 30 + (from < 140 ? 14 : 0)}
         >
-          <ChapterTransition duration={seconds * 30} first={from === 0}>
+          <ChapterTransition
+            duration={seconds * 30}
+            first={from === 0}
+            plain={from === 140}
+          >
             {attack === false ? (
               <Scene />
             ) : (

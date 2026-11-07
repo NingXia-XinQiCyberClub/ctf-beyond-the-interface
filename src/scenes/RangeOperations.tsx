@@ -316,7 +316,7 @@ const Chain: React.FC<{ blue: boolean; t: number }> = ({ blue, t }) => {
           broken = t >= edge.breach;
         const harden = i < 2 ? progress(t, 29.6 + i * 0.7, 0.65) : 0,
           block =
-            i === 1 && (blue || t >= 24)
+            i === 1 && (blue || t >= 24) && !(blue && harden > 0)
               ? progress(t, blue ? 20.5 : 24, 0.65)
               : 0;
         return (
@@ -628,7 +628,251 @@ const Chain: React.FC<{ blue: boolean; t: number }> = ({ blue, t }) => {
   );
 };
 
+const ReportPage: React.FC<{ blue: boolean; t: number }> = ({ blue, t }) => {
+  const color = blue ? BLUE : RED,
+    local = t - (blue ? 38 : 35),
+    finished = local >= 2.45;
+  const sections = blue
+    ? [
+        ["01", "告警研判与溯源", "关联请求、身份、异常任务与源会话 XQ-017"],
+        ["02", "防守处置与加固", "入口阻断、节点隔离、对象授权与运维角色检查"],
+        [
+          "03",
+          "修复验证与归档",
+          "异常访问 403 · 合法业务 200 · 临时任务已撤除",
+        ],
+      ]
+    : [
+        ["01", "入口与攻击链", "业务门户 → 业务 API → 运维节点 → 文件服务"],
+        ["02", "证据与影响", "REQ-017 / TASK-042 · 跨身份访问与任务权限缺口"],
+        ["03", "修复建议", "补齐对象授权；限制运维角色；修复后复测"],
+      ];
+  return (
+    <AbsoluteFill
+      style={{ background: blue ? "#030a12" : "#0b050b", color: WHITE }}
+    >
+      <AbsoluteFill
+        style={{
+          background: `radial-gradient(ellipse at 25% 55%,${color}12,transparent 65%)`,
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          left: 90,
+          top: 65,
+          font: `15px ${mono}`,
+          letterSpacing: 4,
+          color,
+        }}
+      >
+        CHAPTER 02 / {blue ? "BLUE TEAM" : "RED TEAM"} / REPORT WRITING
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          right: 83,
+          top: 55,
+          display: "flex",
+          alignItems: "center",
+          gap: 15,
+        }}
+      >
+        <Img src={staticFile("logo.svg")} style={{ width: 65, height: 65 }} />
+        <span style={{ fontSize: 21, whiteSpace: "nowrap" }}>
+          鑫启网安俱乐部
+        </span>
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          left: 88,
+          top: 125,
+          fontSize: 52,
+          fontWeight: 700,
+          letterSpacing: 4,
+        }}
+      >
+        {finished
+          ? blue
+            ? "蓝队报告，撰写完成。"
+            : "红队报告，撰写完成。"
+          : blue
+            ? "撰写防守处置报告。"
+            : "撰写渗透测试报告。"}
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          left: 90,
+          top: 230,
+          width: 1740,
+          height: 665,
+          border: `1px solid ${color}66`,
+          background: "#06101af2",
+          boxShadow: "0 24px 80px #0007",
+        }}
+      >
+        <div
+          style={{
+            height: 58,
+            borderBottom: `1px solid ${color}30`,
+            display: "flex",
+            alignItems: "center",
+            padding: "0 30px",
+            gap: 16,
+            color,
+            font: `17px ${mono}`,
+            letterSpacing: 2,
+          }}
+        >
+          <span style={{ width: 8, height: 8, background: color }} />
+          {blue ? "blue-team-report.md" : "red-team-report.md"}
+          <span style={{ marginLeft: "auto", color: finished ? GREEN : MUTED }}>
+            {finished ? "SAVED" : "WRITING…"}
+          </span>
+        </div>
+        <div style={{ position: "absolute", left: 42, top: 95, width: 1115 }}>
+          {sections.map(([index, title, body], i) => {
+            const p = progress(local, 0.65 + i * 0.38, 0.4),
+              typed = body.slice(
+                0,
+                Math.floor(Math.max(0, local - 0.65 - i * 0.38) * 100),
+              );
+            return (
+              <div
+                key={index}
+                style={{
+                  height: 145,
+                  opacity: p,
+                  transform: `translateY(${(1 - p) * 12}px)`,
+                  borderBottom: "1px solid #193045",
+                  padding: "13px 0",
+                }}
+              >
+                <div style={{ fontSize: 24, color, letterSpacing: 2 }}>
+                  <span style={{ fontFamily: mono, marginRight: 21 }}>
+                    {index}
+                  </span>
+                  {title}
+                </div>
+                <div
+                  style={{
+                    fontSize: 27,
+                    color: WHITE,
+                    lineHeight: 1.5,
+                    marginTop: 20,
+                    letterSpacing: 1,
+                  }}
+                >
+                  {typed}
+                  <span style={{ opacity: p < 1 ? 1 : 0, color }}>▌</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            right: 0,
+            top: 58,
+            bottom: 0,
+            width: 452,
+            borderLeft: `1px solid ${color}30`,
+            padding: "45px 33px",
+          }}
+        >
+          <svg width="68" height="84" viewBox="0 0 68 84">
+            <path
+              d="M12 3H44L63 22V79H12Z M44 3V22H63"
+              fill={`${color}0d`}
+              stroke={color}
+              strokeWidth="2"
+            />
+            <path
+              d="M23 37H52M23 48H52M23 59H43"
+              stroke={color}
+              strokeWidth="2"
+            />
+            {finished && (
+              <circle cx="50" cy="65" r="17" fill="#0d3028" stroke={GREEN} />
+            )}
+            {finished && (
+              <path
+                d="M42 65L48 71L59 58"
+                stroke={GREEN}
+                strokeWidth="3"
+                fill="none"
+              />
+            )}
+          </svg>
+          <div
+            style={{
+              marginTop: 28,
+              fontSize: 29,
+              color: finished ? GREEN : color,
+              fontWeight: 700,
+            }}
+          >
+            {finished ? "报告已完成" : "整理证据，编写结论"}
+          </div>
+          <div style={{ font: `15px ${mono}`, color: MUTED, marginTop: 14 }}>
+            SESSION XQ-017 / LOCAL ARCHIVE
+          </div>
+          <div style={{ height: 5, background: "#1c2d3e", marginTop: 38 }}>
+            <div
+              style={{
+                height: "100%",
+                width: `${progress(local, 0.55, 1.9) * 100}%`,
+                background: finished ? GREEN : color,
+              }}
+            />
+          </div>
+          <div
+            style={{
+              marginTop: 18,
+              font: `20px ${mono}`,
+              color: finished ? GREEN : color,
+            }}
+          >
+            {Math.round(progress(local, 0.55, 1.9) * 100)}%
+          </div>
+          <div
+            style={{
+              fontSize: 22,
+              lineHeight: 2.1,
+              marginTop: 38,
+              color: MUTED,
+            }}
+          >
+            {blue ? "处置措施 04 / 复测项目 03" : "发现问题 02 / 修复建议 02"}
+            <br />
+            {blue ? "研判 · 响应 · 加固 · 复测" : "发现 · 证据 · 影响 · 建议"}
+          </div>
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            left: 42,
+            bottom: 30,
+            font: `16px ${mono}`,
+            letterSpacing: 3,
+            color: finished ? GREEN : MUTED,
+          }}
+        >
+          {finished
+            ? "REPORT COMPLETE / EVIDENCE ATTACHED"
+            : "COLLECTING EVIDENCE / DOCUMENTING FINDINGS"}
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
 const OperationPage: React.FC<{ blue: boolean; t: number }> = ({ blue, t }) => {
+  if ((blue && t >= 38) || (!blue && t >= 35))
+    return <ReportPage blue={blue} t={t} />;
   const color = blue ? BLUE : RED,
     phase =
       t < 10
@@ -910,6 +1154,8 @@ export function cameraPosition(t: number) {
     [19, 1],
     [24, 0],
     [29, 1],
+    [35, 0],
+    [38, 1],
   ]) {
     if (t < at) break;
     camera = camera + (target - camera) * progress(t, at, 0.6);
@@ -919,8 +1165,8 @@ export function cameraPosition(t: number) {
 
 export const RangeScene: React.FC = () => {
   const t = useCurrentFrame() / 30,
-    camera = cameraPosition(t),
-    close = progress(t, 40, 2);
+    camera = cameraPosition(t);
+  if (t >= 41) return <AbsoluteFill style={{ background: "#000" }} />;
   return (
     <AbsoluteFill style={{ background: "#03080f", overflow: "hidden" }}>
       <div
@@ -930,7 +1176,6 @@ export const RangeScene: React.FC = () => {
           height: 1080,
           display: "flex",
           transform: `translateX(${-1920 * camera}px)`,
-          opacity: 1 - close,
         }}
       >
         {[false, true].map((blue) => (
@@ -947,27 +1192,6 @@ export const RangeScene: React.FC = () => {
           </div>
         ))}
       </div>
-      {close > 0 && (
-        <svg width="1920" height="1080" style={{ position: "absolute" }}>
-          {[RED, BLUE].map((color, i) => (
-            <g key={color}>
-              <path
-                d={`M${i ? 1830 : 90} 765 Q${i ? 1500 : 420} 765 960 ${765 - 475 * close}`}
-                stroke={color}
-                strokeWidth="3"
-                fill="none"
-                opacity={1 - close * 0.3}
-              />
-              <circle
-                cx={960 + (i ? 1 : -1) * 800 * (1 - close)}
-                cy={765 - 475 * close}
-                r="6"
-                fill={color}
-              />
-            </g>
-          ))}
-        </svg>
-      )}
     </AbsoluteFill>
   );
 };
