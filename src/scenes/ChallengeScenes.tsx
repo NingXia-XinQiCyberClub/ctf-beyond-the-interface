@@ -1201,7 +1201,7 @@ export const CryptoScene: React.FC = () => {
             letterSpacing: 3,
           }}
         >
-          SINGLE-BLOCK DEMONSTRATION / 数据块逐一还原
+          SINGLE-BLOCK DECRYPTION / 数据块逐一还原
         </div>
       </div>
       <ExploitArtifacts kind="crypto" t={t} />

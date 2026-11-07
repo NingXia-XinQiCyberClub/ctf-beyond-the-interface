@@ -6,6 +6,7 @@
 - 主体为CTF与黑客视角，社团元素少量融入。五方向为Web、Crypto、Reverse、Pwn、Misc。
 - 当前规格150秒、1920×1080、30fps、4500帧。第三版CTF悬念在64–90秒收束，90–98秒邀请邮件，98–140秒红蓝攻防演练。
 - 当前制作第三版；用户已审定视频脚本并选定C《红蓝交锋》配乐，护网结尾采用修复复测、红蓝归一。见`docs/v3-storyboard.md`与`docs/v3-direction.md`；第二版历史说明保留。
+- 最新为第三版修订v3.1：开场加Logo，邮件信封图标与指针定位；护网红蓝队各占独立全屏工作台，红左蓝右，切换只作水平平移。片内不显示“虚构”“剧情演示”等字样，工程保留实际来源记录。护网页面实现于`src/scenes/RangeOperations.tsx`。
 - 用户已审查确认`public/logo.svg`，保留原始PNG对照；Logo本身不改色。
 - 片尾口号已由用户选定为“见微知隙，破阵无声。”，二维码必须指向`https://ningxia-xinqicyberclub.github.io/`。
 - 保留第一版最后Flag提交、排名上涨和落版结构。关键音画事件共用`src/data/attack-cues.json`。

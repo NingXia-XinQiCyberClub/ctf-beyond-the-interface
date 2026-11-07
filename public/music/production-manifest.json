@@ -275,6 +275,12 @@
       "power": 0.8
     },
     {
+      "time": 103.2,
+      "label": "OBJECT BOUNDARY CROSSED",
+      "kind": "breach",
+      "power": 0.65
+    },
+    {
       "time": 108,
       "label": "CORRELATED ALERT",
       "kind": "alert",
@@ -285,6 +291,18 @@
       "label": "TASK CREATED",
       "kind": "lock",
       "power": 0.7
+    },
+    {
+      "time": 113.1,
+      "label": "ROLE BOUNDARY CROSSED",
+      "kind": "breach",
+      "power": 0.65
+    },
+    {
+      "time": 114.9,
+      "label": "INTERNAL PATH OPEN",
+      "kind": "breach",
+      "power": 0.65
     },
     {
       "time": 117,

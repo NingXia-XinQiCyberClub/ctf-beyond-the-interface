@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from "react";
-import { AbsoluteFill, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Img, staticFile, useCurrentFrame } from "remotion";
 import cues from "../data/attack-cues.json";
 
 const sat = (n: number) => Math.max(0, Math.min(1, n));
@@ -519,14 +519,40 @@ export const AttackIntro: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          right: 110,
-          top: 67,
-          font: "14px Consolas, monospace",
-          color: C.muted,
-          letterSpacing: 3,
+          right: 90,
+          top: 35,
+          display: "flex",
+          alignItems: "center",
+          gap: 18,
+          opacity: smooth(t / 0.65),
         }}
       >
-        CTF OPERATION / XINQI
+        <Img
+          src={staticFile("logo.svg")}
+          style={{ width: 82, height: 82, objectFit: "contain" }}
+        />
+        <div>
+          <div
+            style={{
+              fontSize: 24,
+              color: C.white,
+              whiteSpace: "nowrap",
+              letterSpacing: 2,
+            }}
+          >
+            鑫启网安俱乐部
+          </div>
+          <div
+            style={{
+              font: "12px Consolas, monospace",
+              color: C.muted,
+              letterSpacing: 3,
+              marginTop: 8,
+            }}
+          >
+            CTF OPERATION / XINQI
+          </div>
+        </div>
       </div>
     </AbsoluteFill>
   );

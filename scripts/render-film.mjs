@@ -14,15 +14,15 @@ const output = path.join(
   root,
   "dist",
   preview
-    ? "preview-v3-720p.mp4"
+    ? "preview-v3.1-720p.mp4"
     : sample
-      ? "transition-v3-sample.mp4"
-      : "beyond-the-interface-v3-1080p.mp4",
+      ? "transition-v3.1-sample.mp4"
+      : "beyond-the-interface-v3.1-1080p.mp4",
 );
 await fs.mkdir(path.dirname(output), { recursive: true });
 const serveUrl = await bundle({
   entryPoint: path.join(root, "src/index.ts"),
-  outDir: path.join(root, "build/film-v3"),
+  outDir: path.join(root, "build/film-v3.1"),
 });
 const browser = await openBrowser("chrome", {
   browserExecutable:

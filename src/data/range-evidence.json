@@ -16,7 +16,7 @@
       "response": {
         "owner": "alice",
         "project": "门户联调",
-        "classification": "DEMO"
+        "classification": "INTERNAL"
       }
     },
     {
@@ -27,7 +27,7 @@
       "response": {
         "owner": "bob",
         "project": "运维交接",
-        "classification": "DEMO"
+        "classification": "INTERNAL"
       }
     },
     {
@@ -38,8 +38,8 @@
       "response": {
         "task": "TASK-042",
         "node": "ops-01",
-        "file": "evidence-demo.txt",
-        "proof": "AUTHORIZED_RANGE_DEMO"
+        "file": "range-evidence.txt",
+        "proof": "RANGE_ACCESS_VERIFIED"
       }
     },
     {
@@ -97,7 +97,7 @@
       "response": {
         "owner": "alice",
         "project": "门户联调",
-        "classification": "DEMO"
+        "classification": "INTERNAL"
       }
     },
     {
