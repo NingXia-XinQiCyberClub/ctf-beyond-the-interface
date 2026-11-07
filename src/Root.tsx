@@ -19,15 +19,98 @@ import {
 import { FinaleScene, OutroScene } from "./scenes/StoryScenes";
 import "./global.css";
 import { AttackIntro, AttackStage } from "./scenes/AttackDirection";
+import { InvitationScene, RangeScene } from "./scenes/RangeScenes";
 
-export const CHAPTERS = [
+type Chapter = {
+  title: string;
+  from: number;
+  seconds: number;
+  component: React.FC;
+  timeMap?: number[][];
+  attack?: boolean;
+};
+export const CHAPTERS: Chapter[] = [
   { title: "入口", from: 0, seconds: 10, component: AttackIntro },
-  { title: "Web", from: 10, seconds: 22, component: WebScene },
-  { title: "Crypto", from: 32, seconds: 20, component: CryptoScene },
-  { title: "Reverse", from: 52, seconds: 22, component: ReverseScene },
-  { title: "Pwn", from: 74, seconds: 22, component: PwnScene },
-  { title: "Misc", from: 96, seconds: 18, component: MiscScene },
-  { title: "最后一次提交", from: 114, seconds: 26, component: FinaleScene },
+  {
+    title: "Web",
+    from: 10,
+    seconds: 12,
+    component: WebScene,
+    timeMap: [
+      [0, 0],
+      [3.2, 5],
+      [5.6, 10.8],
+      [8, 15.6],
+      [9.2, 17.6],
+      [12, 22],
+    ],
+  },
+  {
+    title: "Crypto",
+    from: 22,
+    seconds: 10,
+    component: CryptoScene,
+    timeMap: [
+      [0, 0],
+      [4, 8],
+      [6, 12],
+      [8.4, 17.2],
+      [10, 20],
+    ],
+  },
+  {
+    title: "Reverse",
+    from: 32,
+    seconds: 10,
+    component: ReverseScene,
+    timeMap: [
+      [0, 0],
+      [5.6, 12.4],
+      [8, 17.6],
+      [10, 22],
+    ],
+  },
+  {
+    title: "Pwn",
+    from: 42,
+    seconds: 12,
+    component: PwnScene,
+    timeMap: [
+      [0, 0],
+      [3.6, 6.8],
+      [6.8, 14],
+      [9.6, 19.2],
+      [12, 22],
+    ],
+  },
+  {
+    title: "Misc",
+    from: 54,
+    seconds: 10,
+    component: MiscScene,
+    timeMap: [
+      [0, 0],
+      [2.8, 4.8],
+      [5.2, 8.8],
+      [8, 14.4],
+      [10, 18],
+    ],
+  },
+  { title: "最后一次提交", from: 64, seconds: 26, component: FinaleScene },
+  {
+    title: "护网行动邀请",
+    from: 90,
+    seconds: 8,
+    component: InvitationScene,
+    attack: false,
+  },
+  {
+    title: "红蓝攻防演练",
+    from: 98,
+    seconds: 42,
+    component: RangeScene,
+    attack: false,
+  },
   {
     title: "见微知隙，破阵无声",
     from: 140,
@@ -35,6 +118,28 @@ export const CHAPTERS = [
     component: OutroScene,
   },
 ];
+
+// Preserve action/result beats while shortening the explanatory pauses.
+const Retimed: React.FC<{ map?: number[][]; children: React.ReactNode }> = ({
+  map,
+  children,
+}) => {
+  const frame = useCurrentFrame();
+  if (!map) return <>{children}</>;
+  const time = frame / 30;
+  const index = Math.max(
+    1,
+    map.findIndex(([x]) => time < x),
+  );
+  const [a, b] =
+    time >= map[map.length - 1][0]
+      ? map.slice(-2)
+      : [map[index - 1], map[index]];
+  const source =
+    a[1] +
+    (b[1] - a[1]) * Math.max(0, Math.min(1, (time - a[0]) / (b[0] - a[0])));
+  return <Freeze frame={Math.round(source * 30)}>{children}</Freeze>;
+};
 
 const ChapterTransition: React.FC<{
   duration: number;
@@ -71,21 +176,29 @@ const Film: React.FC = () => (
   <AbsoluteFill
     style={{ fontFamily: '"Noto Sans SC", sans-serif', background: "#020711" }}
   >
-    {CHAPTERS.map(({ title, from, seconds, component: Scene }) => (
-      <Sequence
-        key={title}
-        name={title}
-        from={from * 30}
-        durationInFrames={seconds * 30 + (from < 140 ? 14 : 0)}
-      >
-        <ChapterTransition duration={seconds * 30} first={from === 0}>
-          <AttackStage from={from}>
-            <Scene />
-          </AttackStage>
-        </ChapterTransition>
-      </Sequence>
-    ))}
-    <Audio src={staticFile("soundtrack.wav")} />
+    {CHAPTERS.map(
+      ({ title, from, seconds, component: Scene, timeMap, attack }) => (
+        <Sequence
+          key={title}
+          name={title}
+          from={from * 30}
+          durationInFrames={seconds * 30 + (from < 140 ? 14 : 0)}
+        >
+          <ChapterTransition duration={seconds * 30} first={from === 0}>
+            {attack === false ? (
+              <Scene />
+            ) : (
+              <AttackStage from={from}>
+                <Retimed map={timeMap}>
+                  <Scene />
+                </Retimed>
+              </AttackStage>
+            )}
+          </ChapterTransition>
+        </Sequence>
+      ),
+    )}
+    <Audio src={staticFile("soundtrack-v3.wav")} />
   </AbsoluteFill>
 );
 
@@ -121,7 +234,7 @@ const FilmCover: React.FC = () => (
         fontFamily: "Consolas, monospace",
       }}
     >
-      CAPTURE THE FLAG / OFFENSIVE CUT 02
+      CTF → CYBER EXERCISE / CUT 03
     </div>
     <div
       style={{
@@ -176,7 +289,7 @@ const FilmCover: React.FC = () => (
         letterSpacing: 5,
       }}
     >
-      WEB / CRYPTO / REVERSE / PWN / MISC
+      CAPTURE THE FLAG / RED TEAM / BLUE TEAM
     </div>
   </AbsoluteFill>
 );

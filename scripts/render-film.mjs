@@ -14,15 +14,15 @@ const output = path.join(
   root,
   "dist",
   preview
-    ? "preview-v2-720p.mp4"
+    ? "preview-v3-720p.mp4"
     : sample
-      ? "transition-v2-sample.mp4"
-      : "beyond-the-interface-v2-1080p.mp4",
+      ? "transition-v3-sample.mp4"
+      : "beyond-the-interface-v3-1080p.mp4",
 );
 await fs.mkdir(path.dirname(output), { recursive: true });
 const serveUrl = await bundle({
   entryPoint: path.join(root, "src/index.ts"),
-  outDir: path.join(root, "build/film-v2"),
+  outDir: path.join(root, "build/film-v3"),
 });
 const browser = await openBrowser("chrome", {
   browserExecutable:
@@ -51,7 +51,7 @@ try {
     audioBitrate: "320k",
     scale: preview ? 2 / 3 : 1,
     concurrency: Number(process.env.RENDER_CONCURRENCY || 8),
-    frameRange: sample ? [29 * 30, 34 * 30 - 1] : undefined,
+    frameRange: sample ? [87 * 30, 100 * 30 - 1] : undefined,
     timeoutInMilliseconds: 120000,
     logLevel: "error",
     overwrite: true,

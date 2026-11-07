@@ -2,15 +2,17 @@
 
 本文件区分自有代码、程序生成媒体、品牌素材与第三方依赖。项目根目录的 MIT 许可证不替代单项素材或依赖自身的许可条件。
 
-| 项目 | 来源 | 用途与授权范围 |
-| --- | --- | --- |
-| 俱乐部 Logo | 用户提供的原始 `public/logo.png`；第二版依据原图几何重绘为 `public/logo.svg`，经用户审查确认 | SVG 使用独立路径与渐变，无内嵌位图，透明背景，保留原造型和配色；清理原图杂边。本片品牌署名使用。Logo 与相关品牌名称保留原有权利，不纳入本仓库 MIT 授权；复用工程时应替换，或另行取得品牌使用许可 |
-| Noto Sans SC | [Google Fonts 字体服务](https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700)与 [Google Fonts 字体源](https://github.com/google/fonts/tree/main/ofl/notosanssc) | SIL Open Font License 1.1。使用官方生成的静态 400／700 字重子集；覆盖 `src` 字符与完整常用 ASCII，具体集合和下载地址记录于 `public/fonts/font-source.json`。分发时保留 OFL 文本和版权声明 |
-| 二维界面、路径、图表、粒子与程序图形 | 本项目动画源代码生成 | 自有实现按项目 MIT 许可证发布；演示赛题与界面数据为本片编写 |
-| 配乐与界面音效 | `scripts/generate-audio.mjs` 程序合成 | 没有第三方录音、音乐采样包或外部音频服务；生成脚本及其生成结果按项目发布许可使用 |
-| 片尾二维码 | 根据俱乐部公开主页地址生成 | 二维码图形由项目生成；链接目标保留其各自内容权利 |
-| Remotion | [remotion-dev/remotion](https://github.com/remotion-dev/remotion) | 保留 Remotion 自身许可证，使用条件以[官方现行条款](https://www.remotion.dev/docs/terms)为准。项目 MIT 许可不改变这些条件 |
-| React 与其他 npm 依赖 | `package.json`、`package-lock.json` 所列上游包 | 各自许可证适用；安装后可在对应包的 LICENSE 文件中查看 |
+| 项目                                 | 来源                                                                                                                                                                          | 用途与授权范围                                                                                                                                                                                   |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 俱乐部 Logo                          | 用户提供的原始 `public/logo.png`；第二版依据原图几何重绘为 `public/logo.svg`，经用户审查确认                                                                                  | SVG 使用独立路径与渐变，无内嵌位图，透明背景，保留原造型和配色；清理原图杂边。本片品牌署名使用。Logo 与相关品牌名称保留原有权利，不纳入本仓库 MIT 授权；复用工程时应替换，或另行取得品牌使用许可 |
+| Noto Sans SC                         | [Google Fonts 字体服务](https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700)与 [Google Fonts 字体源](https://github.com/google/fonts/tree/main/ofl/notosanssc) | SIL Open Font License 1.1。使用官方生成的静态 400／700 字重子集；覆盖 `src` 字符与完整常用 ASCII，具体集合和下载地址记录于 `public/fonts/font-source.json`。分发时保留 OFL 文本和版权声明        |
+| 二维界面、路径、图表、粒子与程序图形 | 本项目动画源代码生成                                                                                                                                                          | 自有实现按项目 MIT 许可证发布；演示赛题与界面数据为本片编写                                                                                                                                      |
+| 第三版配乐                           | 本机[ACE-Step 1.5](https://github.com/ace-step/ACE-Step-1.5)生成；用户审听选定C《红蓝交锋》，以其为源音频作repaint延展与cover变奏                                             | 输入资产在`public/music/`，提示词、任务号和编排记录随附。保留上游MIT许可文本`public/music/ACE-Step-LICENSE.txt`；模型依赖不打包。生成音频作为本项目配乐素材，不包含参考视频音轨或外部采样包      |
+| 界面音效与历史程序配乐               | 第三版`scripts/mix-v3-audio.py`独立合成短音效；旧版`scripts/generate-audio.mjs`保留                                                                                           | 程序生成，没有第三方录音；自有脚本与程序音效按项目发布许可使用                                                                                                                                   |
+| 护网演练数据                         | `scripts/range-exercise.py`本机回环临时HTTP靶场                                                                                                                               | 虚构业务记录；10次真实HTTP请求的响应写入`src/data/range-evidence.json`。影片动画重现验证过程，不冒用真实企业数据或安全事件                                                                       |
+| 片尾二维码                           | 根据俱乐部公开主页地址生成                                                                                                                                                    | 二维码图形由项目生成；链接目标保留其各自内容权利                                                                                                                                                 |
+| Remotion                             | [remotion-dev/remotion](https://github.com/remotion-dev/remotion)                                                                                                             | 保留 Remotion 自身许可证，使用条件以[官方现行条款](https://www.remotion.dev/docs/terms)为准。项目 MIT 许可不改变这些条件                                                                         |
+| React 与其他 npm 依赖                | `package.json`、`package-lock.json` 所列上游包                                                                                                                                | 各自许可证适用；安装后可在对应包的 LICENSE 文件中查看                                                                                                                                            |
 
 ## 字体分发
 

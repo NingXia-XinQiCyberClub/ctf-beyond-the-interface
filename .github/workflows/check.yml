@@ -23,7 +23,15 @@ jobs:
         run: npm ci
       - name: Prepare local assets
         run: npm run assets
-      - name: Synthesize original audio
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install audio mixing dependency
+        run: python -m pip install -r requirements-audio.txt
+      - name: Verify local HTTP exercise
+        run: npm run range
+      - name: Mix ACE-Step music and original foley
         run: npm run audio
       - name: Check TypeScript
         run: npm run typecheck

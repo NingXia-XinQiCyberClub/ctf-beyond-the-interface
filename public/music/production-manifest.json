@@ -1,0 +1,338 @@
+{
+  "selectedSample": "C / 红蓝交锋",
+  "model": "ACE-Step 1.5 turbo",
+  "requestedBpm": 150,
+  "requestedKey": "D minor",
+  "duration": 150,
+  "sampleRate": 48000,
+  "edits": [
+    {
+      "start": 0,
+      "duration": 86.1,
+      "source": "C-extended",
+      "sourceOffset": 0,
+      "gain": 0.85,
+      "lowpassHz": null
+    },
+    {
+      "start": 86,
+      "duration": 2.25,
+      "source": "C-theme",
+      "sourceOffset": 24,
+      "gain": 0.09,
+      "lowpassHz": 1200
+    },
+    {
+      "start": 88.3,
+      "duration": 2.25,
+      "source": "C-theme",
+      "sourceOffset": 8,
+      "gain": 0.96,
+      "lowpassHz": null
+    },
+    {
+      "start": 90,
+      "duration": 8.05,
+      "source": "C-blue",
+      "sourceOffset": 0,
+      "gain": 0.23,
+      "lowpassHz": 1200
+    },
+    {
+      "start": 98,
+      "duration": 10.15,
+      "source": "C-theme",
+      "sourceOffset": 0,
+      "gain": 0.9,
+      "lowpassHz": null
+    },
+    {
+      "start": 108,
+      "duration": 4.15,
+      "source": "C-blue",
+      "sourceOffset": 10,
+      "gain": 0.84,
+      "lowpassHz": null
+    },
+    {
+      "start": 112,
+      "duration": 5.15,
+      "source": "C-extended",
+      "sourceOffset": 48,
+      "gain": 0.96,
+      "lowpassHz": null
+    },
+    {
+      "start": 117,
+      "duration": 5.05,
+      "source": "C-blue",
+      "sourceOffset": 16,
+      "gain": 0.92,
+      "lowpassHz": null
+    },
+    {
+      "start": 122.22,
+      "duration": 4.93,
+      "source": "C-blue",
+      "sourceOffset": 21,
+      "gain": 0.64,
+      "lowpassHz": null
+    },
+    {
+      "start": 127,
+      "duration": 5.15,
+      "source": "C-blue",
+      "sourceOffset": 5,
+      "gain": 0.55,
+      "lowpassHz": 3200
+    },
+    {
+      "start": 132,
+      "duration": 4.15,
+      "source": "C-theme",
+      "sourceOffset": 16,
+      "gain": 0.72,
+      "lowpassHz": null
+    },
+    {
+      "start": 136,
+      "duration": 4.1,
+      "source": "C-blue",
+      "sourceOffset": 24,
+      "gain": 0.48,
+      "lowpassHz": 2400
+    },
+    {
+      "start": 140,
+      "duration": 10,
+      "source": "C-theme",
+      "sourceOffset": 22,
+      "gain": 1.02,
+      "lowpassHz": null
+    }
+  ],
+  "events": [
+    {
+      "time": 2.8,
+      "label": "TARGET ACQUIRED",
+      "kind": "lock",
+      "power": 0.7
+    },
+    {
+      "time": 6,
+      "label": "ATTACK SURFACE",
+      "kind": "drop",
+      "power": 1
+    },
+    {
+      "time": 15.6,
+      "label": "BYPASS AUTHORIZATION",
+      "kind": "breach",
+      "power": 1
+    },
+    {
+      "time": 18,
+      "label": "PRIVATE DATA EXPOSED",
+      "kind": "breach",
+      "power": 0.85
+    },
+    {
+      "time": 19.2,
+      "label": "ACCESS GRANTED",
+      "kind": "success",
+      "power": 0.7
+    },
+    {
+      "time": 26,
+      "label": "MODULUS FRACTURED",
+      "kind": "breach",
+      "power": 0.9
+    },
+    {
+      "time": 28,
+      "label": "KEY RECOVERED",
+      "kind": "breach",
+      "power": 0.8
+    },
+    {
+      "time": 30.4,
+      "label": "CIPHER BROKEN",
+      "kind": "success",
+      "power": 0.8
+    },
+    {
+      "time": 37.6,
+      "label": "BRANCH UNLOCKED",
+      "kind": "breach",
+      "power": 0.95
+    },
+    {
+      "time": 40,
+      "label": "CHECK BYPASSED",
+      "kind": "success",
+      "power": 0.8
+    },
+    {
+      "time": 45.6,
+      "label": "SEGMENTATION FAULT",
+      "kind": "failure",
+      "power": 1
+    },
+    {
+      "time": 48.8,
+      "label": "RETURN ADDRESS CONTROL",
+      "kind": "breach",
+      "power": 1
+    },
+    {
+      "time": 51.6,
+      "label": "BREAKPOINT HIT",
+      "kind": "lock",
+      "power": 0.8
+    },
+    {
+      "time": 56.8,
+      "label": "STRIP THE SURFACE",
+      "kind": "breach",
+      "power": 0.7
+    },
+    {
+      "time": 59.2,
+      "label": "HIDDEN CHANNEL",
+      "kind": "lock",
+      "power": 0.7
+    },
+    {
+      "time": 62,
+      "label": "BYTES EXTRACTED",
+      "kind": "success",
+      "power": 0.8
+    },
+    {
+      "time": 76,
+      "label": "EXECUTION REDIRECTED",
+      "kind": "breach",
+      "power": 0.9
+    },
+    {
+      "time": 79.2,
+      "label": "TARGET REACHED",
+      "kind": "breach",
+      "power": 1
+    },
+    {
+      "time": 87.3,
+      "label": "SUBMIT",
+      "kind": "click",
+      "power": 0.6
+    },
+    {
+      "time": 88.3,
+      "label": "CORRECT",
+      "kind": "final",
+      "power": 1
+    },
+    {
+      "time": 88.8,
+      "label": "FIRST BLOOD",
+      "kind": "final",
+      "power": 0.8
+    },
+    {
+      "time": 89,
+      "label": "RANK UP",
+      "kind": "final",
+      "power": 0.7
+    },
+    {
+      "time": 90,
+      "label": "INVITATION RECEIVED",
+      "kind": "email",
+      "power": 0.8
+    },
+    {
+      "time": 92,
+      "label": "OPEN MESSAGE",
+      "kind": "click",
+      "power": 0.55
+    },
+    {
+      "time": 95.5,
+      "label": "ENTER EXERCISE",
+      "kind": "click",
+      "power": 0.65
+    },
+    {
+      "time": 98,
+      "label": "RED / BLUE READY",
+      "kind": "drop",
+      "power": 0.85
+    },
+    {
+      "time": 102,
+      "label": "OBJECT BOUNDARY",
+      "kind": "breach",
+      "power": 0.8
+    },
+    {
+      "time": 108,
+      "label": "CORRELATED ALERT",
+      "kind": "alert",
+      "power": 0.8
+    },
+    {
+      "time": 112,
+      "label": "TASK CREATED",
+      "kind": "lock",
+      "power": 0.7
+    },
+    {
+      "time": 117,
+      "label": "POLICY APPLIED",
+      "kind": "lock",
+      "power": 0.75
+    },
+    {
+      "time": 119,
+      "label": "NODE ISOLATED",
+      "kind": "block",
+      "power": 0.6
+    },
+    {
+      "time": 122,
+      "label": "REQUEST DENIED",
+      "kind": "block",
+      "power": 0.9
+    },
+    {
+      "time": 127,
+      "label": "EVIDENCE CORRELATED",
+      "kind": "lock",
+      "power": 0.55
+    },
+    {
+      "time": 132,
+      "label": "FIX VERIFIED",
+      "kind": "success",
+      "power": 0.7
+    },
+    {
+      "time": 136,
+      "label": "SESSION CLOSED",
+      "kind": "close",
+      "power": 0.75
+    },
+    {
+      "time": 140,
+      "label": "RED BLUE CONVERGE",
+      "kind": "coda",
+      "power": 0.8
+    }
+  ],
+  "music": "ACE-Step generated; source-derived repaint and cover",
+  "sfx": "Original deterministic procedural foley, separate from music",
+  "normalizationTarget": {
+    "integratedLUFS": -16,
+    "truePeakDb": -1.5
+  }
+}

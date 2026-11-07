@@ -40,31 +40,7 @@ const SignalContext = createContext(cold);
 export const useAttackColors = () => useContext(SignalContext);
 
 export function attackHeat(time: number) {
-  const phases = [
-    [0, 2.8, 0],
-    [2.8, 6, 0.45],
-    [6, 10, 0.7],
-    [10, 20.8, 0],
-    [20.8, 27.6, 1],
-    [27.6, 32, 0.45],
-    [32, 40, 0.05],
-    [40, 49.2, 0.95],
-    [49.2, 52, 0.45],
-    [52, 64.4, 0.1],
-    [64.4, 69.6, 0.95],
-    [69.6, 74, 0.45],
-    [74, 80.8, 0.15],
-    [80.8, 86.8, 1],
-    [86.8, 88, 0.3],
-    [88, 96, 1],
-    [96, 100.8, 0],
-    [100.8, 110.4, 0.65],
-    [110.4, 114, 0.3],
-    [114, 126, 0.3],
-    [126, 135.6, 0.9],
-    [135.6, 138.3, 0.35],
-    [138.3, 150, 0],
-  ];
+  const phases = cues.heatPhases;
   const index = phases.findIndex(([a, b]) => time >= a && time < b);
   if (index < 0) return 0;
   const [start, , target] = phases[index];
@@ -99,12 +75,10 @@ export const AttackStage: React.FC<{
   const beat = Math.exp(-((frame % 12) / 12) * 7);
   const event = [...cues.events]
     .reverse()
-    .find(
-      (cue) => time >= cue.time && time < cue.time + 0.55 && cue.time < 114,
-    );
+    .find((cue) => time >= cue.time && time < cue.time + 0.55 && cue.time < 64);
   const age = event ? time - event.time : 10;
   const hit = event ? Math.exp(-age * 12) * event.power : 0;
-  const active = time >= 2.8 && time < 135.6;
+  const active = time >= 2.8 && time < 86;
   const stage = heat > 0.6 ? "EXPLOIT / EXECUTE" : "RECON / LOCK ON";
   const impulse = event && age < 0.18 ? (1 - age / 0.18) * 3 : 0;
   return (
@@ -156,7 +130,7 @@ export const AttackStage: React.FC<{
                 // {String(Math.floor(local / 0.4)).padStart(3, "0")}
               </span>
               <span style={{ marginLeft: "auto", opacity: 0.55 }}>
-                CTF RANGE / SESSION 0x02
+                CTF RANGE / SESSION 0x03
               </span>
             </div>
             <div
@@ -540,7 +514,7 @@ export const AttackIntro: React.FC = () => {
           letterSpacing: 5,
         }}
       >
-        BEYOND THE INTERFACE / 02
+        BEYOND THE INTERFACE / 03
       </div>
       <div
         style={{

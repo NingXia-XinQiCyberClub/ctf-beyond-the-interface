@@ -8,7 +8,6 @@ import {
   useVideoConfig,
 } from "remotion";
 
-
 const sans = '"Noto Sans SC", "Microsoft YaHei", Arial, sans-serif';
 const mono = 'Consolas, "Courier New", monospace';
 const sat = (v: number) => Math.max(0, Math.min(1, v));
@@ -309,7 +308,7 @@ export const FinaleScene: React.FC = () => {
     <AbsoluteFill
       style={{ fontFamily: sans, color: C.white, overflow: "hidden" }}
     >
-      <Atmosphere t={t + 114} />
+      <Atmosphere t={t + 64} />
       <div style={{ position: "absolute", left: 90, top: 65 }}>
         <Corner>FINAL CHALLENGE / PWN</Corner>
         <div
@@ -797,7 +796,7 @@ export const OutroScene: React.FC = () => {
               />
               <path
                 d={route}
-                stroke={i % 2 ? C.blue : C.cyan}
+                stroke={i % 2 ? "#42c9ff" : "#ff4762"}
                 fill="none"
                 strokeWidth="2"
               />
@@ -942,7 +941,7 @@ export const OutroScene: React.FC = () => {
           opacity: smooth((t - 4.5) / 0.5),
         }}
       >
-        <Corner>CTF · CAPTURE THE FLAG</Corner>
+        <Corner>CTF / RED TEAM / BLUE TEAM</Corner>
       </div>
       <div
         style={{

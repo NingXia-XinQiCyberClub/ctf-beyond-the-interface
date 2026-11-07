@@ -1,0 +1,23 @@
+{
+  "extension": {
+    "task_id": "60fcc82f-6ea7-4bdd-9127-e76d3d4ee241",
+    "caption": "Instrumental melodic cyber action breakbeat. Continue the source theme and its concise synth hook naturally. Propulsive broken drums and elastic bass, dark spacious chords, gritty low synth answered by a bright clean lead. Develop the same theme through musical variations and a sparse atmospheric breakdown, build to a confident cinematic climax. Detailed groove, smooth treble, no vocals, no speech.",
+    "seed": 45307,
+    "ready": true,
+    "file": "C-extension.wav"
+  },
+  "blue": {
+    "task_id": "0ec7254d-faf3-427a-8b03-ebef0e7ca1f7",
+    "caption": "Instrumental melodic cyber electronic breakbeat. Preserve the source melody and harmonic identity. A clean precise bright synthesizer answers a gritty bass phrase, crisp restrained percussion, clear spacious chords. Tense alert controlled atmosphere that builds into a confident resolved ending. Smooth treble, no vocals, no speech.",
+    "seed": 45308,
+    "ready": true,
+    "file": "C-blue.wav"
+  },
+  "theme": {
+    "task_id": "103c2880-036f-47fd-afdd-c4cf197964df",
+    "caption": "Instrumental melodic electronic breakbeat for a cyber action sequence, propulsive broken drums, elastic grooving bass, a bold concise synthesizer lead hook, dark spacious chords, crisp but smooth percussion, occasional tasteful industrial impacts. Call-and-response between a gritty low synth phrase and a clean bright answering melody, rising tension into a forceful musical drop, a short suspended pause, then the hook returns with a confident final cadence. High fidelity modern mix, energetic yet melodic, detailed groove, uncluttered arrangement, no vocals, no speech, no harsh continuous noise.",
+    "requested_seed": 45307,
+    "engine": "ACE-Step 1.5 turbo / local CUDA INT8",
+    "asset": "C-theme.wav"
+  }
+}

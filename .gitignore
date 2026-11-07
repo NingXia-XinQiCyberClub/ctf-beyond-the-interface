@@ -9,9 +9,12 @@ build/
 !.env.example
 public/soundtrack.wav
 public/soundtrack.mp3
+public/soundtrack-v3.wav
 public/club-qr.png
 qa/
 *.tsbuildinfo
+__pycache__/
+*.pyc
 .DS_Store
 Thumbs.db
 outputs/

@@ -240,7 +240,7 @@ function fail(start) {
 
 // The exact same event table drives the palette, effects and musical accents.
 const cues = JSON.parse(
-  fs.readFileSync(path.join(root, "src/data/attack-cues.json"), "utf8"),
+  fs.readFileSync(path.join(root, "src/data/attack-cues-v2.json"), "utf8"),
 );
 const BEAT = 60 / cues.bpm; // 0.4 seconds / 12 frames, sample-exact at 48 kHz.
 const STEP = BEAT / 4;

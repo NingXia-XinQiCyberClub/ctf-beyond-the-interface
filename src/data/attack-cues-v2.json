@@ -1,0 +1,86 @@
+{
+  "version": "2.0.0",
+  "bpm": 150,
+  "fps": 30,
+  "chapters": [0, 10, 32, 52, 74, 96, 114, 140],
+  "events": [
+    { "time": 2.8, "label": "TARGET ACQUIRED", "kind": "lock", "power": 0.7 },
+    { "time": 6, "label": "ATTACK SURFACE", "kind": "drop", "power": 1 },
+    {
+      "time": 20.8,
+      "label": "BYPASS AUTHORIZATION",
+      "kind": "breach",
+      "power": 1
+    },
+    {
+      "time": 25.6,
+      "label": "PRIVATE DATA EXPOSED",
+      "kind": "breach",
+      "power": 0.85
+    },
+    {
+      "time": 27.6,
+      "label": "ACCESS GRANTED",
+      "kind": "success",
+      "power": 0.7
+    },
+    {
+      "time": 40,
+      "label": "MODULUS FRACTURED",
+      "kind": "breach",
+      "power": 0.9
+    },
+    { "time": 44, "label": "KEY RECOVERED", "kind": "breach", "power": 0.8 },
+    { "time": 49.2, "label": "CIPHER BROKEN", "kind": "success", "power": 0.8 },
+    {
+      "time": 64.4,
+      "label": "BRANCH UNLOCKED",
+      "kind": "breach",
+      "power": 0.95
+    },
+    {
+      "time": 69.6,
+      "label": "CHECK BYPASSED",
+      "kind": "success",
+      "power": 0.8
+    },
+    {
+      "time": 80.8,
+      "label": "SEGMENTATION FAULT",
+      "kind": "failure",
+      "power": 1
+    },
+    {
+      "time": 88,
+      "label": "RETURN ADDRESS CONTROL",
+      "kind": "breach",
+      "power": 1
+    },
+    { "time": 93.2, "label": "BREAKPOINT HIT", "kind": "lock", "power": 0.8 },
+    {
+      "time": 100.8,
+      "label": "STRIP THE SURFACE",
+      "kind": "breach",
+      "power": 0.7
+    },
+    { "time": 104.8, "label": "HIDDEN CHANNEL", "kind": "lock", "power": 0.7 },
+    {
+      "time": 110.4,
+      "label": "BYTES EXTRACTED",
+      "kind": "success",
+      "power": 0.8
+    },
+    {
+      "time": 126,
+      "label": "EXECUTION REDIRECTED",
+      "kind": "breach",
+      "power": 0.9
+    },
+    { "time": 129.2, "label": "TARGET REACHED", "kind": "breach", "power": 1 },
+    { "time": 137.3, "label": "SUBMIT", "kind": "click", "power": 0.6 },
+    { "time": 138.3, "label": "CORRECT", "kind": "final", "power": 1 },
+    { "time": 138.8, "label": "FIRST BLOOD", "kind": "final", "power": 0.8 },
+    { "time": 139, "label": "RANK UP", "kind": "final", "power": 0.7 },
+    { "time": 143, "label": "NEXT CHALLENGE", "kind": "coda", "power": 0.6 }
+  ]
+}

@@ -1,17 +1,19 @@
 {
   "name": "ctf-beyond-the-interface",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "private": true,
   "description": "《表面之下》：鑫启网安俱乐部 CTF 黑客主题动画宣传片",
   "scripts": {
     "dev": "remotion studio src/index.ts",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write src scripts docs README.md package.json tsconfig.json",
-    "audio": "node scripts/generate-audio.mjs",
+    "audio": "python scripts/mix-v3-audio.py",
     "assets": "node scripts/prepare-assets.mjs",
-    "render": "remotion render src/index.ts BeyondTheInterface dist/beyond-the-interface-v2-1080p.mp4 --codec=h264 --crf=18 --audio-codec=aac --pixel-format=yuv420p",
-    "preview": "remotion render src/index.ts BeyondTheInterface dist/preview-v2-720p.mp4 --scale=0.6666667 --codec=h264 --crf=23 --audio-codec=aac --pixel-format=yuv420p",
-    "cover": "remotion still src/index.ts FilmCover public/cover.jpg --image-format=jpeg"
+    "render": "node scripts/render-film.mjs",
+    "preview": "node scripts/render-film.mjs --preview",
+    "cover": "remotion still src/index.ts FilmCover public/cover.jpg --image-format=jpeg",
+    "audio:v2": "node scripts/generate-audio.mjs",
+    "range": "python scripts/range-exercise.py"
   },
   "dependencies": {
     "@remotion/cli": "4.0.541",

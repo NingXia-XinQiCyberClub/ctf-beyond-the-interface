@@ -12,7 +12,7 @@ const destination = path.join(root, "qa");
 await fs.mkdir(destination, { recursive: true });
 const serveUrl = await bundle({
   entryPoint: path.join(root, "src/index.ts"),
-  outDir: path.join(root, "build"),
+  outDir: path.join(root, "build/qa-v3"),
   enableCaching: false,
 });
 console.log("Bundle prepared.");
@@ -35,8 +35,8 @@ try {
   const seconds = process.env.QA_SECONDS
     ? process.env.QA_SECONDS.split(",").map(Number)
     : [
-        1.5, 4, 8, 14, 23, 29, 39, 46, 50, 57, 64, 71, 79, 87, 94, 101, 107,
-        112, 119, 129, 135, 137.8, 138.7, 139.3, 143, 146, 149,
+        8, 16, 28, 38, 49, 60, 79, 87.8, 88.6, 89.6, 90.8, 94, 97.7, 100, 105,
+        109.5, 114, 120, 123, 129, 134, 137, 139.9, 143, 146, 149,
       ];
   for (const second of seconds) {
     const output = path.join(

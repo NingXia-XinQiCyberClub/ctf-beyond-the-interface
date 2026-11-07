@@ -1,0 +1,119 @@
+{
+  "scope": "Disposable loopback-only HTTP fixture; all records fictional",
+  "displayHost": "portal.range.test (visual alias for local fixture)",
+  "eventLink": [
+    "REQ-017",
+    "REQ-018",
+    "TASK-042",
+    "ops-01"
+  ],
+  "events": [
+    {
+      "id": "BASE-001",
+      "method": "GET",
+      "path": "/api/records/101",
+      "status": 200,
+      "response": {
+        "owner": "alice",
+        "project": "门户联调",
+        "classification": "DEMO"
+      }
+    },
+    {
+      "id": "REQ-017",
+      "method": "GET",
+      "path": "/api/records/202",
+      "status": 200,
+      "response": {
+        "owner": "bob",
+        "project": "运维交接",
+        "classification": "DEMO"
+      }
+    },
+    {
+      "id": "REQ-018",
+      "method": "POST",
+      "path": "/ops/tasks",
+      "status": 201,
+      "response": {
+        "task": "TASK-042",
+        "node": "ops-01",
+        "file": "evidence-demo.txt",
+        "proof": "AUTHORIZED_RANGE_DEMO"
+      }
+    },
+    {
+      "id": "BLUE-001",
+      "method": "POST",
+      "path": "/control",
+      "status": 200,
+      "response": {
+        "applied": true
+      }
+    },
+    {
+      "id": "RETEST-BLOCK",
+      "method": "GET",
+      "path": "/api/records/202",
+      "status": 403,
+      "response": {
+        "error": "source blocked",
+        "control": "temporary policy"
+      }
+    },
+    {
+      "id": "BLUE-002",
+      "method": "POST",
+      "path": "/control",
+      "status": 200,
+      "response": {
+        "applied": true
+      }
+    },
+    {
+      "id": "RETEST-OBJECT",
+      "method": "GET",
+      "path": "/api/records/202",
+      "status": 403,
+      "response": {
+        "error": "object access denied",
+        "control": "owner authorization"
+      }
+    },
+    {
+      "id": "RETEST-ROLE",
+      "method": "POST",
+      "path": "/ops/tasks",
+      "status": 403,
+      "response": {
+        "error": "operator role required"
+      }
+    },
+    {
+      "id": "RETEST-LEGAL",
+      "method": "GET",
+      "path": "/api/records/101",
+      "status": 200,
+      "response": {
+        "owner": "alice",
+        "project": "门户联调",
+        "classification": "DEMO"
+      }
+    },
+    {
+      "id": "CLOSE-001",
+      "method": "POST",
+      "path": "/control",
+      "status": 200,
+      "response": {
+        "applied": true
+      }
+    }
+  ],
+  "verified": {
+    "objectFix": true,
+    "roleFix": true,
+    "legitimateTraffic": true,
+    "temporaryTasksRemoved": true
+  }
+}
