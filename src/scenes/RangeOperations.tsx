@@ -278,6 +278,29 @@ const Chain: React.FC<{ blue: boolean; t: number }> = ({ blue, t }) => {
           <feGaussianBlur stdDeviation="5" />
         </filter>
       </defs>
+      {/* Trace routes and particles stay behind every node card. */}
+      {blue && t >= 10 && t < 14 && (
+        <>
+          <path
+            d="M500 540H220V325"
+            stroke={BLUE}
+            strokeWidth="4"
+            fill="none"
+            pathLength={1}
+            strokeDasharray="1"
+            strokeDashoffset={1 - progress(t, 10.5, 2.0)}
+          />
+          <circle
+            cx={220}
+            cy={540 - 215 * progress(t, 11.4, 1.2)}
+            r="6"
+            fill={BLUE}
+          />
+          <text x="365" y="407" fontSize="17" fill={BLUE}>
+            请求 → 身份 → 源会话
+          </text>
+        </>
+      )}
       <path d="M220 325V540" stroke="#2c3a4a" strokeWidth="2" />
       <path
         d="M220 325V540"
@@ -575,28 +598,6 @@ const Chain: React.FC<{ blue: boolean; t: number }> = ({ blue, t }) => {
           </g>
         );
       })}
-      {blue && t >= 10 && t < 14 && (
-        <>
-          <path
-            d="M500 540H220V325"
-            stroke={BLUE}
-            strokeWidth="4"
-            fill="none"
-            pathLength={1}
-            strokeDasharray="1"
-            strokeDashoffset={1 - progress(t, 10.5, 2.0)}
-          />
-          <circle
-            cx={220}
-            cy={540 - 215 * progress(t, 11.4, 1.2)}
-            r="6"
-            fill={BLUE}
-          />
-          <text x="365" y="407" fontSize="17" fill={BLUE}>
-            请求 → 身份 → 源会话
-          </text>
-        </>
-      )}
       {blocked && (
         <g opacity={progress(t, 24, 0.4)}>
           <rect

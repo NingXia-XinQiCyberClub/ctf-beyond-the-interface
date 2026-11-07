@@ -8,7 +8,7 @@
 
 源码与制作说明由本项目管理，MP4 和完整资产包通过 GitHub Releases 分发。
 
-当前工作版本为 **第三版报告收尾 v3.2.0**：CTF章末提交、一血与排名第一，经邀请邮件进入红方渗透与蓝方响应，以红蓝各自撰写报告、黑屏后品牌落版收束。红蓝队使用独立全屏页面，红左蓝右，以水平平移切换；Shell与链路突破、阻断、加固和溯源同步动画。配乐方向为用户审听选定的C《红蓝交锋》。片尾保留已确认的SVG Logo、口号 **“见微知隙，破阵无声。”**及[俱乐部主页](https://ningxia-xinqicyberclub.github.io/)二维码。制作说明见 [docs/v3-direction.md](docs/v3-direction.md)，已审定脚本见 [docs/v3-storyboard.md](docs/v3-storyboard.md)。下方Release链接仍指实际已发布版本。
+当前工作版本为 **第三版轨道修正 v3.2.1**：CTF章末提交、一血与排名第一，经邀请邮件进入红方渗透与蓝方响应，以红蓝各自撰写报告、黑屏后品牌落版收束。红蓝队使用独立全屏页面，红左蓝右，以水平平移切换；Shell与链路突破、阻断、加固和溯源同步动画。配乐方向为用户审听选定的C《红蓝交锋》。片尾保留已确认的SVG Logo、口号 **“见微知隙，破阵无声。”**及[俱乐部主页](https://ningxia-xinqicyberclub.github.io/)二维码。制作说明见 [docs/v3-direction.md](docs/v3-direction.md)，已审定脚本见 [docs/v3-storyboard.md](docs/v3-storyboard.md)。下方Release链接仍指实际已发布版本。
 
 ![《表面之下》封面](public/cover.jpg)
 
@@ -50,7 +50,7 @@ npm run render
 完整视频输出到：
 
 ```text
-dist/beyond-the-interface-v3.2-1080p.mp4
+dist/beyond-the-interface-v3.2.1-1080p.mp4
 ```
 
 完整渲染默认使用4个独立浏览器、每个6页并发。所有4500帧重新绘制，1080p、30fps、H.264 CRF18/medium保持不变；最后以视频流复制拼接，整条音轨单次编码。可通过`RENDER_WORKERS`和`RENDER_CONCURRENCY`调整。每段帧数与编码数据散列由程序核验。
@@ -62,7 +62,7 @@ npm run preview
 npm run cover
 ```
 
-`npm run preview`输出`dist/preview-v3.2-720p.mp4`。依赖、缓存和构建输出不进入源码历史，MP4通过Releases分发。
+`npm run preview`输出`dist/preview-v3.2.1-720p.mp4`。依赖、缓存和构建输出不进入源码历史，MP4通过Releases分发。
 
 ## 影片结构
 
