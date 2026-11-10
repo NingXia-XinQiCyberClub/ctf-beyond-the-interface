@@ -15,12 +15,12 @@ const exec = promisify(execFile),
 const preview = process.argv.includes("--preview"),
   sample = process.argv.includes("--sample");
 const name = preview
-  ? "preview-v3.2.4-720p.mp4"
+  ? "preview-v3.2.5-720p.mp4"
   : sample
-    ? "transition-v3.2.4-sample.mp4"
-    : "beyond-the-interface-v3.2.4-1080p.mp4";
+    ? "transition-v3.2.5-sample.mp4"
+    : "beyond-the-interface-v3.2.5-1080p.mp4";
 const output = path.join(root, "dist", name),
-  folder = path.join(root, "build/film-v3.2.4-segments");
+  folder = path.join(root, "build/film-v3.2.5-segments");
 await fs.mkdir(folder, { recursive: true });
 await fs.mkdir(path.dirname(output), { recursive: true });
 const native =
@@ -55,7 +55,7 @@ let lastUpdate = 0;
 const started = performance.now();
 const serveUrl = await bundle({
   entryPoint: path.join(root, "src/index.ts"),
-  outDir: path.join(root, "build/film-v3.2.4"),
+  outDir: path.join(root, "build/film-v3.2.5"),
 });
 console.log(
   `Full render: ${count} frames, ${workers} independent browsers × ${concurrency} pages. 1080p/30fps/CRF18/medium.`,

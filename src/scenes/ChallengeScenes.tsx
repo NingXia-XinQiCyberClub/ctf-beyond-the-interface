@@ -1,4 +1,6 @@
 import React from "react";
+import challenge from "../data/challenge-flags.json";
+const FLAGS = challenge.flags;
 import { useAttackColors, ExploitArtifacts } from "./AttackDirection";
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion";
 
@@ -847,7 +849,7 @@ export const WebScene: React.FC = () => {
               color: C.green,
             }}
           >
-            {textSlice("flag{test}", t, 15.6, 22)}
+            {textSlice(FLAGS.web, t, 15.6, (22 * FLAGS.web.length) / 10)}
           </div>
         </Panel>
       </div>
@@ -870,7 +872,7 @@ export const WebScene: React.FC = () => {
         ]}
       />
       <div style={{ opacity: result }}>
-        <Success t={t} start={17.6} flag="flag{test}" />
+        <Success t={t} start={17.6} flag={FLAGS.web} />
       </div>
       <Caption t={t} start={5.2} end={16.9} text="改写请求，越过边界。" />
     </AbsoluteFill>
@@ -951,7 +953,7 @@ export const CryptoScene: React.FC = () => {
           n = 3233
         </text>
         <text x="405" y="501" fill={C.muted} fontSize="21" fontFamily={MONO}>
-          e = 17 c = 2790
+          e = 17 c = 1369
         </text>
       </svg>
       <div style={{ position: "absolute", inset: 0, opacity: factor }}>
@@ -1131,9 +1133,9 @@ export const CryptoScene: React.FC = () => {
           CIPHERTEXT → PLAINTEXT → MEANING
         </div>
         {[
-          { x: 130, value: "2790", label: "CIPHERTEXT" },
-          { x: 570, value: "65", label: "PLAINTEXT" },
-          { x: 1010, value: "A", label: "ASCII" },
+          { x: 130, value: "1369", label: "CIPHERTEXT" },
+          { x: 570, value: "102", label: "PLAINTEXT" },
+          { x: 1010, value: "f", label: "ASCII" },
         ].map((v, i) => (
           <div
             key={v.label}
@@ -1202,8 +1204,8 @@ export const CryptoScene: React.FC = () => {
             opacity: appear(t, 14.5),
           }}
         >
-          2790<span style={{ fontSize: 17, verticalAlign: "super" }}>2753</span>{" "}
-          mod 3233 = <Glow>65</Glow>
+          1369<span style={{ fontSize: 17, verticalAlign: "super" }}>2753</span>{" "}
+          mod 3233 = <Glow>102</Glow>
         </div>
         <div
           style={{
@@ -1218,7 +1220,7 @@ export const CryptoScene: React.FC = () => {
             letterSpacing: 3,
           }}
         >
-          SINGLE-BLOCK DECRYPTION / 数据块逐一还原
+          FIRST BYTE / 同法还原其余数据块
         </div>
       </div>
       <ExploitArtifacts kind="crypto" t={t} />
@@ -1228,14 +1230,15 @@ export const CryptoScene: React.FC = () => {
         active={t < 5 ? 0 : t < 8 ? 2 : t < 12 ? 4 : t < 15 ? 6 : 8}
         lines={[
           "n, e = 3233, 17",
-          "c = 2790",
+          "c = 1369",
           "p, q = 61, 53",
           "phi = (p-1) * (q-1)",
           "d = 2753",
           "",
           "m = pow(c, d, n)",
-          "# m = 65",
-          "chr(m)  # A",
+          "# m = 102 / first byte",
+          "chr(m)  # f",
+          "# repeat for each cipher block",
         ]}
         accent={C.cyan}
       />
@@ -1251,7 +1254,7 @@ export const CryptoScene: React.FC = () => {
             background: "radial-gradient(ellipse,#07192aee,#030711f5)",
           }}
         />
-        <Success t={t} start={17.2} label="DECRYPTED" />
+        <Success t={t} start={17.2} label="DECRYPTED" flag={FLAGS.crypto} />
         <div
           style={{
             position: "absolute",
@@ -1585,7 +1588,12 @@ export const ReverseScene: React.FC = () => {
       />
       <Caption t={t} start={5.2} end={17.5} text="看穿分支，打开通路。" />
       <div style={{ opacity: verified }}>
-        <Success t={t} start={17.6} label="PATH VERIFIED" />
+        <Success
+          t={t}
+          start={17.6}
+          label="PATH VERIFIED"
+          flag={FLAGS.reverse}
+        />
         <div
           style={{
             position: "absolute",
@@ -1885,7 +1893,7 @@ export const PwnScene: React.FC = () => {
   );
 };
 
-const HIDDEN = "flag{test}";
+const HIDDEN = FLAGS.misc;
 const BITS = Array.from(HIDDEN).flatMap((c) =>
   c.charCodeAt(0).toString(2).padStart(8, "0").split("").map(Number),
 );
@@ -2045,7 +2053,7 @@ export const MiscScene: React.FC = () => {
               BYTES RESTORED / UTF-8
             </div>
             <Glow style={{ fontSize: 36 }}>
-              {textSlice(HIDDEN, t, 11.2, 13)}
+              {textSlice(HIDDEN, t, 11.2, (13 * HIDDEN.length) / 10)}
             </Glow>
           </div>
         </div>
@@ -2062,7 +2070,7 @@ export const MiscScene: React.FC = () => {
           "stream = bits.flatten()",
           "",
           "# group every 8 bits",
-          "message = decode(stream[:80])",
+          `message = decode(stream[:${challenge.miscBitLength}])`,
           "print(message)",
           "",
           "# hidden data restored",

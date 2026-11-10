@@ -1,0 +1,21 @@
+{
+  "flags": {
+    "web": "flag{check_the_owner}",
+    "crypto": "flag{factor_to_decrypt}",
+    "reverse": "flag{follow_the_true_path}",
+    "pwn": "flag{ret_to_win}",
+    "misc": "flag{read_the_lowest_bit}"
+  },
+  "rsa": {
+    "n": 3233,
+    "e": 17,
+    "p": 61,
+    "q": 53,
+    "d": 2753,
+    "cipher": [
+      1369, 745, 1632, 2923, 855, 1369, 1632, 281, 884, 2185, 2412, 119, 884,
+      2185, 119, 1773, 1313, 281, 2412, 487, 612, 884, 1516
+    ]
+  },
+  "miscBitLength": 200
+}

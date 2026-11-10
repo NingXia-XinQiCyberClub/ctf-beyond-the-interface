@@ -21,7 +21,7 @@
 - 常用命令：`npm run assets`、`npm run audio`、`npm run typecheck`、`npm run dev`、`npm run render`。
 - 第三版音乐来自本机ACE-Step 1.5，以用户选定C为参考生成延展与蓝方变奏；`scripts/mix-v3-audio.py`编排音乐与独立程序音效，输入在`public/music/`。提交、Correct、一血对应87.3、88.3、88.8秒。旧版程序配乐脚本及旧时间表保留供历史复现。
 - `npm run range`仅在本机回环临时靶场验证HTTP请求，写入`src/data/range-evidence.json`；不访问真实企业，不发送片内邀请邮件。
-- 所有Flag使用`flag{test}`，赛事、名次与一血是虚构演示，不得宣称真实成绩。
+- v3.2.5：用户要求每个Flag有意义且符合题意，统一由`src/data/challenge-flags.json`管理，替代旧版flag{test}规则；Crypto密文、Misc位流和提取长度必须与对应Flag一致。赛事、名次与一血是虚构演示，不得宣称真实成绩。
 - 保留用户提供Logo的原造型和配色，遵守`ASSETS.md`中的独立素材许可。
 - GitHub发布要求：组织公开源码仓库，MP4等发行附件放Release。本机发布入口是`outputs/publish-github.ps1`。
 - 发布前先核验远端实际状态；本地准备和迁移不等于已经发布。

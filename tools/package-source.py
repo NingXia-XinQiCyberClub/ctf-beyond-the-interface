@@ -4,7 +4,7 @@ import os
 
 workspace = Path(__file__).resolve().parent.parent
 source = workspace
-destination = workspace / 'outputs' / '表面之下-交锋增强版-完整源工程.zip'
+destination = workspace / 'outputs' / '表面之下-题意Flag版-完整源工程.zip'
 excluded = {'node_modules', 'dist', 'build', 'qa', '.git', '.cache', '.remotion', 'outputs', 'release-assets', 'references', '__pycache__'}
 files = []
 for directory, directories, names in os.walk(source):

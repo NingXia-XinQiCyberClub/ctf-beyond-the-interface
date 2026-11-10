@@ -1,4 +1,5 @@
 import React from "react";
+import challenge from "../data/challenge-flags.json";
 import { useAttackColors } from "./AttackDirection";
 import {
   AbsoluteFill,
@@ -282,7 +283,7 @@ export const FinaleScene: React.FC = () => {
   const passed = t >= 24.3;
   const checking = t >= 23.3 && !passed;
   const found = t >= 15.3;
-  const flag = "flag{test}";
+  const flag = challenge.flags.pwn;
   const subtitle =
     t < 6
       ? "还有一道。"

@@ -30,10 +30,10 @@
 ## 技术示意
 
 - Web展示对象级访问授权缺失，读取者与对象所属者ID不同，响应返回内容与演示代码对应。
-- Crypto使用小参数RSA：n=3233，p=61，q=53，e=17，d=2753，c=2790，m=65。
+- Crypto使用小参数RSA：n=3233，p=61，q=53，e=17，d=2753，c=1369，m=102（字符f）；完整密文见src/data/challenge-flags.json。
 - Reverse局部校验使用0x41 XOR 0x2a = 0x6b，分支状态与比较结果同步。
 - Pwn采用自建示意内存，不连接外部目标，偏移修正和执行流动画服务剧情。
-- Misc用flag{test}的80位ASCII序列构造演示位平面并提取字符串。
+- Misc用flag{read_the_lowest_bit}的200位ASCII序列构造演示位平面并提取字符串。
 
 ## 音画同步
 
