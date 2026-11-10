@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Img, staticFile, useCurrentFrame } from "remotion";
 import evidence from "../data/range-evidence.json";
+import { rangeImpact, RangeWarning } from "./RangeWarning";
 
 const RED = "#ff4762",
   BLUE = "#41caff",
@@ -1167,6 +1168,7 @@ export function cameraPosition(t: number) {
 export const RangeScene: React.FC = () => {
   const t = useCurrentFrame() / 30,
     camera = cameraPosition(t);
+  const impact = rangeImpact(98 + t);
   if (t >= 41) return <AbsoluteFill style={{ background: "#000" }} />;
   return (
     <AbsoluteFill style={{ background: "#03080f", overflow: "hidden" }}>
@@ -1176,7 +1178,7 @@ export const RangeScene: React.FC = () => {
           width: 3840,
           height: 1080,
           display: "flex",
-          transform: `translateX(${-1920 * camera}px)`,
+          transform: `translate(${-1920 * camera + impact.x}px,${impact.y}px)`,
         }}
       >
         {[false, true].map((blue) => (
@@ -1193,6 +1195,7 @@ export const RangeScene: React.FC = () => {
           </div>
         ))}
       </div>
+      <RangeWarning time={98 + t} />
     </AbsoluteFill>
   );
 };

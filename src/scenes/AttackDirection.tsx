@@ -81,7 +81,6 @@ export const AttackStage: React.FC<{
   const age = event ? time - event.time : 10;
   const hit = event ? Math.exp(-age * 12) * event.power : 0;
   const active = time >= 2.8 && time < 86;
-  const stage = heat > 0.6 ? "EXPLOIT / EXECUTE" : "RECON / LOCK ON";
   const impulse = event && age < 0.18 ? (1 - age / 0.18) * 3 : 0;
   return (
     <SignalContext.Provider value={palette}>
@@ -107,36 +106,6 @@ export const AttackStage: React.FC<{
                   .padStart(2, "0")}`,
               }}
             />
-            <div
-              style={{
-                position: "absolute",
-                left: 80,
-                right: 80,
-                top: 171,
-                display: "flex",
-                gap: 16,
-                alignItems: "center",
-                fontFamily: "Consolas, monospace",
-                fontSize: 12,
-                letterSpacing: 2.5,
-                color: palette.cyan,
-              }}
-            >
-              <span
-                style={{
-                  width: 22 + beat * 45,
-                  height: 3,
-                  background: palette.cyan,
-                }}
-              />
-              <span>{stage}</span>
-              <span style={{ opacity: 0.5 }}>
-                // {String(Math.floor(local / 0.4)).padStart(3, "0")}
-              </span>
-              <span style={{ marginLeft: "auto", opacity: 0.55 }}>
-                CTF RANGE / SESSION 0x03
-              </span>
-            </div>
             <div
               style={{
                 position: "absolute",

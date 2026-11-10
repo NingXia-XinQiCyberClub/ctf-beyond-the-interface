@@ -1866,5 +1866,97 @@
       "frame": 2280,
       "appliedScale": 1.0
     }
+  ],
+  "rangeWarningFoley": [
+    {
+      "frame": 3096,
+      "time": 103.2,
+      "label": "BOUNDARY BREACHED",
+      "gain": 0.9929947583931228
+    },
+    {
+      "frame": 3101,
+      "time": 103.36666666666666,
+      "label": "BOUNDARY BREACHED",
+      "gain": 1
+    },
+    {
+      "frame": 3107,
+      "time": 103.56666666666666,
+      "label": "BOUNDARY BREACHED",
+      "gain": 1
+    },
+    {
+      "frame": 3258,
+      "time": 108.6,
+      "label": "INTRUSION DETECTED",
+      "gain": 1
+    },
+    {
+      "frame": 3263,
+      "time": 108.76666666666667,
+      "label": "INTRUSION DETECTED",
+      "gain": 1
+    },
+    {
+      "frame": 3269,
+      "time": 108.96666666666667,
+      "label": "INTRUSION DETECTED",
+      "gain": 1
+    },
+    {
+      "frame": 3447,
+      "time": 114.9,
+      "label": "INTERNAL ACCESS",
+      "gain": 1
+    },
+    {
+      "frame": 3452,
+      "time": 115.06666666666666,
+      "label": "INTERNAL ACCESS",
+      "gain": 1
+    },
+    {
+      "frame": 3458,
+      "time": 115.26666666666667,
+      "label": "INTERNAL ACCESS",
+      "gain": 1
+    },
+    {
+      "frame": 3555,
+      "time": 118.5,
+      "label": "CONTAINMENT ACTIVE",
+      "gain": 1
+    },
+    {
+      "frame": 3560,
+      "time": 118.66666666666667,
+      "label": "CONTAINMENT ACTIVE",
+      "gain": 1
+    },
+    {
+      "frame": 3566,
+      "time": 118.86666666666666,
+      "label": "CONTAINMENT ACTIVE",
+      "gain": 1
+    },
+    {
+      "frame": 3690,
+      "time": 123.0,
+      "label": "REQUEST BLOCKED",
+      "gain": 1
+    },
+    {
+      "frame": 3695,
+      "time": 123.16666666666667,
+      "label": "REQUEST BLOCKED",
+      "gain": 1
+    },
+    {
+      "frame": 3701,
+      "time": 123.36666666666666,
+      "label": "REQUEST BLOCKED",
+      "gain": 1
+    }
   ]
 }

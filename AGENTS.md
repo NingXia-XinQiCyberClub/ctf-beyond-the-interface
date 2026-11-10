@@ -11,6 +11,7 @@
 - v3.2.1：溯源轨道与移动光点必须在节点图标下层绘制，包含业务门户、业务API和源会话节点，避免1:50附近轨道穿过节点内部。
 - v3.2.2：用户决定保留既有BGM，只补齐并对齐独立音效后完整重渲染。音效时序由`scripts/foley-schedule.mjs`读取动画命令、报告正文和CTF时间映射生成；合成在`scripts/foley.py`。背景装饰不持续发声，终端结果和静止光标不加键声，139–140秒黑屏不加音效。
 - v3.2.3：仅强化CTF必要短镜头，见`docs/v3.2.3-ctf-action.md`。新镜头与音效共用`src/data/ctf-action.json`；保留BGM，86秒后的母带PCM保持一致。邮件、护网、片尾不改。
+- v3.2.4：删除左上角RECON/LOCK ON等装饰标题及计数。邮件打开时增加鼠标点击动画；护网五个交锋节点增加WARNING弹窗、三声警示音及短暂衰减震动，时序共用`src/data/range-warnings.json`。保留BGM和左右平移；报告与片尾不震动。
 - 完整渲染采用4个独立Chrome、每个6页并发，所有4500帧重新绘制，CRF18/medium/1080p保持不变；视频分段以流复制拼接，音轨只编码一次。`scripts/render-film.mjs`验证每段帧数和拼接前后逐帧编码数据散列。可通过RENDER_WORKERS与RENDER_CONCURRENCY调整。
 - 用户已审查确认`public/logo.svg`，保留原始PNG对照；Logo本身不改色。
 - 片尾口号已由用户选定为“见微知隙，破阵无声。”，二维码必须指向`https://ningxia-xinqicyberclub.github.io/`。

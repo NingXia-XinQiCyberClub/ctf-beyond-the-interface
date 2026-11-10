@@ -285,6 +285,39 @@ export const InvitationScene: React.FC = () => {
           <RangeLaunch />
         </AbsoluteFill>
       )}
+      {t >= 1 && t < 2.55 && (
+        <svg
+          width="32"
+          height="40"
+          style={{
+            position: "absolute",
+            left: 1530,
+            top: 172,
+            overflow: "visible",
+            transform: `translate(${(1 - show(t, 1.05, 0.85)) * 150}px,${(1 - show(t, 1.05, 0.85)) * 110}px)`,
+            opacity: show(t, 1, 0.2) * (1 - show(t, 2.25, 0.3)),
+            pointerEvents: "none",
+          }}
+        >
+          {t >= 2 && (
+            <circle
+              cx="1"
+              cy="1"
+              r={(t - 2) * 65}
+              fill="none"
+              stroke={B}
+              strokeWidth="2"
+              opacity={1 - (t - 2) / 0.55}
+            />
+          )}
+          <path
+            d="M1 1L1 29L9 22L15 36L21 33L15 20L28 20Z"
+            fill={W}
+            stroke="#03080f"
+            strokeWidth="2"
+          />
+        </svg>
+      )}
     </AbsoluteFill>
   );
 };

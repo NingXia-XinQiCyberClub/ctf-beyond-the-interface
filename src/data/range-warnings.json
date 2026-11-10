@@ -1,0 +1,11 @@
+{
+  "events": [
+    {"time":103.2,"title":"BOUNDARY BREACHED","detail":"对象授权边界已突破","team":"red","strength":4},
+    {"time":108.6,"title":"INTRUSION DETECTED","detail":"异常访问 · 关联源会话","team":"blue","strength":3},
+    {"time":114.9,"title":"INTERNAL ACCESS","detail":"内部访问链路已打开","team":"red","strength":5},
+    {"time":118.5,"title":"CONTAINMENT ACTIVE","detail":"阻断策略生效 · 隔离攻击路径","team":"blue","strength":4},
+    {"time":123.0,"title":"REQUEST BLOCKED","detail":"403 Forbidden · 攻击请求被拒绝","team":"red","strength":5}
+  ],
+  "beeps": [0,0.18,0.36],
+  "duration":1.15
+}

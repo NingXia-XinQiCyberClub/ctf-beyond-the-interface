@@ -113,5 +113,8 @@ manifest['bgmArrangementUnchanged']=True
 spec=importlib.util.spec_from_file_location('ctf_foley',ROOT/'scripts/ctf-foley.py')
 ctf_foley=importlib.util.module_from_spec(spec); spec.loader.exec_module(ctf_foley)
 manifest['ctfActionFoley']=ctf_foley.apply(ROOT,target,SR)
+spec=importlib.util.spec_from_file_location('range_warning_audio',ROOT/'scripts/range-warning-audio.py')
+warning_audio=importlib.util.module_from_spec(spec); spec.loader.exec_module(warning_audio)
+manifest['rangeWarningFoley']=warning_audio.apply(ROOT,target,SR)
 (OUT/'music/production-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf8',newline='\n')
 print('C-derived score mixed:',target)
