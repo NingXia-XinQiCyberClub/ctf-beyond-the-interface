@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from "react";
 import { AbsoluteFill, Img, staticFile, useCurrentFrame } from "remotion";
 import cues from "../data/attack-cues.json";
+import { ctfCamera, CtfAction } from "./CtfAction";
 
 const sat = (n: number) => Math.max(0, Math.min(1, n));
 const smooth = (n: number) => {
@@ -56,6 +57,7 @@ export const AttackStage: React.FC<{
   const frame = useCurrentFrame();
   const local = frame / cues.fps;
   const time = from + local;
+  const camera = ctfCamera(from, time);
   const heat = attackHeat(time);
   const palette = Object.fromEntries(
     Object.entries(cold).map(([key, value]) => {
@@ -86,11 +88,13 @@ export const AttackStage: React.FC<{
       <AbsoluteFill style={{ overflow: "hidden", background: palette.bg }}>
         <AbsoluteFill
           style={{
-            transform: `translate(${Math.sin(frame * 2.7) * impulse}px,${Math.cos(frame * 1.9) * impulse * 0.5}px) scale(${1 + hit * 0.009})`,
+            transform: `translate(${Math.sin(frame * 2.7) * impulse}px,${Math.cos(frame * 1.9) * impulse * 0.5}px) scale(${camera.scale * (1 + hit * 0.009)})`,
+            transformOrigin: `${camera.x}px ${camera.y}px`,
           }}
         >
           {children}
         </AbsoluteFill>
+        {time < 86 && <CtfAction from={from} time={time} />}
         {active && (
           <>
             <AbsoluteFill

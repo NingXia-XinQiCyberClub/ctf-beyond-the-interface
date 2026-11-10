@@ -1744,5 +1744,127 @@
       }
     ]
   },
-  "bgmArrangementUnchanged": true
+  "bgmArrangementUnchanged": true,
+  "ctfActionFoley": [
+    {
+      "time": 1.0,
+      "kind": "deny",
+      "label": "PROBE 01 / REFUSED",
+      "gain": 0.7,
+      "frame": 30,
+      "appliedScale": 1.0
+    },
+    {
+      "time": 1.8,
+      "kind": "deny",
+      "label": "PROBE 02 / REFUSED",
+      "gain": 0.7,
+      "frame": 54,
+      "appliedScale": 1.0
+    },
+    {
+      "time": 11.8,
+      "kind": "deny",
+      "label": "DIRECT ENTRY / 403",
+      "gain": 0.9,
+      "frame": 354,
+      "appliedScale": 1.0
+    },
+    {
+      "time": 12.5,
+      "kind": "focus",
+      "label": "OBJECT ENDPOINT IDENTIFIED",
+      "gain": 0.65,
+      "frame": 375,
+      "appliedScale": 1.0
+    },
+    {
+      "time": 23.5,
+      "kind": "deny",
+      "label": "FACTOR CANDIDATE REJECTED",
+      "gain": 0.65,
+      "frame": 705,
+      "appliedScale": 1.0
+    },
+    {
+      "time": 24.2,
+      "kind": "focus",
+      "label": "FACTOR SEARCH NARROWED",
+      "gain": 0.6,
+      "frame": 726,
+      "appliedScale": 1.0
+    },
+    {
+      "time": 26.0,
+      "kind": "fracture",
+      "label": "MODULUS SPLIT",
+      "gain": 0.65,
+      "frame": 780,
+      "appliedScale": 1.0
+    },
+    {
+      "time": 36.63,
+      "kind": "deny",
+      "label": "FALSE BRANCH / EXIT",
+      "gain": 0.7,
+      "frame": 1099,
+      "appliedScale": 1.0
+    },
+    {
+      "time": 37.6,
+      "kind": "focus",
+      "label": "CONTROL FLOW REDIRECT",
+      "gain": 0.7,
+      "frame": 1128,
+      "appliedScale": 1.0
+    },
+    {
+      "time": 45.6,
+      "kind": "fracture",
+      "label": "PROCESS CRASH",
+      "gain": 0.75,
+      "frame": 1368,
+      "appliedScale": 1.0
+    },
+    {
+      "time": 48.8,
+      "kind": "focus",
+      "label": "RETURN ADDRESS REPAIRED",
+      "gain": 0.7,
+      "frame": 1464,
+      "appliedScale": 1.0
+    },
+    {
+      "time": 59.2,
+      "kind": "focus",
+      "label": "BIT PLANE ISOLATED",
+      "gain": 0.55,
+      "frame": 1776,
+      "appliedScale": 1.0
+    },
+    {
+      "time": 70.0,
+      "kind": "deny",
+      "label": "ATTEMPT 01 / ALIGNMENT",
+      "gain": 0.7,
+      "frame": 2100,
+      "appliedScale": 1.0
+    },
+    {
+      "time": 74.4,
+      "kind": "deny",
+      "label": "ATTEMPT 02 / BREAKPOINT",
+      "gain": 0.65,
+      "frame": 2232,
+      "appliedScale": 1.0
+    },
+    {
+      "time": 76.0,
+      "kind": "focus",
+      "label": "EXECUTION REDIRECTED",
+      "gain": 0.7,
+      "frame": 2280,
+      "appliedScale": 1.0
+    }
+  ]
 }

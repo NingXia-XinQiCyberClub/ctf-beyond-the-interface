@@ -1,0 +1,166 @@
+{
+  "shots": [
+    {
+      "from": 0,
+      "start": 1.8,
+      "hold": 2.5,
+      "release": 4.2,
+      "end": 5.5,
+      "x": 1060,
+      "y": 528,
+      "zoom": 1.06
+    },
+    {
+      "from": 10,
+      "start": 13.2,
+      "hold": 14.0,
+      "release": 17.9,
+      "end": 19.15,
+      "x": 805,
+      "y": 510,
+      "zoom": 1.07
+    },
+    {
+      "from": 22,
+      "start": 24.7,
+      "hold": 25.55,
+      "release": 28.8,
+      "end": 30.35,
+      "x": 690,
+      "y": 475,
+      "zoom": 1.07
+    },
+    {
+      "from": 32,
+      "start": 34.2,
+      "hold": 36.3,
+      "release": 38.7,
+      "end": 39.95,
+      "x": 830,
+      "y": 455,
+      "zoom": 1.07
+    },
+    {
+      "from": 42,
+      "start": 44.7,
+      "hold": 45.6,
+      "release": 49.4,
+      "end": 51.55,
+      "x": 670,
+      "y": 570,
+      "zoom": 1.07
+    },
+    {
+      "from": 54,
+      "start": 56.5,
+      "hold": 57.2,
+      "release": 60.5,
+      "end": 61.95,
+      "x": 690,
+      "y": 510,
+      "zoom": 1.07
+    },
+    {
+      "from": 64,
+      "start": 69.5,
+      "hold": 70.0,
+      "release": 75.6,
+      "end": 78.5,
+      "x": 800,
+      "y": 520,
+      "zoom": 1.06
+    }
+  ],
+  "events": [
+    {
+      "time": 1.0,
+      "kind": "deny",
+      "label": "PROBE 01 / REFUSED",
+      "gain": 0.7
+    },
+    {
+      "time": 1.8,
+      "kind": "deny",
+      "label": "PROBE 02 / REFUSED",
+      "gain": 0.7
+    },
+    {
+      "time": 11.8,
+      "kind": "deny",
+      "label": "DIRECT ENTRY / 403",
+      "gain": 0.9
+    },
+    {
+      "time": 12.5,
+      "kind": "focus",
+      "label": "OBJECT ENDPOINT IDENTIFIED",
+      "gain": 0.65
+    },
+    {
+      "time": 23.5,
+      "kind": "deny",
+      "label": "FACTOR CANDIDATE REJECTED",
+      "gain": 0.65
+    },
+    {
+      "time": 24.2,
+      "kind": "focus",
+      "label": "FACTOR SEARCH NARROWED",
+      "gain": 0.6
+    },
+    {
+      "time": 26.0,
+      "kind": "fracture",
+      "label": "MODULUS SPLIT",
+      "gain": 0.65
+    },
+    {
+      "time": 36.63,
+      "kind": "deny",
+      "label": "FALSE BRANCH / EXIT",
+      "gain": 0.7
+    },
+    {
+      "time": 37.6,
+      "kind": "focus",
+      "label": "CONTROL FLOW REDIRECT",
+      "gain": 0.7
+    },
+    {
+      "time": 45.6,
+      "kind": "fracture",
+      "label": "PROCESS CRASH",
+      "gain": 0.75
+    },
+    {
+      "time": 48.8,
+      "kind": "focus",
+      "label": "RETURN ADDRESS REPAIRED",
+      "gain": 0.7
+    },
+    {
+      "time": 59.2,
+      "kind": "focus",
+      "label": "BIT PLANE ISOLATED",
+      "gain": 0.55
+    },
+    {
+      "time": 70.0,
+      "kind": "deny",
+      "label": "ATTEMPT 01 / ALIGNMENT",
+      "gain": 0.7
+    },
+    {
+      "time": 74.4,
+      "kind": "deny",
+      "label": "ATTEMPT 02 / BREAKPOINT",
+      "gain": 0.65
+    },
+    {
+      "time": 76.0,
+      "kind": "focus",
+      "label": "EXECUTION REDIRECTED",
+      "gain": 0.7
+    }
+  ]
+}

@@ -7,6 +7,7 @@ from pathlib import Path
 import json, os, shutil, subprocess, wave
 import numpy as np
 from foley import add_foley
+import importlib.util
 
 ROOT=Path(__file__).resolve().parents[1]
 SR=48000; N=150*SR
@@ -108,5 +109,9 @@ write(QA/'v3-music-only.wav',music); write(QA/'v3-sfx-only.wav',sfx)
 manifest=dict(selectedSample='C / 红蓝交锋',model='ACE-Step 1.5 turbo',requestedBpm=150,requestedKey='D minor',duration=150,sampleRate=SR,edits=edits,events=cues['events'],music='ACE-Step generated; source-derived repaint and cover',sfx='Original deterministic procedural foley, separate from music',normalizationTarget=dict(integratedLUFS=-16,truePeakDb=-1.5))
 manifest['additionalFoley']=foley_schedule
 manifest['bgmArrangementUnchanged']=True
+# This final layer leaves the existing mastered score untouched outside CTF cues.
+spec=importlib.util.spec_from_file_location('ctf_foley',ROOT/'scripts/ctf-foley.py')
+ctf_foley=importlib.util.module_from_spec(spec); spec.loader.exec_module(ctf_foley)
+manifest['ctfActionFoley']=ctf_foley.apply(ROOT,target,SR)
 (OUT/'music/production-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf8',newline='\n')
 print('C-derived score mixed:',target)

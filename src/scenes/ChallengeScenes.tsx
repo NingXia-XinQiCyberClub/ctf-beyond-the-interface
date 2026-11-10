@@ -1001,6 +1001,23 @@ export const CryptoScene: React.FC = () => {
             transform={`rotate(${-t * 8} 690 475)`}
           />
           <path d="M260 475H480M900 475H1120" stroke={C.blue} strokeWidth="1" />
+          {/* Factorisation cracks the modulus ring on the existing 26 s beat. */}
+          {t >= 8 &&
+            t < 9.2 &&
+            Array.from({ length: 12 }, (_, i) => {
+              const a = (i * Math.PI) / 6,
+                q = ease(p(t, 8, 9.2));
+              const r = 210 + q * 130;
+              return (
+                <path
+                  key={`factor-shard-${i}`}
+                  d={`M${690 + Math.cos(a) * r} ${475 + Math.sin(a) * r}l${Math.cos(a + 0.7) * 26} ${Math.sin(a + 0.7) * 26}`}
+                  stroke={C.cyan}
+                  strokeWidth="4"
+                  opacity={1 - q}
+                />
+              );
+            })}
           <circle cx="260" cy="475" r="5" fill={C.cyan} />
           <circle cx="1120" cy="475" r="5" fill={C.cyan} />
         </svg>
@@ -1394,6 +1411,24 @@ export const ReverseScene: React.FC = () => {
             filter="url(#rev-glow)"
           />
           <circle cx={trace[0]} cy={trace[1]} r="5" fill="white" />
+          {t >= 12.4 && t < 13.7 && (
+            <g opacity={1 - p(t, 12.4, 13.7)}>
+              <circle
+                cx="830"
+                cy="405"
+                r={30 + 100 * ease(p(t, 12.4, 13.7))}
+                fill="none"
+                stroke={C.cyan}
+                strokeWidth="3"
+              />
+              <path
+                d="M805 375L830 350L855 375"
+                stroke={C.cyan}
+                strokeWidth="5"
+                fill="none"
+              />
+            </g>
+          )}
           <text
             x="885"
             y="284"
@@ -1670,6 +1705,9 @@ export const PwnScene: React.FC = () => {
                 ? "00 dd ff ff ff 7f 00 00"
                 : repair
                   ? "90 12 40 00 00 00 00 00"
+                      .split(" ")
+                      .map((byte, j) => (t >= 14 + j * 0.07 ? byte : "??"))
+                      .join(" ")
                   : "?? ?? ?? ?? ?? ?? ?? ??";
           return (
             <div
